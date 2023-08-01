@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_profile"
+    app:startDestination="@id/profileMainFragment">
+
+    <fragment
+        android:id="@+id/profileMainFragment"
+        android:name="com.app.vibespace.ui.profile.ProfileMainFragment"
+        android:label="ProfileMainFragment"
+        tools:layout="@layout/fragment_profile_main"
+        >
+        <action
+            android:id="@+id/action_profileMainFragment_to_priceProfileFragment"
+            app:destination="@id/priceProfileFragment" />
+        <action
+            android:id="@+id/action_profileMainFragment_to_userListProfileFragment"
+            app:destination="@id/userListProfileFragment" />
+        <action
+            android:id="@+id/action_profileMainFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.app.vibespace.ui.profile.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/fragment_user_profile"
+        >
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="dataModel"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="sexuality"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="height"
+            app:argType="string"
+            />
+        <argument
+            android:name="occupation"
+            app:argType="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/userListProfileFragment"
+        android:name="com.app.vibespace.ui.profile.UserListProfileFragment"
+        android:label="UserListProfileFragment" />
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.app.vibespace.ui.profile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"
+        >
+        <action
+            android:id="@+id/action_editProfileFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <argument
+            android:name="university"
+            app:argType="string"
+            />
+        <argument
+            android:name="sexuality"
+            app:argType="string"
+            />
+        <argument
+            android:name="age"
+            app:argType="string"
+            />
+        <argument
+            android:name="height"
+            app:argType="string"
+            />
+        <argument
+            android:name="occupation"
+            app:argType="string"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/priceProfileFragment"
+        android:name="com.app.vibespace.ui.profile.PriceProfileFragment"
+        android:label="PriceProfileFragment"
+        tools:layout="@layout/fragment_price_profile"
+        />
+</navigation>

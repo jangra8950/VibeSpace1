@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_registration"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.app.vibespace.ui.registration.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_verifyEmailFragment"
+            app:destination="@id/verifyEmailFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.app.vibespace.ui.registration.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.app.vibespace.ui.registration.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" >
+        <action
+            android:id="@+id/action_userDetailsFragment_to_verifyEmailFragment"
+            app:destination="@id/verifyEmailFragment" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifyEmailFragment"
+        android:name="com.app.vibespace.ui.registration.VerifyEmailFragment"
+        android:label="fragment_verify_email"
+        tools:layout="@layout/fragment_verify_email" >
+        <action
+            android:id="@+id/action_verifyEmailFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_verifyEmailFragment_to_verifyOtpFragment"
+            app:destination="@id/verifyOtpFragment" />
+        <argument
+            android:name="otpType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifyOtpFragment"
+        android:name="com.app.vibespace.ui.registration.VerifyOtpFragment"
+        android:label="fragment_verify_otp"
+        tools:layout="@layout/fragment_verify_otp" >
+        <action
+            android:id="@+id/action_verifyOtpFragment_to_verificationSuccessFragment"
+            app:destination="@id/verificationSuccessFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="otpType"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/verificationSuccessFragment"
+        android:name="com.app.vibespace.ui.registration.VerificationSuccessFragment"
+        android:label="fragment_verification_success"
+        tools:layout="@layout/fragment_verification_success" >
+        <action
+            android:id="@+id/action_verificationSuccessFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+        <action
+            android:id="@+id/action_verificationSuccessFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.app.vibespace.ui.registration.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" >
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_bitmojiFragment"
+            app:destination="@id/bitmojiFragment" />
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+
+        <argument
+            android:name="type"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/bitmojiFragment"
+        android:name="com.app.vibespace.ui.registration.BitmojiFragment"
+        android:label="fragment_bitmoji"
+        tools:layout="@layout/fragment_bitmoji" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.app.vibespace.ui.registration.HomeFragment"
+        android:label="HomeFragment" >
+
+        <argument
+            android:name="fName"
+            app:argType="string"/>
+        <argument
+            android:name="lName"
+            app:argType="string"/>
+    </fragment>
+</navigation>

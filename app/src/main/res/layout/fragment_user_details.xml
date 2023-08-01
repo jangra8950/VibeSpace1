@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.vibespace.viewModel.registration.UserDetailsViewModel" />
+        <variable
+            name="fragment"
+            type="com.app.vibespace.ui.registration.UserDetailsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> viewModel.onBackTap(view)}"
+            android:padding="@dimen/_10sdp"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDetails"
+            style="@style/txtHeading"
+            android:text="@string/details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDob"
+            style="@style/text"
+            android:text="@string/dob"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/etDob" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etDob"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_72sdp"
+            app:endIconDrawable="@drawable/ic_baseline_calendar_month_24"
+            android:background="@drawable/round_edit_text"
+            app:endIconMode="custom"
+            android:elevation="@dimen/_2sdp"
+            app:hintEnabled="false"
+
+            android:cursorVisible="false"
+            android:focusable="false"
+
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetails">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dob"
+
+                android:text="@={viewModel.dob}"
+                android:onClick="@{(view)-> viewModel.datePicker(view)}"
+                android:padding="@dimen/_10sdp"
+                android:hint="@string/dobHint"
+                android:background="@drawable/round_edit_text"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:maxLines="1"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDrop"
+            style="@style/text"
+            android:text="@string/uni"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/etUniversity" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUniversity"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_18sdp"
+            android:background="@drawable/round_edit_text"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:elevation="@dimen/_2sdp"
+            app:hintEnabled="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etDob">
+
+            <AutoCompleteTextView
+                android:id="@+id/dropDown"
+                android:dropDownHeight="@dimen/_152sdp"
+                android:text="@={viewModel.university}"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_edit_text"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:padding="@dimen/_2sdp"
+                android:hint="@string/choose" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBio"
+            style="@style/text"
+            android:text="@string/biotext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/etBio" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etBio"
+            android:text="@={viewModel.bio}"
+            style="@style/editText"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:hint="@string/bio"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+
+            android:lines="3"
+            android:gravity="top|start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUniversity" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDetails"
+            style="@style/button"
+            android:onClick="@{(view)->fragment.onContinue(view)}"
+            android:layout_marginTop="@dimen/_42sdp"
+            android:text="@string/Continue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etBio" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCreate"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_12ssp"
+            android:text="@string/create"
+            android:layout_marginStart="@dimen/_64sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNewAccount"
+            android:onClick="@{(view)->fragment.onSignIn(view)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/signIn"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_2sdp"
+            app:layout_constraintStart_toEndOf="@+id/tvCreate"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <include
+            android:id="@+id/progressBar"
+            layout="@layout/layout_progress_bar"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

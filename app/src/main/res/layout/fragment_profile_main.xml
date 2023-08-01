@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.vibespace.viewModel.profile.ProfileViewModel" />
+        <variable
+           name="fragment"
+           type="com.app.vibespace.ui.profile.ProfileMainFragment" />
+    </data>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/colorWhite">
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvAppName"
+           style="@style/txtHeading"
+           android:text="@string/vibespace"
+           android:textColor="@color/colorPrimary"
+           android:layout_marginTop="@dimen/_32sdp"
+           android:layout_marginStart="@dimen/_32sdp"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintEnd_toStartOf="@id/ivSearchBar"
+           />
+
+       <androidx.appcompat.widget.AppCompatImageView
+           android:id="@+id/ivSearchBar"
+           app:srcCompat="@drawable/ic_search_bar"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/_12sdp"
+           android:layout_marginTop="@dimen/_24sdp"
+           android:layout_marginStart="@dimen/_92sdp"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toEndOf="@id/tvAppName"
+           app:layout_constraintEnd_toStartOf="@id/ivSetting"
+           />
+
+       <androidx.appcompat.widget.AppCompatImageView
+           android:id="@+id/ivSetting"
+           app:srcCompat="@drawable/ic_setting"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/_12sdp"
+           android:layout_marginEnd="@dimen/_32sdp"
+           android:layout_marginTop="@dimen/_24sdp"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toEndOf="@id/ivSearchBar"
+           />
+
+       <androidx.appcompat.widget.AppCompatImageView
+           android:id="@+id/ivAvatar"
+           app:srcCompat="@drawable/ic_avatar"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/_32sdp"
+           android:layout_marginTop="@dimen/_12sdp"
+           app:layout_constraintTop_toBottomOf="@id/tvAppName"
+           app:layout_constraintStart_toStartOf="parent"
+           />
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvProfileName"
+           style="@style/text"
+
+           android:fontFamily="@font/poppins_medium"
+
+           android:layout_marginStart="@dimen/_30sdp"
+           android:layout_marginTop="@dimen/_8sdp"
+           app:layout_constraintTop_toBottomOf="@id/ivAvatar"
+           app:layout_constraintStart_toStartOf="parent"
+           />
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvFollowersCount"
+
+           android:textColor="@color/colorBlack"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/_16ssp"
+           android:layout_marginStart="@dimen/_56sdp"
+           android:layout_marginTop="@dimen/_16sdp"
+           app:layout_constraintTop_toBottomOf="@id/ivSearchBar"
+           app:layout_constraintStart_toEndOf="@id/ivAvatar"
+           app:layout_constraintBottom_toTopOf="@id/tvFollower"
+           />
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvFollower"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/colorEditTxt"
+           android:text="@string/followers"
+           android:fontFamily="@font/poppins_regular"
+           android:textSize="@dimen/_12ssp"
+           android:layout_marginStart="@dimen/_40sdp"
+           app:layout_constraintTop_toBottomOf="@id/tvFollowersCount"
+           app:layout_constraintStart_toEndOf="@id/ivAvatar"
+
+           />
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvFollowingCount"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+
+           android:textColor="@color/colorBlack"
+           android:textSize="@dimen/_16ssp"
+           android:layout_marginStart="@dimen/_58sdp"
+           android:layout_marginTop="@dimen/_16sdp"
+           app:layout_constraintTop_toBottomOf="@id/ivSearchBar"
+           app:layout_constraintStart_toEndOf="@id/tvFollowersCount"
+           />
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/tvFollowing"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/colorEditTxt"
+           android:text="@string/following"
+           android:fontFamily="@font/poppins_regular"
+           android:textSize="@dimen/_12ssp"
+           android:layout_marginEnd="@dimen/_34sdp"
+           app:layout_constraintTop_toBottomOf="@id/tvFollowingCount"
+          app:layout_constraintEnd_toEndOf="parent"
+           />
+
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btnBio"
+           android:layout_height="@dimen/_32sdp"
+           android:layout_width="@dimen/_64sdp"
+           android:text="@string/Bio"
+           android:padding="@dimen/_4sdp"
+           android:layout_marginStart="@dimen/_34sdp"
+           android:textColor="@color/colorWhite"
+           android:elevation="@dimen/_2sdp"
+           android:gravity="center"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="@dimen/_10ssp"
+           android:background="@drawable/round_btn"
+           app:layout_constraintTop_toBottomOf="@id/tvProfileName"
+           app:layout_constraintStart_toStartOf="parent"
+          />
+
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btnCreatePost"
+           style="@style/button"
+           android:elevation="0dp"
+           android:textAllCaps="false"
+           android:text="@string/create_post"
+           android:textColor="@color/colorEditTxt"
+           android:fontFamily="@font/poppins_medium"
+           android:layout_marginTop="@dimen/_26sdp"
+           android:background="@drawable/round_button_logout"
+           app:layout_constraintTop_toBottomOf="@id/btnBio"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           />
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btnMonetize"
+           style="@style/button"
+           android:elevation="0dp"
+           android:textAllCaps="false"
+           android:fontFamily="@font/poppins_medium"
+           android:text="@string/monetize_your_account"
+           android:textColor="@color/colorEditTxt"
+           android:layout_marginTop="@dimen/_12sdp"
+           android:background="@drawable/round_button_logout"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/btnCreatePost"
+           />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
