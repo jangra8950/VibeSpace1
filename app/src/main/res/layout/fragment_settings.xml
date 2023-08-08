@@ -25,12 +25,184 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSetting"
             style="@style/txtHeading"
-            android:text="Settings"
+            android:text="@string/settings"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAccount"
+            style="@style/text"
+            android:text="@string/private_account"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_66sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Switch
+            android:id="@+id/swPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_66sdp"
+            android:thumb="@drawable/custom_switch_thumb"
+            android:track="@drawable/custom_switch_track"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <View
+            android:id="@+id/view"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvAccount"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPassword"
+            style="@style/text"
+            android:text="@string/change_password"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_change_password"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/view"
+            />
+
+        <View
+            android:id="@+id/view1"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvPassword"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBlocked"
+            style="@style/text"
+            android:text="@string/blocked_users"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_block"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1"
+            />
+
+        <View
+            android:id="@+id/view2"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvBlocked"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBankAccount"
+            style="@style/text"
+            android:text="@string/add_bank_account"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_add_bank"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view2"
+            />
+
+        <View
+            android:id="@+id/view3"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvBankAccount"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPayment"
+            style="@style/text"
+            android:text="@string/add_payment_method"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_add_payment_method"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            />
+
+        <View
+            android:id="@+id/view4"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvPayment"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPolicy"
+            style="@style/text"
+            android:text="@string/privacy_policy"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_privacy_policy"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view4"
+            />
+
+        <View
+            android:id="@+id/view5"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvPolicy"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTerms"
+            style="@style/text"
+            android:text="@string/terms_conditions"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_terms_and_conditions"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view5"
+            />
+
+        <View
+            android:id="@+id/view6"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvTerms"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
