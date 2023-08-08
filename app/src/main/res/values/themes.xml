@@ -78,9 +78,9 @@
 
     <style name="otp">
         <item name="android:layout_height">@dimen/_36sdp</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">@dimen/_36sdp</item>
         <item name="android:digits">0123456789</item>
-        <item name="android:padding">@dimen/_12sdp</item>
+
 
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:imeOptions">actionNext</item>
@@ -88,7 +88,7 @@
         <item name="android:importantForAutofill">no</item>
         <item name="android:layout_marginHorizontal">@dimen/_6sdp</item>
         <item name="android:maxLength">1</item>
-        <item name="android:hint">*</item>
+
 
         <item name="android:textColor">@color/colorBlack</item>
         <item name="hintTextColor">@color/colorTxt</item>

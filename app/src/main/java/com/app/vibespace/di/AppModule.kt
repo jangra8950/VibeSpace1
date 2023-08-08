@@ -8,7 +8,7 @@ import com.app.vibespace.service.ApiRequest
 import com.app.vibespace.service.MyRepo
 import com.app.vibespace.ui.registration.SignInActivity
 import com.app.vibespace.util.ApiConstants
-import com.app.vibespace.util.ApiConstants.IS_SLIDE_ALREADY
+
 import com.app.vibespace.util.MyApp.Companion.profileData
 
 import dagger.Module

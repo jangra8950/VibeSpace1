@@ -28,25 +28,13 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             style="@style/BottomNavigationView"
-            android:layout_height="wrap_content"
-
-
-            android:elevation="@dimen/_16sdp"
+            android:layout_height="@dimen/_48sdp"
             app:itemIconTint="@drawable/selector_bottom_navigation_item"
-            app:itemIconSize="@dimen/_28sdp"
             app:menu="@menu/bottom_navigation"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
-    <!--        <androidx.appcompat.widget.AppCompatButton-->
-    <!--            android:id="@+id/btnSignIn"-->
-    <!--            style="@style/button"-->
-    <!--            android:text="@string/logOut"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            android:layout_marginBottom="@dimen/_32sdp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            />-->

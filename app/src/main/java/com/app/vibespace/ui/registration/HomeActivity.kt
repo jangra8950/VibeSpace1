@@ -17,9 +17,13 @@ import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.databinding.ActivityHomeBinding
 import com.app.vibespace.databinding.FragmentHomeBinding
+import com.app.vibespace.ui.profile.ChatFragment
+import com.app.vibespace.ui.profile.CreatePostFragment
+import com.app.vibespace.ui.profile.FeedFragment
 import com.app.vibespace.ui.profile.ProfileHostFragment
 import com.app.vibespace.ui.profile.ProfileMainFragment
 import com.app.vibespace.util.CommonFuctions
+import com.app.vibespace.util.Communicator
 import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.util.MyApp.Companion.sharedpreferences
@@ -32,11 +36,11 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
-
+class HomeActivity : AppCompatActivity() , Communicator{
     private lateinit var binding: ActivityHomeBinding
+    var postData=""
     private val model:HomeViewModel by viewModels()
-    private var navHostFragment: NavHostFragment?=null
+   // private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -46,37 +50,37 @@ class HomeActivity : AppCompatActivity() {
         binding=DataBindingUtil.setContentView(this,R.layout.activity_home)
         Log.i("SAHIL_DATA",Gson().toJson(profileData))
 
-       // binding.tvName.text="${profileData?.firstName} ${profileData?.lastName}"
-
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.navFragment) as NavHostFragment?
-
         setFragment()
 
     }
 
-
-
-
     private fun setFragment() {
 
-        val firstFragment=ProfileHostFragment()
-        val secondFragment=VerifyOtpFragment()
-        val thirdFragment=VerifyEmailFragment()
-        val fourthFragment=VerificationSuccessFragment()
-
+        val firstFragment=HomeFragment()
+        val secondFragment= FeedFragment()
+        val thirdFragment=ProfileHostFragment()
+        val fourthFragment=ChatFragment()
+        val fifthFragment= CreatePostFragment()
+        val bundle = Bundle()
+        if (postData!="") {
+            bundle.putString("message", postData)
+            postData=""
+        }
         setCurrentFragment(firstFragment)
 
 
         binding.navigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.map->{
-                    setCurrentFragment(thirdFragment)
+                    setCurrentFragment(firstFragment)
                     true}
                 R.id.feed->{setCurrentFragment(secondFragment)
                     true}
-                R.id.profile->{setCurrentFragment(firstFragment)
+                R.id.profile->{setCurrentFragment(thirdFragment)
                     true}
                 R.id.chat->{setCurrentFragment(fourthFragment)
+                    true}
+                R.id.post->{setCurrentFragment(fifthFragment)
                     true}
                 else->false
             }
@@ -91,34 +95,19 @@ class HomeActivity : AppCompatActivity() {
         transcation.commit()
     }
 
-    private fun logout() {
-        model.logOut().observe(this, Observer{response->
-            when(response.status){
-                ApiStatus.SUCCESS -> {
-                    CommonFuctions.dismissDialog()
-                   // binding.progressBar.root.visibility= View.GONE
+    override fun passData(edit: String) {
+        val bundle = Bundle()
+        bundle.putString("message", edit)
+        postData=edit
+        val transaction = supportFragmentManager.beginTransaction()
 
-                    sharedpreferences.edit().clear().apply()
-                    startActivity(Intent(this@HomeActivity, SignInActivity::class.java))
-                    response.message?.let { it2-> showToast(applicationContext,it2) }
-                    finish()
-                }
-                ApiStatus.ERROR -> {
-                    CommonFuctions.dismissDialog()
-                   // binding.progressBar.root.visibility=View.GONE
-                    response.message?.let { it1-> showToast(applicationContext,it1) }
-                }
-
-                ApiStatus.LOADING ->
-                {
-                    CommonFuctions.showDialog(this)
-                   // binding.progressBar.root.visibility=View.VISIBLE
-                }
-            }
-
-        })
+        // Created instance of fragment2
+        val fragment2 =ProfileMainFragment()
+        binding.navigation.selectedItemId = R.id.profile;
+//        fragment2.arguments = bundle
+//        transaction.replace(R.id.flFragment,fragment2)
+//        transaction.commit()
     }
-
 
 
 }

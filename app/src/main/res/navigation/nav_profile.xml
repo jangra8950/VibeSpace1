@@ -20,6 +20,11 @@
         <action
             android:id="@+id/action_profileMainFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+
+        <argument
+            android:name="post"
+            app:argType="string"
+            />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -91,4 +96,14 @@
         android:label="PriceProfileFragment"
         tools:layout="@layout/fragment_price_profile"
         />
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.app.vibespace.ui.profile.CreatePostFragment"
+        android:label="CreatePostFragment"
+        tools:layout="@layout/fragment_create_post"
+        >
+        <action
+            android:id="@+id/action_createPostFragment_to_profileMainFragment"
+            app:destination="@id/profileMainFragment" />
+    </fragment>
 </navigation>

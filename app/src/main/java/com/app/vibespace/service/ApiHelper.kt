@@ -1,6 +1,11 @@
 package com.app.vibespace.service
 
+import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.CreatePostModel
+import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.PostDeleteModel
+import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
@@ -36,5 +41,15 @@ interface ApiHelper {
     suspend fun deleteAccount():DeleteAccountModel
 
     suspend fun updateUser(params:UserUpdateRequest):UserUpdateModel
+
+    suspend fun createPost(params:CreatePostRequest):CreatePostModel
+
+    suspend fun getPostList(query: HashMap<String, Any>):PostListModel
+
+    suspend fun deletePost(id:String):PostDeleteModel
+
+    suspend fun blockUser(params:HashMap<String,String>):BlockUserModel
+
+
 
 }

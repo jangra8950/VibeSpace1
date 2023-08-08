@@ -1,5 +1,7 @@
 package com.app.vibespace.service
 
+import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
@@ -34,4 +36,14 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun deleteAccount():DeleteAccountModel=apiHelper.deleteAccount()
 
     suspend fun updateUser(params:UserUpdateRequest)=apiHelper.updateUser(params)
+
+    suspend fun createPost(params:CreatePostRequest)=apiHelper.createPost(params)
+
+    suspend fun getPostList(query: HashMap<String,Any>)=apiHelper.getPostList(query)
+
+    suspend fun deletePost(id:String)=apiHelper.deletePost(id)
+
+    suspend fun blockUser(params:HashMap<String,String>):BlockUserModel=apiHelper.blockUser(params)
+
+
 }

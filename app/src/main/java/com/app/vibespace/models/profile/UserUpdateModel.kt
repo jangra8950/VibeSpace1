@@ -28,7 +28,7 @@ data class UserUpdateModel(
         var universityId: String,
         var universityName: String,
         var userId: String,
-        var gender: String,
+        var gender: String?,
         var height: Double,
     ){
         data class Location(

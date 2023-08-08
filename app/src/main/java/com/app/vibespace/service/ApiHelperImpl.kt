@@ -1,6 +1,11 @@
 package com.app.vibespace.service
 
+import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.CreatePostModel
+import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.PostDeleteModel
+import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
@@ -49,6 +54,17 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
     override suspend fun updateUser(params: UserUpdateRequest): UserUpdateModel =
         apiService.updateUser(params)
 
+    override suspend fun createPost(params: CreatePostRequest): CreatePostModel =
+        apiService.createPost(params)
+
+    override suspend fun getPostList(query: HashMap<String, Any>): PostListModel =
+        apiService.getPostLList(query)
+
+    override suspend fun deletePost(id: String): PostDeleteModel =
+       apiService.deletePost(id)
+
+    override suspend fun blockUser(params: HashMap<String, String>): BlockUserModel =
+          apiService.blockUser(params)
 
 
 }

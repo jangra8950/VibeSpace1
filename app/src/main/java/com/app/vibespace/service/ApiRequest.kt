@@ -1,6 +1,11 @@
 package com.app.vibespace.service
 
+import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.CreatePostModel
+import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.PostDeleteModel
+import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
@@ -16,9 +21,13 @@ import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.util.ApiConstants
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiRequest {
 
@@ -51,4 +60,18 @@ interface ApiRequest {
 
    @PUT(ApiConstants.API_UPDATE_USER)
    suspend fun updateUser(@Body params: UserUpdateRequest):UserUpdateModel
+
+   @POST(ApiConstants.API_POST_CREATE_POST)
+   suspend fun createPost(@Body params:CreatePostRequest):CreatePostModel
+
+   @GET(ApiConstants.API_GET_POST_LIST)
+   suspend fun getPostLList(@QueryMap query: HashMap<String,Any>):PostListModel
+   //suspend fun getPostLList(@Query("isSelf") isSelf: Boolean?, @Query("post") post: String?):PostListModel
+
+   @DELETE(ApiConstants.API_DELETE_POST)
+   suspend fun deletePost(@Path("id") id: String):PostDeleteModel
+
+   @POST(ApiConstants.API_POST_BLOCK_USER)
+   suspend fun blockUser(@Body params:HashMap<String,String>):BlockUserModel
+
 }

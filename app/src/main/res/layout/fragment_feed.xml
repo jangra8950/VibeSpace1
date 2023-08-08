@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.vibespace.viewModel.profile.FeedViewModel" />
+        <variable
+            name="fragment"
+            type="com.app.vibespace.ui.profile.FeedFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppName"
+            style="@style/txtHeading"
+            android:text="@string/vibespace"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_32sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivSearchBar"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSearchBar"
+            app:srcCompat="@drawable/ic_search_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_92sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvAppName"
+            app:layout_constraintEnd_toStartOf="@id/ivSetting"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSetting"
+            app:srcCompat="@drawable/ic_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivSearchBar"
+            />
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--add  several shimmer placeholder layout -->
+
+                    <include layout="@layout/layout_shimmer" />
+                    <include layout="@layout/layout_shimmer" />
+                    <include layout="@layout/layout_shimmer" />
+                    <include layout="@layout/layout_shimmer" />
+
+
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="4"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_12sdp"
+                tools:listitem="@layout/layout_post_recycler_item" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

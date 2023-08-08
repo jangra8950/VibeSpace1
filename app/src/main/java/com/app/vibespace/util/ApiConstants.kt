@@ -10,15 +10,19 @@ object ApiConstants {
     const val API_POST_LOGIN_USER= "user/login"
     const val API_POST_LOGOUT="user/logout"
     const val API_POST_RESET_PASSWORD="user/password/reset/email"
+    const val API_POST_CREATE_POST="post"
+    const val API_POST_BLOCK_USER="blockUser"
 
 
     // Get call
     const val API_GET_UNIVERSITY_LIST="university"
     const val API_GET_PROFILE="user/profile"
+    const val API_GET_POST_LIST="post/list"
 
 
     // Delete call
     const val API_DELETE_ACCOUNT="user/64a54428038d3bba08c818c2"
+    const val API_DELETE_POST="post/{id}"
 
     // update call
     const val API_UPDATE_USER="user"
@@ -27,10 +31,8 @@ object ApiConstants {
     const val Profile_pic="https://i.pravatar.cc/150?img=3"
     const val Device_Token="1234567890"
     const val Timer_Value=60000
-    var IS_SLIDE_ALREADY = false
 
-    const val PREFERENCE_NAME = "pref_vibe_spa_ce"
-    const val PREF_AUTH_TOKEN="vibe_spa_ce"
+
 
     const val SHARED_PREFS = "shared_prefs"
     const val PROFILE_DATA = "profileData"

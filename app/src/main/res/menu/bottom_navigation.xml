@@ -4,19 +4,24 @@
 
     <item
         android:id="@+id/map"
-        android:icon="@drawable/ic_map"
-        tools:ignore="MenuTitle"
+        android:icon="@drawable/ic_map1"
+       android:title="Map"
         />
     <item
         android:id="@+id/feed"
-        android:icon="@drawable/ic_feed"
-        tools:ignore="MenuTitle" />
+        android:icon="@drawable/ic_feed1"
+        android:title="Feed" />
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"
-        android:title=""  />
+        android:icon="@drawable/ic_profile1"
+        android:title="Profile"  />
     <item
         android:id="@+id/chat"
-        android:icon="@drawable/ic_chat"
-        android:title="" />
+        android:icon="@drawable/ic_chat1"
+        android:title="Chat" />
+    <item
+        android:id="@+id/post"
+        android:icon="@drawable/ic_post1"
+        android:title="Post"
+        />
 </menu>

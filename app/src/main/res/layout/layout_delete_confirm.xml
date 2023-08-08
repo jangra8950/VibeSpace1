@@ -20,38 +20,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btnYes"
-        android:elevation="@dimen/_2sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/round_btn"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_14sdp"
-        android:text="@string/yes"
-        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/colorPrimary"
+        android:text="Yes"
+        android:elevation="@dimen/_2sdp"
         android:textSize="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="@dimen/_52sdp"
+        android:layout_marginTop="@dimen/_24sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvConfirmation" />
+        app:layout_constraintTop_toBottomOf="@id/tvConfirmation"
+            />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btnNo"
-        android:elevation="@dimen/_2sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorEditTxt"
-        android:background="@drawable/round_no_btn"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_14sdp"
-        android:text="@string/no"
-        android:fontFamily="@font/poppins_medium"
+        android:text="No"
+        android:elevation="@dimen/_2sdp"
         android:textSize="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginEnd="@dimen/_52sdp"
+        android:layout_marginTop="@dimen/_24sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvConfirmation"
         />
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btnYes"-->
+<!--        android:elevation="@dimen/_2sdp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/colorWhite"-->
+<!--        android:background="@drawable/round_btn"-->
+<!--        android:layout_marginTop="@dimen/_24sdp"-->
+<!--        android:layout_marginStart="@dimen/_20sdp"-->
+<!--        android:layout_marginBottom="@dimen/_14sdp"-->
+<!--        android:text="@string/yes"-->
+<!--        android:fontFamily="@font/poppins_medium"-->
+<!--        android:textSize="@dimen/_13sdp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvConfirmation" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btnNo"-->
+<!--        android:elevation="@dimen/_2sdp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/colorEditTxt"-->
+<!--        android:background="@drawable/round_no_btn"-->
+<!--        android:layout_marginTop="@dimen/_24sdp"-->
+<!--        android:layout_marginEnd="@dimen/_20sdp"-->
+<!--        android:layout_marginBottom="@dimen/_14sdp"-->
+<!--        android:text="@string/no"-->
+<!--        android:fontFamily="@font/poppins_medium"-->
+<!--        android:textSize="@dimen/_13sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvConfirmation"-->
+<!--        />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,6 +74,7 @@
     <string name="occupation">Occupation</string>
     <string name="logout">LogOut</string>
     <string name="delete_account">Delete Account</string>
+    <string name="delete">Delete</string>
     <string name="choose_your_price">Choose your Price</string>
     <string name="_0">$0</string>
     <string name="_20">$20</string>
@@ -85,5 +86,12 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="save">save</string>
     <string name="logout_confirm">Are you sure you want to Logout?</string>
-    <string name="delete_confirm">Are you sure you want to Delete your Account?</string>
+    <string name="delete_confirm">Are you sure you want to <b>Delete?</b></string>
+    <string name="post_visibility">Post Visibility</string>
+    <string name="_24_hours">24 hours</string>
+    <string name="show_avatar">Show Avatar</string>
+    <string name="prompts">Prompts</string>
+    <string name="text">Text</string>
+    <string name="write_your_text_here">Write your text here</string>
+    <string name="Create_post">Create</string>
 </resources>

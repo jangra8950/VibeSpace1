@@ -142,12 +142,7 @@ class EditProfileFragment : Fragment() {
               when(response.status){
                   ApiStatus.SUCCESS -> {
                       CommonFuctions.dismissDialog()
-//                     val action=EditProfileFragmentDirections.actionEditProfileFragmentToUserProfileFragment(
-//                         dataModel = Gson().toJson(response.data?.data),
-//                         sexuality = response.data?.data?.gender.toString(),
-//                         height = response.data?.data?.height.toString(),
-//                         occupation = response.data?.data?.occupation.toString()
-//                     )
+
                       val editor = MyApp.sharedpreferences.edit()
                       profileData?.gender=response.data?.data?.gender.toString()
                       profileData?.height=response.data?.data?.height!!.toDouble()

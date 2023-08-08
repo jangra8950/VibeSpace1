@@ -134,6 +134,13 @@
            app:layout_constraintEnd_toEndOf="parent"
            />
 
+       <androidx.constraintlayout.widget.Guideline
+           android:id="@+id/guideline"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           app:layout_constraintGuide_percent="0.4"/>
+
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvBio"
            android:layout_width="wrap_content"
@@ -163,22 +170,27 @@
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvUniversity"
            style="@style/text"
+           android:layout_width="0dp"
            android:text="@string/university"
            android:layout_marginStart="@dimen/_30sdp"
+           android:layout_marginEnd="@dimen/_16sdp"
            android:layout_marginTop="@dimen/_20sdp"
            app:layout_constraintTop_toBottomOf="@id/tvBio"
            app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toStartOf="@id/tvDataUniversity"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvDataUniversity"
            style="@style/text"
-
+           android:layout_marginStart="0dp"
+           android:layout_width="0dp"
            android:fontFamily="@font/poppins_medium"
            android:layout_marginTop="@dimen/_21sdp"
-           android:layout_marginStart="@dimen/_142sdp"
+           android:layout_marginEnd="@dimen/_6sdp"
+           app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintTop_toBottomOf="@id/ivEditProfile"
-           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/guideline"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
@@ -187,18 +199,19 @@
            android:text="@string/sexuality"
            android:layout_marginStart="@dimen/_30sdp"
            android:layout_marginTop="@dimen/_12sdp"
-           app:layout_constraintTop_toBottomOf="@id/tvUniversity"
+           app:layout_constraintTop_toBottomOf="@id/tvDataUniversity"
            app:layout_constraintStart_toStartOf="parent"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvDataSexuality"
            style="@style/text"
-
+           android:layout_width="0dp"
+           android:layout_marginStart="0dp"
+           app:layout_constraintEnd_toEndOf="parent"
            android:fontFamily="@font/poppins_medium"
            android:layout_marginTop="@dimen/_12sdp"
-           android:layout_marginStart="@dimen/_142sdp"
-           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/guideline"
            app:layout_constraintTop_toBottomOf="@id/tvDataUniversity"
            />
 
@@ -209,17 +222,18 @@
            android:layout_marginStart="@dimen/_30sdp"
            android:layout_marginTop="@dimen/_12sdp"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvSexuality"
+           app:layout_constraintTop_toBottomOf="@id/tvDataSexuality"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvDataAge"
            style="@style/text"
-
+           android:layout_width="0dp"
+           android:layout_marginStart="0dp"
+           app:layout_constraintEnd_toEndOf="parent"
            android:fontFamily="@font/poppins_medium"
            android:layout_marginTop="@dimen/_12sdp"
-           android:layout_marginStart="@dimen/_142sdp"
-           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/guideline"
            app:layout_constraintTop_toBottomOf="@id/tvDataSexuality"
            />
 
@@ -230,17 +244,18 @@
            android:layout_marginStart="@dimen/_30sdp"
            android:layout_marginTop="@dimen/_12sdp"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvAge"
+           app:layout_constraintTop_toBottomOf="@id/tvDataAge"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvDataHeight"
            style="@style/text"
-
+           android:layout_width="0dp"
+           android:layout_marginStart="0dp"
+           app:layout_constraintEnd_toEndOf="parent"
            android:fontFamily="@font/poppins_medium"
            android:layout_marginTop="@dimen/_12sdp"
-           android:layout_marginStart="@dimen/_142sdp"
-           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/guideline"
            app:layout_constraintTop_toBottomOf="@id/tvDataAge"
           />
 
@@ -251,17 +266,18 @@
            android:layout_marginStart="@dimen/_30sdp"
            android:layout_marginTop="@dimen/_12sdp"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvHeight"
+           app:layout_constraintTop_toBottomOf="@id/tvDataHeight"
            />
 
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvDataOccupation"
            style="@style/text"
-
+           android:layout_width="0dp"
+           android:layout_marginStart="0dp"
+           app:layout_constraintEnd_toEndOf="parent"
            android:fontFamily="@font/poppins_medium"
            android:layout_marginTop="@dimen/_12sdp"
-           android:layout_marginStart="@dimen/_142sdp"
-           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/guideline"
            app:layout_constraintTop_toBottomOf="@id/tvDataHeight"
            />
 
@@ -277,7 +293,7 @@
            android:background="@drawable/round_button_logout"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvOccupation"
+           app:layout_constraintTop_toBottomOf="@id/tvDataOccupation"
            />
 
        <androidx.appcompat.widget.AppCompatButton

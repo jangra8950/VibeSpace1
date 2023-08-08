@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_setting"
+    app:startDestination="@id/settingsFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.app.vibespace.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_bankDetailsFragment"
+            app:destination="@id/bankDetailsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_blockedUserFragment"
+            app:destination="@id/blockedUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewBankDetailsFragment"
+        android:name="com.app.vibespace.ui.settings.AddNewBankDetailsFragment"
+        android:label="AddNewBankDetailsFragment"
+        tools:layout="@layout/fragment_add_new_bank_details">
+        <action
+            android:id="@+id/action_addNewBankDetailsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewCardFragment"
+        android:name="com.app.vibespace.ui.settings.AddNewCardFragment"
+        android:label="AddNewCardFragment"
+        tools:layout="@layout/fragment_add_new_card">
+        <action
+            android:id="@+id/action_addNewCardFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bankDetailsFragment"
+        android:name="com.app.vibespace.ui.settings.BankDetailsFragment"
+        android:label="BankDetailsFragment"
+        tools:layout="@layout/fragment_bank_details">
+        <action
+            android:id="@+id/action_bankDetailsFragment_to_addNewBankDetailsFragment"
+            app:destination="@id/addNewBankDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blockedUserFragment"
+        android:name="com.app.vibespace.ui.settings.BlockedUserFragment"
+        android:label="BlockedUserFragment"
+        tools:layout="@layout/fragment_blocked_user"
+        />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.app.vibespace.ui.settings.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password">
+        <action
+            android:id="@+id/action_changePasswordFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.app.vibespace.ui.settings.PaymentMethodFragment"
+        android:label="PaymentMethodFragment"
+        tools:layout="@layout/fragment_payment_method">
+        <action
+            android:id="@+id/action_paymentMethodFragment_to_addNewCardFragment"
+            app:destination="@id/addNewCardFragment" />
+    </fragment>
+</navigation>
