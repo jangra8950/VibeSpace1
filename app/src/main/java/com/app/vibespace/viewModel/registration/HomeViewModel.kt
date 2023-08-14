@@ -18,9 +18,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repo: MyRepo,
     private val resources: android.content.res.Resources
+
 ):ViewModel() {
-
-
 
     @SuppressLint("SuspiciousIndentation")
     fun logOut()= liveData(Dispatchers.IO) {

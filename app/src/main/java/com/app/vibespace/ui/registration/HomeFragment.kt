@@ -35,9 +35,7 @@ class HomeFragment : Fragment() {
         binding.viewModel=model
         binding.fragment=this
         binding.lifecycleOwner=this
-
         getData()
-
     }
 
     private fun getData() {

@@ -4,8 +4,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,6 +25,7 @@ import com.app.vibespace.ui.profile.CreatePostFragment
 import com.app.vibespace.ui.profile.FeedFragment
 import com.app.vibespace.ui.profile.ProfileHostFragment
 import com.app.vibespace.ui.profile.ProfileMainFragment
+import com.app.vibespace.ui.profile.UserListProfileFragment
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.Communicator
 import com.app.vibespace.util.MyApp
@@ -40,6 +44,7 @@ class HomeActivity : AppCompatActivity() , Communicator{
     private lateinit var binding: ActivityHomeBinding
     var postData=""
     private val model:HomeViewModel by viewModels()
+    private var doubleBackToExitPressedOnce=false
    // private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,32 +60,26 @@ class HomeActivity : AppCompatActivity() , Communicator{
     }
 
     private fun setFragment() {
-
-        val firstFragment=HomeFragment()
-        val secondFragment= FeedFragment()
-        val thirdFragment=ProfileHostFragment()
-        val fourthFragment=ChatFragment()
-        val fifthFragment= CreatePostFragment()
         val bundle = Bundle()
         if (postData!="") {
             bundle.putString("message", postData)
             postData=""
         }
-        setCurrentFragment(firstFragment)
+        setCurrentFragment(HomeFragment())
 
 
         binding.navigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.map->{
-                    setCurrentFragment(firstFragment)
+                    setCurrentFragment(HomeFragment())
                     true}
-                R.id.feed->{setCurrentFragment(secondFragment)
+                R.id.feed->{setCurrentFragment(FeedFragment())
                     true}
-                R.id.profile->{setCurrentFragment(thirdFragment)
+                R.id.profile->{setCurrentFragment(ProfileHostFragment())
                     true}
-                R.id.chat->{setCurrentFragment(fourthFragment)
+                R.id.chat->{setCurrentFragment(ChatFragment())
                     true}
-                R.id.post->{setCurrentFragment(fifthFragment)
+                R.id.post->{setCurrentFragment(CreatePostFragment())
                     true}
                 else->false
             }
@@ -109,5 +108,31 @@ class HomeActivity : AppCompatActivity() , Communicator{
 //        transaction.commit()
     }
 
+    override fun onBackPressed() {
 
+        if (supportFragmentManager.backStackEntryCount>0)
+            supportFragmentManager.popBackStack()
+        else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+
+            doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+                doubleBackToExitPressedOnce = false
+            }, 2000)
+        }
+    }
+
+    fun updateFragment(frag:Fragment){
+        supportFragmentManager.beginTransaction().add(R.id.flFragment, frag).addToBackStack(null)
+            .commit()
+    }
+    fun changeFragment(frag:Fragment){
+        supportFragmentManager.beginTransaction().add(R.id.userListFragment, frag).addToBackStack(null)
+            .commit()
+    }
 }

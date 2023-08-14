@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.vibespace.Enums.ApiStatus
@@ -22,6 +23,7 @@ import com.app.vibespace.util.ApiConstants
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
+import com.app.vibespace.util.showToast
 
 
 import com.app.vibespace.util.toast
@@ -60,8 +62,43 @@ class ResetPasswordFragment : Fragment() {
             imm.hideSoftInputFromWindow(v.windowToken, 0)
         }
 
+        setView()
+
     }
 
+    private fun setView() {
+        if(requireActivity().intent.getStringExtra("key")=="fromSettingActivity")
+        {
+            binding.tvOldPassword.visibility=View.VISIBLE
+            binding.etOldPassLayout.visibility=View.VISIBLE
+            binding.tvSetPass.text="Change Password"
+            binding.btnSetPassword.text="UPDATE"
+            binding.tvNewAccount.visibility=View.GONE
+            binding.tvCreate.visibility=View.GONE
+
+        }
+    }
+
+    private fun changePassword(view:View) {
+       activity?.let{
+           model.changePass().observe(it){response->
+               when(response.status){
+                   ApiStatus.SUCCESS -> {
+                       CommonFuctions.dismissDialog()
+                       response?.data?.data?.message?.let { it1 -> showToast(requireContext(), it1) }
+                       onBack(view)
+                   }
+                   ApiStatus.ERROR -> {
+                       CommonFuctions.dismissDialog()
+                       response.message?.let { it1 -> showToast(requireContext(), it1) }
+                   }
+                   ApiStatus.LOADING -> {
+                       CommonFuctions.showDialog(requireActivity())
+                   }
+               }
+           }
+       }
+    }
 
 
     fun onSignIn(view:View){
@@ -69,13 +106,17 @@ class ResetPasswordFragment : Fragment() {
     }
 
     fun onContinue(view:View){
-        if(model.checkValues(view)){
 
-            //if(VerifyOtpRequest().type==CreateOtpType.UR.name)
-            if(args.type==CreateOtpType.UR.name)
+        var isFromSetting=false
+        if(requireActivity().intent.getStringExtra("key")=="fromSettingActivity")
+            isFromSetting=true
+        if(model.checkValues(view,isFromSetting))
+        {
+            if(isFromSetting)
+                changePassword(view)
+            else if(args.type==CreateOtpType.UR.name)
                registerUser(view)
-           // if(VerifyOtpRequest().type==CreateOtpType.UFP.name)
-            if(args.type==CreateOtpType.UFP.name)
+            else if(args.type==CreateOtpType.UFP.name)
                 resetPassword(view)
 
         }
@@ -144,6 +185,8 @@ class ResetPasswordFragment : Fragment() {
             }
         }
     }
-
+    fun onBack(view: View){
+        requireActivity().onBackPressed()
+    }
 
 }

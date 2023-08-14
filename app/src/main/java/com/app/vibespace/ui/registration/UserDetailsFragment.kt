@@ -138,7 +138,9 @@ private fun dropDown(autoCompleteTextView: AutoCompleteTextView) {
             }
         }
     }
-
+    fun onBack(view: View){
+        requireActivity().onBackPressed()
+    }
 
 
 }

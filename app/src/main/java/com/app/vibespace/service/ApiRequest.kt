@@ -4,8 +4,12 @@ import com.app.vibespace.models.profile.BlockUserModel
 import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.PostCommentListModel
+import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
+import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
@@ -18,6 +22,8 @@ import com.app.vibespace.models.registration.SignUpRequest
 import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
+import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.UnblockUserModel
 import com.app.vibespace.util.ApiConstants
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -74,4 +80,30 @@ interface ApiRequest {
    @POST(ApiConstants.API_POST_BLOCK_USER)
    suspend fun blockUser(@Body params:HashMap<String,String>):BlockUserModel
 
+   @GET(ApiConstants.API_GET_BLOCKED_USER)
+   suspend fun getBlockedUser():BlockedUserListModel
+
+   @DELETE(ApiConstants.API_DELETE_UNBLOCK_USER)
+   suspend fun unblockUser(@Path("id")id:String):UnblockUserModel
+
+  @POST(ApiConstants.API_POST_CHANGE_PASS)
+   suspend fun changePass(@Body params:HashMap<String,String>):ResetPasswordModel
+
+   @GET(ApiConstants.API_GET_USER_LIST)
+   suspend fun getUserList():UserListModel
+
+   @POST(ApiConstants.API_POST_LIKE)
+    suspend fun postLike(@Body params:HashMap<String,String>):PostLikeCountModel
+
+    @DELETE(ApiConstants.API_DELETE_UNLIKE)
+    suspend fun unlikePost(@Path("id")id:String):PostLikeCountModel
+
+    @POST(ApiConstants.API_POST_REPORT)
+    suspend fun postReport(@Body params:HashMap<String,String>):PostLikeCountModel
+
+    @GET(ApiConstants.API_GET_COMMENT_LIST)
+    suspend fun getCommentLList(@Query("postId") postId: String):PostCommentListModel
+
+   @POST(ApiConstants.API_POST_COMMENT)
+   suspend fun postComment(@Body params:HashMap<String,String>):PostCommentModel
 }

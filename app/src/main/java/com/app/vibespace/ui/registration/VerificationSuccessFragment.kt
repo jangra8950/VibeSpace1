@@ -32,7 +32,7 @@ private val args:VerificationSuccessFragmentArgs by navArgs()
 
     private fun navigate() {
       binding.back.setOnClickListener {
-          findNavController().navigate(R.id.verifyOtpFragment)
+          requireActivity().onBackPressed()
       }
 
        binding.btnSuccess.setOnClickListener {
@@ -47,5 +47,8 @@ private val args:VerificationSuccessFragmentArgs by navArgs()
        }
     }
 
+    fun onBack(view: View){
+        requireActivity().onBackPressed()
+    }
 
 }

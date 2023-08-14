@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+
+    <data>
+
+    </data>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           android:background="@drawable/round_edit_profile"
+            android:padding="@dimen/_12sdp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvComments"
+                android:tint="@color/colorTxt"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_centerHorizontal="true"
+                />
+
+            <LinearLayout
+                android:layout_below="@+id/tvComments"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_above="@+id/tvTypeComment"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--add  several shimmer placeholder layout -->
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+                        <include layout="@layout/layout_shimmer_user_list" />
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="4"
+                    android:layout_weight="1"
+                    app:stackFromEnd="true"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    tools:listitem="@layout/layout_comment_item" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tvTypeComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fontFamily="@font/poppins_medium"
+                android:textColor="@color/colorEditTxt"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/round_type_comment"
+                android:hint="Type Comment.."
+                android:gravity="start"
+                android:layout_toStartOf="@+id/ivSend"
+                android:padding="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSend"
+                app:srcCompat="@drawable/ic_send"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                />
+        </RelativeLayout>
+
+
+</layout>

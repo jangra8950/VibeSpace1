@@ -31,35 +31,72 @@ class ResetPasswordViewModel @Inject constructor(
     private val resources: android.content.res.Resources
 ):ViewModel() {
 
+    val oldPassword=MutableLiveData("")
     val password=MutableLiveData("")
     val confirmPassword=MutableLiveData("")
 
-    fun checkValues(view: View): Boolean {
-        return when {
-            password.value.toString().trim().isEmpty() -> {
-                showToast(view.context,resources.getString(R.string.please_enter_valid_password))
-                false
+    fun checkValues(view: View,isChangePass:Boolean): Boolean {
+
+        if (isChangePass) {
+            if (oldPassword.value.toString().trim().isEmpty()) {
+                showToast(view.context, resources.getString(R.string.please_enter_valid_password))
+                return false
             }
-            password.value.toString().trim().length < 8 -> {
-                showToast(view.context,resources.getString(R.string.password_must_be_8_character_long))
-                false
-            }
-            confirmPassword.value.toString().trim().isEmpty() -> {
-                showToast(view.context,resources.getString(R.string.please_enter_valid_confirm_password))
-                false
-            }
-            confirmPassword.value.toString().trim().length < 8 -> {
-                showToast(view.context,resources.getString(R.string.confirm_password_must_be_8_character_long))
-                false
-            }
-            password.value.toString().trim() != confirmPassword.value.toString().trim() -> {
-                showToast(view.context,resources.getString(R.string.password_and_confirm_password_should_match_each_other))
-                false
-            }
-            else -> {
-                true
+            if (oldPassword.value.toString().trim().length < 8){
+                showToast(
+                    view.context,
+                    resources.getString(R.string.password_must_be_8_character_long)
+                )
+                return false
             }
         }
+
+            return when {
+
+                password.value.toString().trim().isEmpty() -> {
+                    showToast(
+                        view.context,
+                        resources.getString(R.string.please_enter_valid_password)
+                    )
+                    false
+                }
+
+                password.value.toString().trim().length < 8 -> {
+                    showToast(
+                        view.context,
+                        resources.getString(R.string.password_must_be_8_character_long)
+                    )
+                    false
+                }
+
+                confirmPassword.value.toString().trim().isEmpty() -> {
+                    showToast(
+                        view.context,
+                        resources.getString(R.string.please_enter_valid_confirm_password)
+                    )
+                    false
+                }
+
+                confirmPassword.value.toString().trim().length < 8 -> {
+                    showToast(
+                        view.context,
+                        resources.getString(R.string.confirm_password_must_be_8_character_long)
+                    )
+                    false
+                }
+
+                password.value.toString().trim() != confirmPassword.value.toString().trim() -> {
+                    showToast(
+                        view.context,
+                        resources.getString(R.string.password_and_confirm_password_should_match_each_other)
+                    )
+                    false
+                }
+
+                else -> {
+                    true
+                }
+            }
     }
 
     fun registerUser(mActivity: Activity)= liveData(Dispatchers.IO) {
@@ -112,9 +149,25 @@ class ResetPasswordViewModel @Inject constructor(
         return request
     }
 
+    fun changePass()= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+        try {
+            val query: HashMap<String,String> = hashMapOf()
+            query["oldPassword"] = oldPassword.value.toString()
+            query["newPassword"] = password.value.toString()
+            query["confirmPassword"] = confirmPassword.value.toString()
 
-    fun onBack(view: View){
-        val controller= Navigation.findNavController(view)
-        controller.popBackStack()
+            val changeResponse:ResetPasswordModel=repo.changePass(query)
+            if(changeResponse.statusCode==200)
+                emit(Resources.success(changeResponse))
+            else
+                emit(Resources.error(changeResponse.message,null))
+
+        }catch(exe:Exception){
+            emit(handleApiError(exe,resources))
+        }
     }
+
+
+
 }

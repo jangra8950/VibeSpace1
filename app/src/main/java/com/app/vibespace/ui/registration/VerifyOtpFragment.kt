@@ -3,6 +3,7 @@ package com.app.vibespace.ui.registration
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +73,7 @@ class VerifyOtpFragment : Fragment() {
 //        }
 
         arguments?.let {
-            val safeArgs= VerifyOtpFragmentArgs.fromBundle(it)
+           val safeArgs= VerifyOtpFragmentArgs.fromBundle(it)
             binding.tvEmail.text=safeArgs.email
             model.setArguments(arguments)
 
@@ -152,6 +153,9 @@ class VerifyOtpFragment : Fragment() {
                 }
             }
         }
+    }
+    fun onBack(view: View){
+        requireActivity().onBackPressed()
     }
 
 

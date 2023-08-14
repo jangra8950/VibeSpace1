@@ -47,11 +47,17 @@
 
                     <!--add  several shimmer placeholder layout -->
 
-                    <include layout="@layout/layout_shimmer" />
-                    <include layout="@layout/layout_shimmer" />
-                    <include layout="@layout/layout_shimmer" />
-                    <include layout="@layout/layout_shimmer" />
-
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
+                    <include layout="@layout/layout_shimmer_blocked_user" />
 
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>

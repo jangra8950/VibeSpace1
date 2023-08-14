@@ -67,7 +67,7 @@ class EditProfileFragment : Fragment() {
 
        // setValues()
         binding.back.setOnClickListener {
-            findNavController().popBackStack()
+           requireActivity().onBackPressed()
         }
 
         getUniversityList(view)

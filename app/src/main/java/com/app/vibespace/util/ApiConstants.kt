@@ -12,17 +12,27 @@ object ApiConstants {
     const val API_POST_RESET_PASSWORD="user/password/reset/email"
     const val API_POST_CREATE_POST="post"
     const val API_POST_BLOCK_USER="blockUser"
+    const val API_POST_CHANGE_PASS="user/password/change"
+    const val API_POST_LIKE="like"
+    const val API_POST_REPORT="reportPost"
+    const val API_POST_COMMENT="comment"
+
 
 
     // Get call
     const val API_GET_UNIVERSITY_LIST="university"
     const val API_GET_PROFILE="user/profile"
     const val API_GET_POST_LIST="post/list"
+    const val API_GET_BLOCKED_USER="blockUser/list"
+    const val API_GET_USER_LIST="user/userList"
+    const val API_GET_COMMENT_LIST="comment/list"
 
 
     // Delete call
     const val API_DELETE_ACCOUNT="user/64a54428038d3bba08c818c2"
     const val API_DELETE_POST="post/{id}"
+    const val API_DELETE_UNBLOCK_USER="blockUser/{id}"
+    const val API_DELETE_UNLIKE="like/{id}"
 
     // update call
     const val API_UPDATE_USER="user"

@@ -20,6 +20,7 @@ import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.databinding.FragmentUserProfileBinding
 import com.app.vibespace.models.profile.UserUpdateModel
+import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.registration.SignInActivity
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.MyApp
@@ -65,18 +66,20 @@ class UserProfileFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            findNavController().popBackStack()
+           requireActivity().onBackPressed()
         }
 
         binding.ivEditProfile.setOnClickListener {
-           val action=UserProfileFragmentDirections.actionUserProfileFragmentToEditProfileFragment(
-               university = profileData?.universityName.toString(),
-               sexuality = profileData?.gender.toString(),
-               age = "29",
-               height = profileData?.height.toString(),
-               occupation = profileData?.occupation.toString()
-           )
-            findNavController().navigate(action)
+//           val action=UserProfileFragmentDirections.actionUserProfileFragmentToEditProfileFragment(
+//               university = profileData?.universityName.toString(),
+//               sexuality = profileData?.gender.toString(),
+//               age = "29",
+//               height = profileData?.height.toString(),
+//               occupation = profileData?.occupation.toString()
+//           )
+//            findNavController().navigate(action)
+
+            (requireActivity() as HomeActivity).updateFragment(EditProfileFragment())
         }
     }
 

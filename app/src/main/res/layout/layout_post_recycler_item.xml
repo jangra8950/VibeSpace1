@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="data"
+            type="com.app.vibespace.models.profile.PostListModel.Data.Post" />
     </data>
 
         <androidx.cardview.widget.CardView
@@ -22,6 +24,7 @@
            <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
+               android:paddingHorizontal="@dimen/_12sdp"
                android:background="@color/colorWhite">
 
                <androidx.appcompat.widget.AppCompatImageView
@@ -30,7 +33,6 @@
                    app:srcCompat="@drawable/ic_map1"
                    android:layout_width="@dimen/_22sdp"
                    android:layout_height="@dimen/_22sdp"
-                   android:layout_marginStart="@dimen/_12sdp"
                    android:layout_marginTop="@dimen/_6sdp"
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +50,7 @@
                    />
                <androidx.appcompat.widget.AppCompatTextView
                    android:id="@+id/tvName"
-                   android:text="John Wick"
+                   android:text="@{data.UserDetails.firstName+' '+ data.UserDetails.firstName}"
                    android:fontFamily="@font/poppins_medium"
                    android:textColor="@color/colorEditTxt"
                    android:layout_width="wrap_content"
@@ -65,7 +67,6 @@
                    android:layout_width="@dimen/_22sdp"
                    android:layout_height="@dimen/_22sdp"
                    android:layout_marginTop="@dimen/_6sdp"
-                   android:layout_marginEnd="@dimen/_12sdp"
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintEnd_toEndOf="parent"
                    />
@@ -76,7 +77,7 @@
                    android:layout_height="wrap_content"
                    android:fontFamily="@font/poppins_medium"
                    android:textColor="@color/colorEditTxt"
-                   android:text="nkevkekneke fekfenf kenf kenke fnke n fkfen fkefe nefknf biefi efn nfiefn  dcw nek enfene kenfefkkee fknfeffeee k "
+                   android:text="@{data.caption}"
                    android:layout_marginTop="@dimen/_10sdp"
                    android:layout_marginHorizontal="@dimen/_12sdp"
                    app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +92,7 @@
                    android:layout_width="@dimen/_16sdp"
                    android:layout_height="@dimen/_16sdp"
                    app:layout_constraintStart_toStartOf="parent"
-                   android:layout_marginStart="@dimen/_22sdp"
+                   android:layout_marginStart="@dimen/_10sdp"
                    android:layout_marginTop="@dimen/_6sdp"
                    app:layout_constraintTop_toBottomOf="@id/tvCaption"
                    />
@@ -103,6 +104,7 @@
                    android:fontFamily="@font/poppins_medium"
                    android:textColor="@color/colorEditTxt"
 
+                   android:text="@{data.likeCount}"
                    android:gravity="center"
                    android:layout_marginTop="@dimen/_6sdp"
                    app:layout_constraintTop_toBottomOf="@+id/tvCaption"
@@ -129,33 +131,45 @@
                    android:fontFamily="@font/poppins_medium"
                    android:textColor="@color/colorEditTxt"
 
+                   android:text="@{data.commentCount}"
                    android:gravity="center"
                    android:layout_marginTop="@dimen/_6sdp"
                    app:layout_constraintTop_toBottomOf="@+id/tvCaption"
                    app:layout_constraintStart_toEndOf="@id/ivComment"
                    />
 
-               <androidx.appcompat.widget.AppCompatTextView
+               <androidx.appcompat.widget.AppCompatEditText
                    android:id="@+id/tvTypeComment"
-                   android:layout_width="match_parent"
+                   android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    app:fontFamily="@font/poppins_medium"
                    android:textColor="@color/colorEditTxt"
                    android:background="@drawable/round_type_comment"
-                   android:text="Type Comment.."
+                   android:hint="Type Comment.."
                    android:gravity="start"
 
                    android:padding="@dimen/_4sdp"
-
                    android:layout_marginTop="@dimen/_14sdp"
                    android:layout_marginBottom="@dimen/_12sdp"
-
-                   android:layout_marginHorizontal="@dimen/_12sdp"
                    app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toStartOf="@+id/ivSend"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/ivComment"
+                   />
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id="@+id/ivSend"
+                   app:srcCompat="@drawable/ic_send"
+
+                   android:visibility="gone"
+                   android:layout_width="@dimen/_30sdp"
+                   android:layout_height="@dimen/_30sdp"
+                   android:layout_marginStart="@dimen/_8sdp"
+                   app:layout_constraintStart_toEndOf="@id/tvTypeComment"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintBottom_toBottomOf="parent"
                    app:layout_constraintTop_toBottomOf="@id/ivComment"
                    />
+
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 

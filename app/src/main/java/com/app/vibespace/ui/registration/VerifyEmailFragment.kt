@@ -114,6 +114,9 @@ class VerifyEmailFragment : Fragment() {
             }
         }
     }
+    fun onBack(view: View){
+        requireActivity().onBackPressed()
+    }
 
 
 }

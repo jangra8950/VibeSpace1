@@ -28,6 +28,7 @@ import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.adapter.PostAdapter
+import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ProfileViewModel
 import com.google.gson.Gson
@@ -172,7 +173,8 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
 
     private fun navigation() {
         binding.btnBio.setOnClickListener {
-            findNavController().navigate(R.id.userProfileFragment)
+           // findNavController().navigate(R.id.userProfileFragment)
+            (requireActivity() as HomeActivity).updateFragment(UserProfileFragment())
         }
 //        binding.btnMonetize.setOnClickListener {
 //            findNavController().navigate(R.id.priceProfileFragment)

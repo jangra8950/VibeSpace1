@@ -20,26 +20,15 @@
         android:textSize="@dimen/_14sdp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/colorEditTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_22sdp"
         android:layout_marginStart="@dimen/_12sdp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivAvatar" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:paddingHorizontal="@dimen/_18sdp"
-        android:textColor="@color/colorBlack"
-        android:background="@color/colorBackground"
-        android:layout_marginEnd="@dimen/_8sdp"
-
-        android:layout_marginBottom="@dimen/_4sdp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivAvatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

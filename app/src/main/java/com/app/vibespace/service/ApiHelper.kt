@@ -4,8 +4,12 @@ import com.app.vibespace.models.profile.BlockUserModel
 import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.PostCommentListModel
+import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
+import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
@@ -18,6 +22,8 @@ import com.app.vibespace.models.registration.SignUpRequest
 import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
+import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.UnblockUserModel
 
 
 interface ApiHelper {
@@ -50,6 +56,22 @@ interface ApiHelper {
 
     suspend fun blockUser(params:HashMap<String,String>):BlockUserModel
 
+   suspend fun getBlockedUser():BlockedUserListModel
 
+   suspend fun unblockUser(id:String):UnblockUserModel
+
+   suspend fun changePass(params:HashMap<String,String>):ResetPasswordModel
+
+   suspend fun getUserList():UserListModel
+
+   suspend fun postLIke(params:HashMap<String,String>):PostLikeCountModel
+
+   suspend fun dislikePost(id:String):PostLikeCountModel
+
+    suspend fun postReport(params:HashMap<String,String>):PostLikeCountModel
+
+    suspend fun postComment(params:HashMap<String,String>):PostCommentModel
+
+    suspend fun getCommentList(postId:String):PostCommentListModel
 
 }
