@@ -14,6 +14,7 @@ import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
 import com.app.vibespace.models.registration.CreateOtpRequest
+import com.app.vibespace.models.registration.GetPeopleModel
 import com.app.vibespace.models.registration.LogOutModel
 import com.app.vibespace.models.registration.ResetPasswordModel
 import com.app.vibespace.models.registration.ResetPasswordRequest
@@ -98,5 +99,8 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
 
     override suspend fun getCommentList(postId: String): PostCommentListModel =
        apiService.getCommentLList(postId)
+
+    override suspend fun getPeople(params: HashMap<String, Any>): GetPeopleModel =
+        apiService.getPeople(params)
 
 }

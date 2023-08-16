@@ -102,4 +102,6 @@
     <string name="add_payment_method">Add Payment Method</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+
+    <string name="mapbox_access_token">sk.eyJ1IjoiemltYmxlY29kZSIsImEiOiJjbGttZmh1YmwwOWIwM2VtaWJmdzVldmM4In0.Yu5NQGscXHxZ7hj1skDSHQ</string>
 </resources>

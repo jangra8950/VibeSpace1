@@ -10,6 +10,7 @@ import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpRequest
+import com.app.vibespace.models.registration.GetPeopleModel
 import com.app.vibespace.models.registration.ResetPasswordModel
 import com.app.vibespace.models.registration.ResetPasswordRequest
 import com.app.vibespace.models.registration.SignInRequest
@@ -69,4 +70,6 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun postComment(params:HashMap<String,String>):PostCommentModel=apiHelper.postComment(params)
 
     suspend fun getCommentList(postId:String):PostCommentListModel=apiHelper.getCommentList(postId)
+
+    suspend fun getPeople(params:HashMap<String,Any>):GetPeopleModel=apiHelper.getPeople(params)
 }

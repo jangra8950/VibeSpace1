@@ -26,7 +26,9 @@ class ProfileViewModel @Inject constructor(
 
        try {
            val profileResponse: UserUpdateModel =repo.getProfile()
-           if(profileResponse.statusCode==200)
+           if(profileResponse.statusCode==401)
+               emit(Resources.error(profileResponse.message,null))
+           else if(profileResponse.statusCode==200)
                emit(Resources.success(profileResponse))
            else
                emit(Resources.error(profileResponse.message,null))

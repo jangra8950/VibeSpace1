@@ -26,7 +26,7 @@ object ApiConstants {
     const val API_GET_BLOCKED_USER="blockUser/list"
     const val API_GET_USER_LIST="user/userList"
     const val API_GET_COMMENT_LIST="comment/list"
-
+    const val API_GET_PEOPLE="user/people"
 
     // Delete call
     const val API_DELETE_ACCOUNT="user/64a54428038d3bba08c818c2"

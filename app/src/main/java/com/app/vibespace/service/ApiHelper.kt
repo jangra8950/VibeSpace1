@@ -14,6 +14,7 @@ import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
 import com.app.vibespace.models.registration.CreateOtpModel
 import com.app.vibespace.models.registration.CreateOtpRequest
+import com.app.vibespace.models.registration.GetPeopleModel
 import com.app.vibespace.models.registration.LogOutModel
 import com.app.vibespace.models.registration.ResetPasswordModel
 import com.app.vibespace.models.registration.ResetPasswordRequest
@@ -73,5 +74,7 @@ interface ApiHelper {
     suspend fun postComment(params:HashMap<String,String>):PostCommentModel
 
     suspend fun getCommentList(postId:String):PostCommentListModel
+
+    suspend fun getPeople(params:HashMap<String,Any>):GetPeopleModel
 
 }

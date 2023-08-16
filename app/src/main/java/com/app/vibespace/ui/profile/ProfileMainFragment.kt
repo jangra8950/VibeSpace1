@@ -2,6 +2,7 @@ package com.app.vibespace.ui.profile
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -29,6 +30,7 @@ import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.adapter.PostAdapter
 import com.app.vibespace.ui.registration.HomeActivity
+import com.app.vibespace.ui.registration.SignInActivity
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ProfileViewModel
 import com.google.gson.Gson
@@ -160,8 +162,10 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
                         setValues(profileData!!)
                     }
                     ApiStatus.ERROR -> {
+
+                        loginDialog()
                        //CommonFuctions.dismissDialog()
-                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                      //  response.message?.let { it1 -> showToast(requireActivity(), it1) }
                     }
                     ApiStatus.LOADING -> {
                       //  CommonFuctions.showDialog(requireActivity())
@@ -169,6 +173,22 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
                 }
             }
         }
+    }
+
+    private fun loginDialog() {
+        CommonFuctions.dialog = Dialog(requireContext())
+        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        CommonFuctions.dialog?.setContentView(R.layout.layout_access_token)
+        CommonFuctions.dialog?.setCancelable(false)
+        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
+            startActivity(Intent(requireContext(),SignInActivity::class.java))
+            requireActivity().finish()
+            CommonFuctions.dialog!!.dismiss()
+        }
+
+        CommonFuctions.dialog?.show()
     }
 
     private fun navigation() {

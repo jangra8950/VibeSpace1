@@ -18,21 +18,14 @@
        android:layout_height="match_parent"
        android:background="@color/colorWhite">
 
-       <androidx.appcompat.widget.AppCompatTextView
-           android:id="@+id/tvWelcome"
-           style="@style/txtHeading"
-           android:text="WELCOME"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           />
-       <androidx.appcompat.widget.AppCompatTextView
-           android:id="@+id/tvName"
-           style="@style/text"
-           android:layout_marginTop="@dimen/_22sdp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+       <com.mapbox.maps.MapView
+           xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+           android:id="@+id/mapView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           mapbox:mapbox_cameraTargetLat="28.7128"
+           mapbox:mapbox_cameraTargetLng="77.1060"
+           mapbox:mapbox_cameraZoom="9.0"
            />
    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
