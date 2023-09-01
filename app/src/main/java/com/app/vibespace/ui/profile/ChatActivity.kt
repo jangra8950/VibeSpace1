@@ -221,7 +221,7 @@ class ChatActivity : AppCompatActivity() {
                 chatType = "text",
                 isRead = false,
                 isDelivered = false,
-                status = ""
+                status = "",
             )
 
             val message = MqttMessage(Gson().toJson(sentChat).toByteArray())

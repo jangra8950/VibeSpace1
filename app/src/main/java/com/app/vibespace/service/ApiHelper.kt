@@ -85,4 +85,6 @@ interface ApiHelper {
    suspend fun getChatInd(userId:String):ChatItemModel
 
    suspend fun postFollow(params:HashMap<String,Any>):FollowModel
+
+   suspend fun deleteChat(param:HashMap<String,Any>):DeleteAccountModel
 }

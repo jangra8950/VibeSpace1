@@ -3,10 +3,12 @@ package com.app.vibespace.adapter
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.app.vibespace.R
 import com.app.vibespace.databinding.LayoutChatItemBinding
 
 import com.app.vibespace.models.profile.SummaryModel
@@ -17,7 +19,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
+import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 import java.util.Date
 import java.util.Locale
@@ -58,8 +62,8 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
         }
 
         holder.binding.tvTime.text=convertTimestampToRealTime(item.sentAt.toLong())
-
-     //   Picasso.with(context).load(item.senderMascotIcon).into(holder.binding.ivAvatar)
+        if (!item.senderMascotIcon.isNullOrEmpty())
+            Picasso.with(context).load(item.senderMascotIcon).into(holder.binding.ivAvatar)
 
 //        CoroutineScope(Dispatchers.Main).launch {
 //            try {
@@ -74,10 +78,13 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
     }
 
     fun convertTimestampToRealTime(timestamp: Long): String {
-        val date = Date(timestamp)
-        val format = SimpleDateFormat("HH:mm", Locale.US)
-        format.timeZone = TimeZone.getDefault()
-        return format.format(date)
+        val smsTime: Calendar = Calendar.getInstance(TimeZone.getDefault())
+        smsTime.timeInMillis = timestamp
+        return try {
+            DateFormat.format("hh:mm a", smsTime).toString()
+        } catch (e: ParseException) {
+            throw RuntimeException(e)
+        }
     }
 
     private suspend fun loadImageFromUrl(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
