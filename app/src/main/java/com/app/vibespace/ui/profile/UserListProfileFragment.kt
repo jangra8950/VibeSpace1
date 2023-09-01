@@ -43,7 +43,7 @@ class UserListProfileFragment : Fragment() {
         binding.lifecycleOwner=this
 
         binding.recyclerview.layoutManager=LinearLayoutManager(activity)
-        adapter= UserListAdapter(userList)
+        adapter= UserListAdapter(userList,requireActivity())
         binding.recyclerview.adapter=adapter
 
         view.setOnClickListener { v ->

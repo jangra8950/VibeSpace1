@@ -1,14 +1,17 @@
 package com.app.vibespace.service
 
 import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
 import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.models.profile.SummaryModel
 import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
@@ -43,7 +46,7 @@ interface ApiHelper {
 
     suspend fun resetPassword(params:ResetPasswordRequest):ResetPasswordModel
 
-    suspend fun getProfile():UserUpdateModel
+    suspend fun getProfile(otherUserId:String):UserUpdateModel
 
     suspend fun deleteAccount():DeleteAccountModel
 
@@ -77,4 +80,9 @@ interface ApiHelper {
 
     suspend fun getPeople(params:HashMap<String,Any>):GetPeopleModel
 
+    suspend fun getSummary():SummaryModel
+
+   suspend fun getChatInd(userId:String):ChatItemModel
+
+   suspend fun postFollow(params:HashMap<String,Any>):FollowModel
 }

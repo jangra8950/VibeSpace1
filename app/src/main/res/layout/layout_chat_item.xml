@@ -15,7 +15,8 @@
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/_42sdp"
             android:layout_height="@dimen/_42sdp"
-            app:srcCompat="@drawable/ic_avatar"
+            android:paddingBottom="@dimen/_4sdp"
+            android:src="@drawable/ic_avatar"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +40,10 @@
             android:text="hello there we are here to help "
             android:fontFamily="@font/poppins_medium"
             android:layout_width="0dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@id/tvName"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
@@ -63,7 +67,7 @@
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_14sdp"
             android:background="@color/colorBackground"
-            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +54,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
 
         if(!::binding.isInitialized)
             binding=DataBindingUtil.inflate(inflater,R.layout.fragment_profile_main,container,false)
-
+        Log.i("SAHILDATAR","profile")
         return binding.root
     }
 
@@ -67,8 +68,21 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         adapter =  PostAdapter(postList,this)
         binding.recyclerview.adapter =  adapter
 
-        getProfile(view)
-        getPostList(view)
+
+//        val bundle = arguments
+//        val message = bundle!!.getString("mText")
+//
+//        if(message!="") {
+//            getProfile(view, message!!)
+//            getPostList(view, message)
+//        }
+//        else{
+//            getProfile(view,"")
+//            getPostList(view,"")
+//        }
+            getProfile(view,"")
+            getPostList(view,"")
+
         navigation()
 
     }
@@ -112,9 +126,9 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
     }
 
 
-    private fun getPostList(view: View) {
+    private fun getPostList(view: View,id:String) {
        activity?.let {
-           model.getPostList(true,null).observe(it){response->
+           model.getPostList(true,null,id).observe(it){response->
                when(response.status){
                    ApiStatus.SUCCESS -> {
 
@@ -141,9 +155,9 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
     }
 
 
-    private fun getProfile(view:View) {
+    private fun getProfile(view:View,id:String) {
         activity?.let {
-            model.getProfile().observe(it){response->
+            model.getProfile(id).observe(it){response->
                 when(response.status){
                     ApiStatus.SUCCESS -> {
                     //    CommonFuctions.dismissDialog()
@@ -206,6 +220,12 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.tvProfileName.text=data.firstName +" "+data.lastName
         binding.tvFollowersCount.text=data.totalFollower.toString()
         binding.tvFollowingCount.text= data.totalFollowing.toString()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("SAHILDATA","Profile")
     }
 
     override fun deletePostCallback(position: Int, postId: String) {

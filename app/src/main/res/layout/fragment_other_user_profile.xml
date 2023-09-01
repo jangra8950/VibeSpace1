@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.vibespace.viewModel.profile.OtherUserProfileViewModel" />
+        <variable
+            name="fragment"
+            type="com.app.vibespace.ui.profile.OtherUserProfileFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppName"
+            style="@style/txtHeading"
+            android:text="@string/vibespace"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintStart_toEndOf="@id/back"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:expandedTitleGravity="top"
+                    app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivAvatar"
+                            app:srcCompat="@drawable/ic_avatar"
+                            android:layout_width="@dimen/_56sdp"
+                            android:layout_height="@dimen/_56sdp"
+                            android:layout_marginStart="@dimen/_22sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvProfileName"
+                            style="@style/text"
+                            android:fontFamily="@font/poppins_medium"
+                            android:layout_marginStart="@dimen/_24sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:layout_constraintTop_toBottomOf="@id/ivAvatar"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStreakCount"
+                            android:textColor="@color/colorBlack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+                            app:layout_constraintBottom_toTopOf="@id/tvStreak"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStreak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorEditTxt"
+                            android:text="Streak"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_marginStart="@dimen/_24sdp"
+                            app:layout_constraintTop_toBottomOf="@id/tvStreakCount"
+                            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvVibesCount"
+                            android:text="3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvStreak"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvVibes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorEditTxt"
+                            android:text="Vibes"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_marginStart="@dimen/_26sdp"
+                            app:layout_constraintTop_toBottomOf="@id/tvVibesCount"
+                            app:layout_constraintStart_toEndOf="@id/tvStreak"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCollegeCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tufts"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_marginEnd="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_16sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvVibes"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCollege"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorEditTxt"
+                            android:text="College"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_12ssp"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            app:layout_constraintTop_toBottomOf="@id/tvCollegeCount"
+                            app:layout_constraintStart_toEndOf="@id/tvVibes"
+                            />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnMessage"
+                            style="@style/button"
+                            android:elevation="0dp"
+                            android:layout_width="0dp"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Message"
+                            android:textColor="@color/colorEditTxt"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/round_button_logout"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/btnFollow"
+                            app:layout_constraintTop_toBottomOf="@id/tvProfileName"
+                            />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnFollow"
+                            style="@style/button"
+                            android:layout_width="0dp"
+                            android:elevation="0dp"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Follow"
+                            android:textColor="@color/colorEditTxt"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:background="@drawable/round_button_logout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/btnMessage"
+                            app:layout_constraintTop_toBottomOf="@id/tvProfileName"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--add  several shimmer placeholder layout -->
+
+                        <include layout="@layout/layout_shimmer" />
+                        <include layout="@layout/layout_shimmer" />
+                        <include layout="@layout/layout_shimmer" />
+                        <include layout="@layout/layout_shimmer" />
+
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="4"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    tools:listitem="@layout/layout_post_recycler_item" />
+
+            </RelativeLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

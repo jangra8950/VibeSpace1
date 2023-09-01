@@ -1,14 +1,17 @@
 package com.app.vibespace.service
 
 import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
 import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.models.profile.SummaryModel
 import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
@@ -60,7 +63,7 @@ interface ApiRequest {
     suspend fun resetPassword(@Body params:ResetPasswordRequest):ResetPasswordModel
 
     @GET(ApiConstants.API_GET_PROFILE)
-    suspend fun getProfile():UserUpdateModel
+    suspend fun getProfile(@Query("otherUserId") otherUserId: String):UserUpdateModel
 
     @DELETE(ApiConstants.API_DELETE_ACCOUNT)
     suspend fun deleteAccount():DeleteAccountModel
@@ -110,5 +113,14 @@ interface ApiRequest {
 
    @GET(ApiConstants.API_GET_PEOPLE)
    suspend fun getPeople(@QueryMap query: HashMap<String,Any>):GetPeopleModel
+
+   @GET(ApiConstants.API_GET_SUMMARY)
+   suspend fun getSummary():SummaryModel
+
+   @GET(ApiConstants.API_GET_CHAT_IND)
+   suspend fun getChatInd(@Query("userId") userId: String):ChatItemModel
+
+   @POST(ApiConstants.API_POST_CONNECT)
+   suspend fun postFollow(@Body query: HashMap<String,Any>):FollowModel
 
 }

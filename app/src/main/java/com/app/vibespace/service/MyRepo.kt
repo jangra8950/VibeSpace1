@@ -1,11 +1,14 @@
 package com.app.vibespace.service
 
 import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
+import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostLikeCountModel
+import com.app.vibespace.models.profile.SummaryModel
 import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.profile.UserUpdateRequest
@@ -39,7 +42,7 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
 
     suspend fun resetPassword(params:ResetPasswordRequest)=apiHelper.resetPassword(params)
 
-    suspend fun getProfile(): UserUpdateModel =apiHelper.getProfile()
+    suspend fun getProfile(otherUserId:String): UserUpdateModel =apiHelper.getProfile(otherUserId)
 
     suspend fun deleteAccount():DeleteAccountModel=apiHelper.deleteAccount()
 
@@ -72,4 +75,10 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun getCommentList(postId:String):PostCommentListModel=apiHelper.getCommentList(postId)
 
     suspend fun getPeople(params:HashMap<String,Any>):GetPeopleModel=apiHelper.getPeople(params)
+
+    suspend fun getSummary():SummaryModel=apiHelper.getSummary()
+
+    suspend fun getChatInd(userId:String):ChatItemModel=apiHelper.getChatInd(userId)
+
+    suspend fun postFollow(params:HashMap<String,Any>):FollowModel=apiHelper.postFollow(params)
 }

@@ -16,6 +16,7 @@ object ApiConstants {
     const val API_POST_LIKE="like"
     const val API_POST_REPORT="reportPost"
     const val API_POST_COMMENT="comment"
+    const val API_POST_CONNECT="connect"
 
 
 
@@ -27,6 +28,8 @@ object ApiConstants {
     const val API_GET_USER_LIST="user/userList"
     const val API_GET_COMMENT_LIST="comment/list"
     const val API_GET_PEOPLE="user/people"
+    const val API_GET_SUMMARY="chats/summary"
+    const val API_GET_CHAT_IND="chats/individual"
 
     // Delete call
     const val API_DELETE_ACCOUNT="user/64a54428038d3bba08c818c2"

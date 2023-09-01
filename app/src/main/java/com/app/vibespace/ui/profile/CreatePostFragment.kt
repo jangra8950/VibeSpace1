@@ -2,6 +2,7 @@ package com.app.vibespace.ui.profile
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.databinding.FragmentCreatePostBinding
 import com.app.vibespace.util.CommonFuctions
-import com.app.vibespace.util.Communicator
+
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.CreatePostViewModel
 import com.google.gson.Gson
@@ -27,13 +28,14 @@ class CreatePostFragment : Fragment() {
 
     private lateinit var binding:FragmentCreatePostBinding
     private val model:CreatePostViewModel by viewModels()
-    private lateinit var communicator: Communicator
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         if(!::binding.isInitialized)
             binding=DataBindingUtil.inflate(inflater,R.layout.fragment_create_post,container,false)
+        Log.i("SAHILDATAR","Post")
         return binding.root
     }
 
@@ -50,7 +52,12 @@ class CreatePostFragment : Fragment() {
             imm.hideSoftInputFromWindow(v.windowToken, 0)
         }
 
-        communicator = activity as Communicator
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("SAHILDATA","Post")
     }
 
     fun createPost(view:View){
@@ -61,7 +68,8 @@ class CreatePostFragment : Fragment() {
                        CommonFuctions.dismissDialog()
                        model.caption.value=""
                        response.data?.data?.message?.let { it2-> showToast(requireActivity(),it2) }
-                      communicator.passData(Gson().toJson(response.data?.data))
+                       findNavController().navigate(R.id.profileHostFragment)
+                     // communicator.passData(Gson().toJson(response.data?.data))
 
                    }
                    ApiStatus.ERROR -> {

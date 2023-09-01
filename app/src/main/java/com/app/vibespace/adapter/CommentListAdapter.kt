@@ -41,15 +41,6 @@ class CommentListAdapter(private val mList:ArrayList<PostCommentListModel.Data.C
             holder.binding.data=mList[position]
         val item=mList[position]
 
-
-//        holder.binding.ivSend.setOnClickListener {
-//            holder.binding.tvTypeComment.clearFocus()
-//            val imm =
-//                context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-//            imm.hideSoftInputFromWindow(holder.binding.tvTypeComment.windowToken, 0)
-//
-//        }
-
     }
 
 

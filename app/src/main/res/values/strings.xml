@@ -63,7 +63,7 @@
     <string name="vibespace">Vibespace</string>
     <string name="Bio">bio</string>
     <string name="BIO">Bio</string>
-    <string name="create_post">Create Post</string>
+    <string name="create_post">Create Vibe</string>
     <string name="monetize_your_account">Monetize Your Account</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
@@ -93,7 +93,7 @@
     <string name="prompts">Prompts</string>
     <string name="text">Text</string>
     <string name="write_your_text_here">Write your text here</string>
-    <string name="Create_post">Create</string>
+    <string name="Create_post">Vibe</string>
     <string name="settings">Settings</string>
     <string name="private_account">Private Account</string>
     <string name="change_password">Change Password</string>

@@ -3,24 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/map"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_map1"
        android:title="Map"
         />
     <item
-        android:id="@+id/feed"
+        android:id="@+id/feedFragment"
         android:icon="@drawable/ic_feed1"
         android:title="Feed" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileHostFragment"
         android:icon="@drawable/ic_profile1"
         android:title="Profile"  />
     <item
-        android:id="@+id/chat"
+        android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat1"
         android:title="Chat" />
     <item
-        android:id="@+id/post"
+        android:id="@+id/createPostFragment"
         android:icon="@drawable/ic_post1"
         android:title="Post"
         />

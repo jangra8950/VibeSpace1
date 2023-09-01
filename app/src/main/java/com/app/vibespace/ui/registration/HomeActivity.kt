@@ -1,8 +1,7 @@
 package com.app.vibespace.ui.registration
 
-import android.content.Intent
+
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,40 +9,42 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.app.vibespace.Enums.ApiStatus
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.app.vibespace.R
 import com.app.vibespace.databinding.ActivityHomeBinding
-import com.app.vibespace.databinding.FragmentHomeBinding
 import com.app.vibespace.ui.profile.ChatFragment
+import com.app.vibespace.ui.profile.ChatFragmentDirections
 import com.app.vibespace.ui.profile.CreatePostFragment
+import com.app.vibespace.ui.profile.CreatePostFragmentDirections
 import com.app.vibespace.ui.profile.FeedFragment
+import com.app.vibespace.ui.profile.FeedFragmentDirections
 import com.app.vibespace.ui.profile.ProfileHostFragment
-import com.app.vibespace.ui.profile.ProfileMainFragment
-import com.app.vibespace.ui.profile.UserListProfileFragment
-import com.app.vibespace.util.CommonFuctions
-import com.app.vibespace.util.Communicator
-import com.app.vibespace.util.MyApp
+import com.app.vibespace.ui.profile.ProfileHostFragmentDirections
+
 import com.app.vibespace.util.MyApp.Companion.profileData
-import com.app.vibespace.util.MyApp.Companion.sharedpreferences
-
-import com.app.vibespace.util.showToast
-import com.app.vibespace.util.toast
-
 import com.app.vibespace.viewModel.registration.HomeViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() , Communicator{
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     var postData=""
     private val model:HomeViewModel by viewModels()
+    lateinit var navHostFragment:NavHostFragment
+    lateinit var navController:NavController
     private var doubleBackToExitPressedOnce=false
    // private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,31 +56,45 @@ class HomeActivity : AppCompatActivity() , Communicator{
         binding=DataBindingUtil.setContentView(this,R.layout.activity_home)
         Log.i("SAHIL_DATA",Gson().toJson(profileData))
 
-        setFragment()
 
-    }
+       navHostFragment = supportFragmentManager.findFragmentById(R.id.flFragment) as NavHostFragment
+       navController = navHostFragment.navController
+     //  NavigationUI.setupWithNavController(binding.navigation, navController)
 
-    private fun setFragment() {
-        val bundle = Bundle()
-        if (postData!="") {
-            bundle.putString("message", postData)
-            postData=""
-        }
-        setCurrentFragment(HomeFragment())
 
 
         binding.navigation.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.map->{
-                    setCurrentFragment(HomeFragment())
+                R.id.homeFragment->{
+                    if (navController.currentDestination?.id!=R.id.homeFragment) {
+                        findNavController(R.id.flFragment).navigate(R.id.homeFragment)
+                        supportFragmentManager.popBackStack(
+                            null,
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE
+                        )
+                        true
+                    }
+                    else
+                        false
+                }
+                R.id.feedFragment->{
+                   findNavController(R.id.flFragment).navigate(R.id.feedFragment)
+                    supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     true}
-                R.id.feed->{setCurrentFragment(FeedFragment())
+                R.id.profileHostFragment->{
+
+                    findNavController(R.id.flFragment).navigate(R.id.profileHostFragment)
+                    supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     true}
-                R.id.profile->{setCurrentFragment(ProfileHostFragment())
+                R.id.chatFragment->{
+                    findNavController(R.id.flFragment).navigate(R.id.chatFragment)
+                    supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
                     true}
-                R.id.chat->{setCurrentFragment(ChatFragment())
-                    true}
-                R.id.post->{setCurrentFragment(CreatePostFragment())
+                R.id.createPostFragment->{
+                    findNavController(R.id.flFragment).navigate(R.id.createPostFragment)
+                    supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
                     true}
                 else->false
             }
@@ -88,30 +103,13 @@ class HomeActivity : AppCompatActivity() , Communicator{
 
     }
 
-    private fun setCurrentFragment(firstFragment: Fragment) {
-        val transcation=supportFragmentManager.beginTransaction()
-        transcation.replace(R.id.flFragment,firstFragment)
-        transcation.commit()
-    }
-
-    override fun passData(edit: String) {
-        val bundle = Bundle()
-        bundle.putString("message", edit)
-        postData=edit
-        val transaction = supportFragmentManager.beginTransaction()
-
-        // Created instance of fragment2
-        val fragment2 =ProfileMainFragment()
-        binding.navigation.selectedItemId = R.id.profile;
-//        fragment2.arguments = bundle
-//        transaction.replace(R.id.flFragment,fragment2)
-//        transaction.commit()
-    }
 
     override fun onBackPressed() {
 
         if (supportFragmentManager.backStackEntryCount>0)
             supportFragmentManager.popBackStack()
+        else if(navHostFragment!=null && navHostFragment!!.isAdded && navHostFragment!!.childFragmentManager.backStackEntryCount>0)
+            navHostFragment!!.childFragmentManager.popBackStack()
         else {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()

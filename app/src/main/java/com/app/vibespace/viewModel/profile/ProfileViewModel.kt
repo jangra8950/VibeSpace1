@@ -21,11 +21,11 @@ class ProfileViewModel @Inject constructor(
 
    // val ProfileName=MutableLiveData("")
 
-    fun getProfile()= liveData(Dispatchers.IO) {
+    fun getProfile(otherUserId:String)= liveData(Dispatchers.IO) {
         emit(Resources.loading(null))
 
        try {
-           val profileResponse: UserUpdateModel =repo.getProfile()
+           val profileResponse: UserUpdateModel =repo.getProfile(otherUserId)
            if(profileResponse.statusCode==401)
                emit(Resources.error(profileResponse.message,null))
            else if(profileResponse.statusCode==200)
@@ -38,14 +38,14 @@ class ProfileViewModel @Inject constructor(
        }
     }
 
-    fun getPostList(isSelf:Boolean?,post:String?)= liveData(Dispatchers.IO) {
+    fun getPostList(isSelf:Boolean?,post:String?,id:String?)= liveData(Dispatchers.IO) {
         emit(Resources.loading(null))
 
         try {
             val query: HashMap<String, Any> = hashMapOf()
             query["isSelf"] = isSelf ?: false
             query["post"] = post ?: ""
-
+            query["otherUserId"]=id ?:""
             val postResponse:PostListModel=repo.getPostList(query)
             if(postResponse.statusCode==200)
                 emit(Resources.success(postResponse))

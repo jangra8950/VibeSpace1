@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/chat_bg"
+        android:layout_marginEnd="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:padding="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/round_edit_profile">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvReceiverName"
+            android:gravity="start"
+            android:paddingEnd="@dimen/_6sdp"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/colorTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvReceiverTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/colorTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReceiverName"
+            android:text="7.20pm"
+            android:layout_gravity="center"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/_6sdp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_100sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@drawable/round_edit_profile"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSenderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="end"
+            android:paddingEnd="@dimen/_6sdp"
+            android:includeFontPadding="false"
+           app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_12ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSenderTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:textColor="@color/transparent_white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSenderName"
+            android:text="7.20pm"
+            android:layout_gravity="end"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</RelativeLayout>

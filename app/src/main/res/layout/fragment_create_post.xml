@@ -39,21 +39,87 @@
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent" />
 
+
+<!--       <androidx.appcompat.widget.AppCompatTextView-->
+<!--           android:id="@+id/tvAvatar"-->
+<!--           style="@style/text"-->
+<!--           android:text="@string/show_avatar"-->
+<!--           android:layout_marginTop="@dimen/_18sdp"-->
+<!--           android:layout_marginStart="@dimen/_30sdp"-->
+<!--           app:layout_constraintTop_toBottomOf="@id/tvPostTime"-->
+<!--           app:layout_constraintStart_toStartOf="parent"-->
+<!--           />-->
+
+<!--       <androidx.appcompat.widget.AppCompatTextView-->
+<!--           android:id="@+id/tvPrompts"-->
+<!--           android:layout_width="wrap_content"-->
+<!--           style="@style/text"-->
+<!--           android:text="@string/prompts"-->
+<!--           android:fontFamily="@font/poppins_medium"-->
+<!--           android:layout_marginStart="@dimen/_34sdp"-->
+<!--           app:layout_constraintStart_toStartOf="parent"-->
+<!--           app:layout_constraintTop_toBottomOf="@id/tvAvatar"-->
+<!--           />-->
+
+<!--       <Switch-->
+<!--           android:id="@+id/swAvatar"-->
+<!--           android:layout_width="wrap_content"-->
+<!--           android:layout_height="wrap_content"-->
+<!--           android:thumb="@drawable/custom_switch_thumb"-->
+<!--           android:track="@drawable/custom_switch_track"-->
+<!--           app:layout_constraintTop_toBottomOf="@id/tvAvatar"-->
+<!--           android:layout_marginStart="@dimen/_118sdp"-->
+<!--           app:layout_constraintStart_toEndOf="@id/tvPrompts"-->
+<!--           app:layout_constraintEnd_toEndOf="parent"-->
+<!--           tools:ignore="UseSwitchCompatOrMaterialXml" />-->
+
+<!--       <androidx.appcompat.widget.AppCompatTextView-->
+<!--           android:id="@+id/tvText"-->
+<!--           style="@style/text"-->
+<!--           android:text="@string/text"-->
+<!--           android:layout_marginTop="@dimen/_18sdp"-->
+<!--           android:layout_marginStart="@dimen/_30sdp"-->
+<!--           app:layout_constraintTop_toBottomOf="@id/tvPrompts"-->
+<!--           app:layout_constraintStart_toStartOf="parent"-->
+<!--           />-->
+
+       <androidx.appcompat.widget.AppCompatEditText
+           android:id="@+id/etText"
+           style="@style/editText"
+           android:layout_height="0dp"
+           android:text="@={viewModel.caption}"
+           android:layout_marginTop="@dimen/_8sdp"
+           android:layout_marginBottom="@dimen/_12sdp"
+           android:layout_marginHorizontal="@dimen/_4sdp"
+           android:hint="@string/write_your_text_here"
+           android:importantForAutofill="no"
+           android:inputType="textMultiLine"
+           android:scrollbars="vertical"
+           android:elevation="@dimen/_1sdp"
+           android:lines="8"
+           android:gravity="top|start"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/tvPost"
+           app:layout_constraintBottom_toTopOf="@id/tvPostVisibilty"
+           />
+
+
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvPostVisibilty"
            style="@style/text"
            android:text="@string/post_visibility"
-           android:layout_marginTop="@dimen/_36sdp"
-           android:layout_marginStart="@dimen/_30sdp"
+           android:layout_marginStart="@dimen/_10sdp"
+           android:layout_marginBottom="@dimen/_36sdp"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvPost"
+           app:layout_constraintBottom_toTopOf="@id/btnDetails"
            />
        <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/tvPostTime"
            style="@style/text"
            android:text="@string/_24_hours"
            android:fontFamily="@font/poppins_medium"
-           android:layout_marginStart="@dimen/_34sdp"
+           android:layout_marginStart="@dimen/_14sdp"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@id/tvPostVisibilty"
            />
@@ -65,92 +131,22 @@
            android:thumb="@drawable/custom_switch_thumb"
            android:track="@drawable/custom_switch_track"
            app:layout_constraintTop_toBottomOf="@id/tvPostVisibilty"
-           android:layout_marginStart="@dimen/_118sdp"
+           android:layout_marginStart="@dimen/_158sdp"
            app:layout_constraintStart_toEndOf="@id/tvPostTime"
            app:layout_constraintEnd_toEndOf="parent"
            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-       <androidx.appcompat.widget.AppCompatTextView
-           android:id="@+id/tvAvatar"
-           style="@style/text"
-           android:text="@string/show_avatar"
-           android:layout_marginTop="@dimen/_18sdp"
-           android:layout_marginStart="@dimen/_30sdp"
-           app:layout_constraintTop_toBottomOf="@id/tvPostTime"
-           app:layout_constraintStart_toStartOf="parent"
-           />
-
-       <androidx.appcompat.widget.AppCompatTextView
-           android:id="@+id/tvPrompts"
-           android:layout_width="wrap_content"
-           style="@style/text"
-           android:text="@string/prompts"
-           android:fontFamily="@font/poppins_medium"
-           android:layout_marginStart="@dimen/_34sdp"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvAvatar"
-           />
-
-       <Switch
-           android:id="@+id/swAvatar"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:thumb="@drawable/custom_switch_thumb"
-           android:track="@drawable/custom_switch_track"
-           app:layout_constraintTop_toBottomOf="@id/tvAvatar"
-           android:layout_marginStart="@dimen/_118sdp"
-           app:layout_constraintStart_toEndOf="@id/tvPrompts"
-           app:layout_constraintEnd_toEndOf="parent"
-           tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-       <androidx.appcompat.widget.AppCompatTextView
-           android:id="@+id/tvText"
-           style="@style/text"
-           android:text="@string/text"
-           android:layout_marginTop="@dimen/_18sdp"
-           android:layout_marginStart="@dimen/_30sdp"
-           app:layout_constraintTop_toBottomOf="@id/tvPrompts"
-           app:layout_constraintStart_toStartOf="parent"
-           />
-
-       <androidx.appcompat.widget.AppCompatEditText
-           android:id="@+id/etText"
-           style="@style/editText"
-           android:text="@={viewModel.caption}"
-           android:layout_marginTop="@dimen/_4sdp"
-           android:layout_marginHorizontal="@dimen/_30sdp"
-           android:hint="@string/write_your_text_here"
-           android:importantForAutofill="no"
-           android:inputType="textMultiLine"
-           android:scrollbars="vertical"
-           android:elevation="@dimen/_1sdp"
-           android:lines="5"
-           android:gravity="top|start"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/tvText" />
 
        <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btnDetails"
            style="@style/button"
            android:onClick="@{(view)-> fragment.createPost(view)}"
            android:layout_marginTop="@dimen/_62sdp"
+           android:layout_marginHorizontal="@dimen/_4sdp"
            android:text="@string/Create_post"
+           android:layout_marginBottom="@dimen/_4sdp"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/etText" />
-
-<!--       <androidx.appcompat.widget.SwitchCompat-->
-<!--           android:id="@+id/swPost"-->
-<!--           android:layout_width="wrap_content"-->
-<!--           android:layout_height="wrap_content"-->
-<!--           app:track="@drawable/custom_switch_track"-->
-<!--           android:thumb="@drawable/custom_switch_thumb"-->
-<!--           app:layout_constraintTop_toBottomOf="@id/tvPostVisibilty"-->
-<!--           android:layout_marginStart="@dimen/_118sdp"-->
-<!--           app:layout_constraintStart_toEndOf="@id/tvPostTime"-->
-<!--           app:layout_constraintEnd_toEndOf="parent"-->
-<!--           />-->
+           app:layout_constraintBottom_toBottomOf="parent" />
 
 
    </androidx.constraintlayout.widget.ConstraintLayout>

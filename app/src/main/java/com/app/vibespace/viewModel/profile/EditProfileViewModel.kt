@@ -86,8 +86,8 @@ class EditProfileViewModel @Inject constructor(
         obj.gender=sexuality.value.toString()
         obj.height=height.value?.toDouble()
         obj.occupation=occuption.value.toString()
-        obj.location?.lat="31.78905".toDouble()
-        obj.location?.lng="77.34424".toDouble()
+        obj.location?.lat="28.3949".toDouble()
+        obj.location?.lng="84.1240".toDouble()
         return obj
     }
 
