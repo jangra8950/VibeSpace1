@@ -81,4 +81,6 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun getChatInd(userId:String):ChatItemModel=apiHelper.getChatInd(userId)
 
     suspend fun postFollow(params:HashMap<String,Any>):FollowModel=apiHelper.postFollow(params)
+
+    suspend fun deleteChat(params:HashMap<String,Any>):DeleteAccountModel=apiHelper.deleteChat(params)
 }

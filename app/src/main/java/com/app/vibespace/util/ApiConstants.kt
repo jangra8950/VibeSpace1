@@ -17,6 +17,7 @@ object ApiConstants {
     const val API_POST_REPORT="reportPost"
     const val API_POST_COMMENT="comment"
     const val API_POST_CONNECT="connect"
+    const val API_POST_CHAT_DELETE="chats/deleteBy"
 
 
 
