@@ -103,7 +103,7 @@ class UserProfileFragment : Fragment() {
     private fun showDialogDelete(context: Context){
         CommonFuctions.dialog = Dialog(context)
         CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_logout_confirm)
+        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
         CommonFuctions.dialog?.setCancelable(false)
         CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

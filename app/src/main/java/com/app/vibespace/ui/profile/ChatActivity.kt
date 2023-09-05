@@ -15,6 +15,7 @@ import com.app.vibespace.adapter.ChatAdapter
 import com.app.vibespace.databinding.ActivityChatBinding
 import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.ChatRequest
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.hideKeyboard
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ChatItemViewModel
@@ -57,6 +58,10 @@ class ChatActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat)
         val otherUserId = intent.getStringExtra("data").toString()
         val name = intent.getStringExtra("name").toString()
+        val image = intent.getStringExtra("image").toString()
+
+        loadImage(this,image,binding.ivAvatar)
+
         binding.tvBlocked.text = name
         getChat(otherUserId)
 
@@ -76,7 +81,6 @@ class ChatActivity : AppCompatActivity() {
 
         val decoration = StickyRecyclerHeadersDecoration(adap)
         binding.recyclerview.addItemDecoration(decoration)
-
 
 
         binding.back.setOnClickListener {
