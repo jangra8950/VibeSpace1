@@ -9,7 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite">
+
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="@drawable/round_edit_profile">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivAvatar"
@@ -61,13 +64,13 @@
            app:layout_constraintStart_toEndOf="@id/tvTxt"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintEnd_toEndOf="parent" />
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:background="@color/colorBackground"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+<!--        <View-->
+<!--            android:id="@+id/view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/_1sdp"-->
+<!--            android:layout_marginTop="@dimen/_14sdp"-->
+<!--            android:background="@color/colorBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

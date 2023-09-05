@@ -12,6 +12,8 @@ import com.app.vibespace.R
 import com.app.vibespace.databinding.LayoutChatItemBinding
 
 import com.app.vibespace.models.profile.SummaryModel
+import com.app.vibespace.util.CommonFuctions.Companion.convertTimestampToRealTime
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.squareup.picasso.Picasso
 
 import kotlinx.coroutines.CoroutineScope
@@ -45,60 +47,45 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        if (position>=0)
-//            holder.binding.data=mList[position]
+
         val item=mList[position]
 
         if(item.isOwnMessage)
+        {
             holder.binding.tvName.text=item.receiverFirstName+" "+item.receiverLastName
-        else
-           holder.binding.tvName.text=item.senderFirstName+" "+item.senderLastName
+            if (!item.receiverMascotIcon.isNullOrEmpty())
+                loadImage(context,item.receiverMascotIcon,holder.binding.ivAvatar)
+
+        }
+
+        else{
+            holder.binding.tvName.text=item.senderFirstName+" "+item.senderLastName
+            if (!item.senderMascotIcon.isNullOrEmpty())
+                loadImage(context,item.senderMascotIcon,holder.binding.ivAvatar)
+        }
+
+
         holder.binding.tvTxt.text=item.message
+        holder.binding.tvTime.text=convertTimestampToRealTime(item.sentAt)
+
         holder.itemView.setOnClickListener {
             if(item.isOwnMessage)
-              chat.chat(position,item.receiverId,item.receiverFirstName+" "+item.receiverLastName)
+              chat.chat(position,item.receiverId,item.receiverFirstName+" "+item.receiverLastName,item.receiverMascotIcon)
             else
-                chat.chat(position,item.senderId,item.senderFirstName+" "+item.senderLastName)
+                chat.chat(position,item.senderId,item.senderFirstName+" "+item.senderLastName,item.senderMascotIcon)
         }
 
-        holder.binding.tvTime.text=convertTimestampToRealTime(item.sentAt.toLong())
-        if (!item.senderMascotIcon.isNullOrEmpty())
-            Picasso.with(context).load(item.senderMascotIcon).into(holder.binding.ivAvatar)
 
-//        CoroutineScope(Dispatchers.Main).launch {
-//            try {
-//                val image = loadImageFromUrl(item.senderMascotIcon)
-//                if (image != null)
-//                    holder.binding.ivAvatar.setImageBitmap(image)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
+
+
+
 
     }
 
-    fun convertTimestampToRealTime(timestamp: Long): String {
-        val smsTime: Calendar = Calendar.getInstance(TimeZone.getDefault())
-        smsTime.timeInMillis = timestamp
-        return try {
-            DateFormat.format("hh:mm a", smsTime).toString()
-        } catch (e: ParseException) {
-            throw RuntimeException(e)
-        }
-    }
 
-    private suspend fun loadImageFromUrl(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
-        return@withContext try {
-            val `in` = URL(imageUrl).openStream()
-            BitmapFactory.decodeStream(`in`)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
-    }
 
     interface Summary{
-        fun chat(position: Int,userId: String,name:String)
+        fun chat(position: Int,userId: String,name:String,image:String)
     }
 
 

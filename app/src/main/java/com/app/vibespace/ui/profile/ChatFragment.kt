@@ -1,23 +1,32 @@
 package com.app.vibespace.ui.profile
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.adapter.ChatListAdapter
 
 import com.app.vibespace.databinding.FragmentChatBinding
 import com.app.vibespace.models.profile.SummaryModel
+import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ChatListViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -56,6 +65,36 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
 
         dragFunctionality()
 
+        refreshFunctionailty()
+
+    }
+
+    private fun refreshFunctionailty() {
+       binding.refreshLayout.setOnRefreshListener {
+             getSummary()
+       }
+    }
+
+    private fun showDialogDelete(context: Context,viewHolder: RecyclerView.ViewHolder){
+        CommonFuctions.dialog = Dialog(context)
+        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
+        CommonFuctions.dialog?.setCancelable(false)
+        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        CommonFuctions.dialog!!.findViewById<AppCompatTextView>(R.id.btnYes).setOnClickListener {
+
+            val deletedCourse: SummaryModel.Data.ChatSummary =
+                chatList[viewHolder.bindingAdapterPosition]
+            deleteChat(deletedCourse.conversationId,viewHolder.bindingAdapterPosition)
+
+            CommonFuctions.dialog!!.dismiss()
+        }
+        CommonFuctions.dialog!!.findViewById<AppCompatTextView>(R.id.btnNo).setOnClickListener {
+            adapter.notifyItemChanged(viewHolder.bindingAdapterPosition)
+            CommonFuctions.dialog!!.dismiss()
+        }
+        CommonFuctions.dialog?.show()
     }
 
     private fun dragFunctionality() {
@@ -70,10 +109,12 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                val deletedCourse: SummaryModel.Data.ChatSummary =
-                    chatList[viewHolder.bindingAdapterPosition]
+                showDialogDelete(requireActivity(),viewHolder)
 
-                deleteChat(deletedCourse.conversationId,viewHolder.bindingAdapterPosition)
+//                val deletedCourse: SummaryModel.Data.ChatSummary =
+//                    chatList[viewHolder.bindingAdapterPosition]
+//
+//                deleteChat(deletedCourse.conversationId,viewHolder.bindingAdapterPosition)
 
             }
         }).attachToRecyclerView(binding.recyclerview)
@@ -129,12 +170,14 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
                        adapter.notifyDataSetChanged()
                        binding.shimmerLayout.visibility=View.GONE
                        binding.recyclerview.visibility=View.VISIBLE
+                       binding.refreshLayout.isRefreshing=false
                    }
                    ApiStatus.ERROR -> {
                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                       binding.refreshLayout.isRefreshing=false
                    }
                    ApiStatus.LOADING -> {
-
+                       binding.refreshLayout.isRefreshing=false
                    }
                }
            }
@@ -161,11 +204,12 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
         }
     }
 
-    override fun chat(position: Int, userId: String,name:String) {
+    override fun chat(position: Int, userId: String,name:String,image:String) {
 
         val intent = Intent(requireActivity(), ChatActivity::class.java)
         intent.putExtra("data", userId)
         intent.putExtra("name",name)
+        intent.putExtra("image",image)
         startActivity(intent)
     }
 

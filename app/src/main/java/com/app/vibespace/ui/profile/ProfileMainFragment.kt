@@ -68,18 +68,6 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         adapter =  PostAdapter(postList,this)
         binding.recyclerview.adapter =  adapter
 
-
-//        val bundle = arguments
-//        val message = bundle!!.getString("mText")
-//
-//        if(message!="") {
-//            getProfile(view, message!!)
-//            getPostList(view, message)
-//        }
-//        else{
-//            getProfile(view,"")
-//            getPostList(view,"")
-//        }
             getProfile(view,"")
             getPostList(view,"")
 
@@ -220,6 +208,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.tvProfileName.text=data.firstName +" "+data.lastName
         binding.tvFollowersCount.text=data.totalFollower.toString()
         binding.tvFollowingCount.text= data.totalFollowing.toString()
+
     }
 
 

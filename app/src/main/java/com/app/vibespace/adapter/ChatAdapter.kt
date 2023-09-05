@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vibespace.databinding.LayoutChatReceiverBinding
 import com.app.vibespace.databinding.LayoutHeaderDateBinding
 import com.app.vibespace.models.profile.ChatItemModel
+import com.app.vibespace.util.CommonFuctions.Companion.convertTimestampToRealTime
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -87,14 +88,4 @@ class ChatAdapter(private val mList:ArrayList<ChatItemModel.Data.Chat>,
         holder.binding.tvHeaderDate.text = headerDateString
     }
 
-    fun convertTimestampToRealTime(timestamp: Long): String {
-
-        val smsTime: Calendar = Calendar.getInstance(TimeZone.getDefault())
-        smsTime.timeInMillis = timestamp
-        return try {
-            DateFormat.format("hh:mm a", smsTime).toString()
-        } catch (e: ParseException) {
-            throw RuntimeException(e)
-        }
-    }
 }
