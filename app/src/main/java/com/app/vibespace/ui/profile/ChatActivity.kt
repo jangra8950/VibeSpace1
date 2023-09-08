@@ -55,7 +55,7 @@ class ChatActivity : AppCompatActivity() {
             val decor = window.decorView
             decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat)
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_chat)
         val otherUserId = intent.getStringExtra("data").toString()
         val name = intent.getStringExtra("name").toString()
         val image = intent.getStringExtra("image").toString()
@@ -73,14 +73,15 @@ class ChatActivity : AppCompatActivity() {
 
 
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.reverseLayout = true
+        layoutManager.reverseLayout=true
         binding.recyclerview.layoutManager = layoutManager
 
-        adap = ChatAdapter(chatList, this, otherUserId)
-        binding.recyclerview.adapter = adap
+        adap= ChatAdapter(chatList,this,otherUserId)
+        binding.recyclerview.adapter=adap
 
         val decoration = StickyRecyclerHeadersDecoration(adap)
         binding.recyclerview.addItemDecoration(decoration)
+
 
 
         binding.back.setOnClickListener {
@@ -90,29 +91,28 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
-    private fun getChat(str: String) {
-        model.chat(str).observe(this) { response ->
-            when (response.status) {
+
+    private fun getChat(str:String) {
+        model.chat(str).observe(this){response->
+            when(response.status){
                 ApiStatus.SUCCESS -> {
                     binding.shimmerLayout.startShimmer()
-                    selfId = response.data?.data?.currentUser!!.userId
+                    selfId= response.data?.data?.currentUser!!.userId
                     chatList.clear()
                     chatList.addAll(response?.data.data.chatList.reversed())
-                    val cId = response.data.data.currentUser.conversationId
-                    val channel = topic + cId.replace(".", "")
+                    val cId=response.data.data.currentUser.conversationId
+                    val channel=topic+cId.replace(".","")
 
-                    Log.i("TRRTTARRA", channel)
-                    mqtt(channel, str, cId.replace(".", ""))
+                    Log.i("TRRTTARRA",channel)
+                    mqtt(channel,str,cId.replace(".",""))
 
                     adap.notifyDataSetChanged()
-                    binding.shimmerLayout.visibility = View.GONE
-                    binding.recyclerview.visibility = View.VISIBLE
+                    binding.shimmerLayout.visibility=View.GONE
+                    binding.recyclerview.visibility=View.VISIBLE
                 }
-
                 ApiStatus.ERROR -> {
                     response.message?.let { it1 -> showToast(this, it1) }
                 }
-
                 ApiStatus.LOADING -> {
 
                 }
@@ -123,16 +123,16 @@ class ChatActivity : AppCompatActivity() {
 
     fun checkValue(): Boolean {
         if (binding.tvText.text?.trim()?.isEmpty()!!) {
-            showToast(applicationContext, "Enter Valid message ")
+            showToast(applicationContext,"Enter Valid message ")
             return false
         }
         return true
     }
 
-    private fun mqtt(channel: String, otherUserId: String, cId: String) {
+    private fun mqtt(channel:String,otherUserId:String,cId:String) {
         val clientId = MqttClient.generateClientId()
         client = MqttAndroidClient(
-            this.applicationContext, "tcp://3.7.75.87:1883",
+            this.applicationContext,"tcp://3.7.75.87:1883",
             clientId
         )
 
@@ -149,7 +149,7 @@ class ChatActivity : AppCompatActivity() {
 
                     binding.ivSend.setOnClickListener {
 
-                        if (checkValue()) {
+                        if(checkValue()) {
 
                             publishAndAddToChatList(
                                 binding.tvText.text?.trim().toString(),
@@ -160,7 +160,7 @@ class ChatActivity : AppCompatActivity() {
                             hideKeyboard(it)
                         }
                     }
-                    subscribe(channel, otherUserId)
+                    subscribe(channel,otherUserId)
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken, exception: Throwable) {
@@ -174,25 +174,25 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    private fun subscribe(channel: String, otherUserId: String) {
+    private fun subscribe(channel:String,otherUserId:String){
         Log.d("Subsscribe", "Message Arrived Successfully")
-        try {
+        try{
 
-            client.subscribe(channel, 1)
+            client.subscribe(channel,1)
 
-            client.setCallback(object : MqttCallback {
+            client.setCallback(object: MqttCallback {
                 override fun connectionLost(cause: Throwable?) {
 
                 }
 
                 override fun messageArrived(topic: String?, message: MqttMessage?) {
                     Log.d("Connect", "Subscribe topic: ${message.toString()}")
-                    val data =
-                        Gson().fromJson(message.toString(), ChatItemModel.Data.Chat::class.java)
-                    if (data.status == "")
+                    val data = Gson().fromJson(message.toString(), ChatItemModel.Data.Chat::class.java)
+                    if (data.status=="") {
                         chatList.add(0, data)
-                    adap.notifyItemInserted(0)
-                    binding.recyclerview.smoothScrollToPosition(0)
+                        adap.notifyItemInserted(0)
+                        binding.recyclerview.smoothScrollToPosition(0)
+                    }
                 }
 
                 override fun deliveryComplete(token: IMqttDeliveryToken?) {
@@ -206,15 +206,10 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun publishAndAddToChatList(
-        mess: String,
-        channel: String,
-        otherUserId: String,
-        cId: String
-    ) {
+    private fun publishAndAddToChatList(mess: String, channel: String, otherUserId: String,cId:String) {
 
         try {
-            val sentChat = ChatRequest(
+            val sentChat=ChatRequest(
                 message = mess,
                 receiverId = otherUserId,
                 senderId = selfId,
@@ -225,7 +220,7 @@ class ChatActivity : AppCompatActivity() {
                 chatType = "text",
                 isRead = false,
                 isDelivered = false,
-                status = "",
+                status = ""
             )
 
             val message = MqttMessage(Gson().toJson(sentChat).toByteArray())

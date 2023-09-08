@@ -87,4 +87,6 @@ interface ApiHelper {
    suspend fun postFollow(params:HashMap<String,Any>):FollowModel
 
    suspend fun deleteChat(param:HashMap<String,Any>):DeleteAccountModel
+
+   suspend fun deleteUnfollow(id:String):FollowModel
 }

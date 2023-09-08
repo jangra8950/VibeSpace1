@@ -118,4 +118,7 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
     override suspend fun deleteChat(param: HashMap<String, Any>): DeleteAccountModel =
      apiService.deleteChat(param)
 
+    override suspend fun deleteUnfollow(id: String): FollowModel =
+      apiService.deleteUnfollow(id)
+
 }

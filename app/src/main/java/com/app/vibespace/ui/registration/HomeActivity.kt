@@ -23,14 +23,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.app.vibespace.R
 import com.app.vibespace.databinding.ActivityHomeBinding
-import com.app.vibespace.ui.profile.ChatFragment
-import com.app.vibespace.ui.profile.ChatFragmentDirections
-import com.app.vibespace.ui.profile.CreatePostFragment
-import com.app.vibespace.ui.profile.CreatePostFragmentDirections
-import com.app.vibespace.ui.profile.FeedFragment
-import com.app.vibespace.ui.profile.FeedFragmentDirections
-import com.app.vibespace.ui.profile.ProfileHostFragment
-import com.app.vibespace.ui.profile.ProfileHostFragmentDirections
+
 
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.viewModel.registration.HomeViewModel
@@ -60,7 +53,6 @@ class HomeActivity : AppCompatActivity() {
        navHostFragment = supportFragmentManager.findFragmentById(R.id.flFragment) as NavHostFragment
        navController = navHostFragment.navController
      //  NavigationUI.setupWithNavController(binding.navigation, navController)
-
 
 
         binding.navigation.setOnItemSelectedListener {

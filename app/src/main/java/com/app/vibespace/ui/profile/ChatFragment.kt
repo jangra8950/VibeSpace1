@@ -157,6 +157,7 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
         getSummary()
     }
     private fun getSummary() {
+
        activity?.let {
            model.getSummary().observe(it){response->
                when(response.status){

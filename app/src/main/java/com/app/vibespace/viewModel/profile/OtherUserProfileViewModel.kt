@@ -2,6 +2,8 @@ package com.app.vibespace.viewModel.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.app.vibespace.models.profile.BlockUserModel
+import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
@@ -69,5 +71,34 @@ class OtherUserProfileViewModel @Inject constructor(
         }catch (exe:Exception){
             emit(handleApiError(exe,resources))
         }
+    }
+
+    fun postUnfollow(id:String)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+        try {
+            val unfollow:FollowModel=repo.deleteUnfollow(id)
+            if(unfollow.statusCode==200)
+                emit(Resources.success(unfollow))
+            else
+                emit(Resources.error(unfollow.message,null))
+
+        }catch (exe:Exception){
+            emit(handleApiError(exe,resources))
+        }
+    }
+
+    fun blockUser(user:HashMap<String,String>)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+
+        try {
+            val blockResponse: BlockUserModel =repo.blockUser(user)
+            if(blockResponse.statusCode==200)
+                emit(Resources.success(blockResponse))
+            else
+                emit(Resources.error(blockResponse.message,null))
+        }catch(exe:Exception){
+            handleApiError(exe,resources)
+        }
+
     }
 }

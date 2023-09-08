@@ -87,7 +87,9 @@ class CommonFuctions {
 
         fun loadImage(context:Context,url:String,imageView: ImageView){
             if(url!="")
-            Picasso.with(context).load(url).into(imageView)
+                Picasso.with(context).load(url).transform(PicassoCircleTransformation()).into(imageView)
+            else
+                Picasso.with(context).load(R.drawable.ic_avatar).transform(PicassoCircleTransformation()).into(imageView)
         }
 
         suspend fun loadImageFromUrl(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {

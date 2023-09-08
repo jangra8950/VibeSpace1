@@ -1,7 +1,6 @@
 package com.app.vibespace.ui.registration
 
-import android.annotation.SuppressLint
-import android.content.Context
+
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -9,17 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.DrawableRes
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.databinding.DataBindingUtil
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
-import com.app.vibespace.databinding.FragmentHomeBinding
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.models.registration.GetPeopleModel
 import com.app.vibespace.ui.profile.UserListProfileFragment
@@ -49,18 +44,19 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
     var data: UserUpdateModel?=null
-//    private lateinit var binding:FragmentHomeBinding
     private val model:HomeViewModel by viewModels()
     private var peopleList=ArrayList<GetPeopleModel.Data.User>()
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
+    var type="all"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         mapView = MapView(
             inflater.context,
             // Use TextureView as render surface for the MapView, for smooth transitions following holding views, e.g. in a ViewPager.
@@ -72,14 +68,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapboxMap = mapView.getMapboxMap()
-        getPeopleList()
 
+        if (arguments!=null)
+            type=arguments?.getString("type")?:"all"
+
+        getPeopleList()
     }
 
 
     private fun getPeopleList() {
        activity?.let {
-           model.getPeople().observe(it){response->
+           model.getPeople(type).observe(it){response->
                when(response.status){
                    ApiStatus.SUCCESS ->{
                        peopleList.clear()
@@ -96,10 +95,6 @@ class HomeFragment : Fragment() {
            }
        }
     }
-
-
-
-
 
     private fun addMap() {
 
@@ -120,7 +115,10 @@ class HomeFragment : Fragment() {
                         pointAnnotationManager.create(pointAnnotationOptions)
 
                         pointAnnotationManager.addClickListener(OnPointAnnotationClickListener {
-                            val action=  HomeFragmentDirections.actionHomeFragmentToOtherUserProfileFragment(data = data.userId)
+//                            val action=  HomeFragmentDirections.actionHomeFragmentToOtherUserProfileFragment(data = data.userId)
+//                            findNavController().navigate(action)
+
+                            val action=  MapLoadFragmentDirections.actionHomeFragmentToOtherUserProfileFragment(data = data.userId)
                             findNavController().navigate(action)
                             true
                         })
@@ -148,4 +146,6 @@ class HomeFragment : Fragment() {
     companion object {
         private const val STYLE_URL = "mapbox://styles/zimblecode/cll5n0h4b00kn01pm7sfvbl6g"
     }
+
+
 }

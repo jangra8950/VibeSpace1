@@ -126,4 +126,7 @@ interface ApiRequest {
    @POST(ApiConstants.API_POST_CHAT_DELETE)
    suspend fun deleteChat(@Body query: HashMap<String,Any>):DeleteAccountModel
 
+   @DELETE(ApiConstants.API_DELETE_CONNECT)
+   suspend fun deleteUnfollow(@Path("id")id:String):FollowModel
+
 }
