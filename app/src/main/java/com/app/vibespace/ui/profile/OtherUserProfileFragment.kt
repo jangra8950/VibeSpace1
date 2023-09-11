@@ -113,11 +113,7 @@ class OtherUserProfileFragment : Fragment() {
                         binding.tvProfileName.text= response?.data?.data?.firstName.toString()+" "+response?.data?.data?.lastName.toString()
                         binding.tvStreakCount.text=response?.data?.data?.totalFollower.toString()
                         binding.tvVibesCount.text= response?.data?.data?.totalFollowing.toString()
-                      //  binding.tvCollegeCount.text=response?.data?.data?.universityName.toString().split(" ")[0]
-//                        Picasso.with(requireActivity()).load(response?.data?.data?.profilePic).fit().resize(50, 50).
-//                        centerCrop().into(
-//                            binding.ivAvatar
-//                        )
+
                     }
                     ApiStatus.ERROR -> {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
