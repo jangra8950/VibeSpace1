@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
@@ -25,6 +27,7 @@ import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.adapter.PostAllAdapter
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
+import com.app.vibespace.paging.PostListPagingAdapter
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.settings.SettingActivity
 import com.app.vibespace.util.CommonFuctions
@@ -35,18 +38,21 @@ import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.FeedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.Date
 
 @AndroidEntryPoint
-class FeedFragment : Fragment(),PostAllAdapter.Post {
+class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
     private lateinit var binding:FragmentFeedBinding
     private val model:FeedViewModel by viewModels()
     private var postList=ArrayList<PostListModel.Data.Post>()
     private var commentList=ArrayList<PostCommentListModel.Data.Comment>()
     lateinit var adapter: PostAllAdapter
+    lateinit var adap: PostListPagingAdapter
     private var myMap = hashMapOf<String, String>()
-   // var a: PostListModel.Data.Post?=null
+
     var check:Boolean?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,10 +71,15 @@ class FeedFragment : Fragment(),PostAllAdapter.Post {
         binding.lifecycleOwner=this
 
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
-        adapter =  PostAllAdapter(postList,this,requireActivity())
-        binding.recyclerview.adapter =  adapter
+//        adapter =  PostAllAdapter(postList,this,requireActivity())
+//        binding.recyclerview.adapter =  adapter
 
-        getPostList()
+        adap=PostListPagingAdapter(requireActivity(),this)
+        binding.recyclerview.adapter=adap
+        getPostListPaging()
+
+
+//        getPostList()
 
         binding.ivSetting.setOnClickListener {
             startActivity(Intent(requireContext(),SettingActivity::class.java))
@@ -100,18 +111,17 @@ class FeedFragment : Fragment(),PostAllAdapter.Post {
                         binding.shimmerLayout.startShimmer()
                         binding.shimmerLayout.visibility=View.GONE
                         binding.recyclerview.visibility=View.VISIBLE
-                        // CommonFuctions.dismissDialog()
                         postList.clear()
                         postList.addAll(response?.data?.data!!.posts)
 
                         adapter.notifyDataSetChanged()
                     }
                     ApiStatus.ERROR -> {
-                       //  CommonFuctions.dismissDialog()
+
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
                     }
                     ApiStatus.LOADING -> {
-                       //  CommonFuctions.showDialog(requireActivity())
+
                     }
                 }
             }
@@ -143,7 +153,7 @@ class FeedFragment : Fragment(),PostAllAdapter.Post {
                 when(response.status){
                     ApiStatus.SUCCESS -> {
                         response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-                        getPostList()
+//                        getPostList()
                       //  postList.removeAt(position)
                         adapter.notifyItemRemoved(position)
                     }
@@ -342,5 +352,20 @@ class FeedFragment : Fragment(),PostAllAdapter.Post {
              }
          }
     }
+
+    private fun getPostListPaging() {
+        binding.shimmerLayout.startShimmer()
+        binding.shimmerLayout.visibility=View.GONE
+        binding.recyclerview.visibility=View.VISIBLE
+        lifecycleScope.launch {
+
+            model.getPostList().collectLatest { data ->
+
+                adap.submitData(data)
+            }
+
+        }
+    }
+
 
 }

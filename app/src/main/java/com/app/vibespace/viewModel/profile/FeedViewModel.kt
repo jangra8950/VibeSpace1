@@ -2,16 +2,23 @@ package com.app.vibespace.viewModel.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.app.vibespace.models.profile.BlockUserModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.paging.FeedPagingSource
 import com.app.vibespace.service.MyRepo
 import com.app.vibespace.service.Resources
 import com.app.vibespace.util.handleApiError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -128,5 +135,21 @@ class FeedViewModel @Inject constructor(
             handleApiError(exe,resources)
         }
     }
+
+
+    fun getPostList() : Flow<PagingData<PostListModel.Data.Post>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory =
+            {
+                FeedPagingSource(repo)
+            }
+        ).flow.cachedIn(viewModelScope)
+
+    }
+
 
 }

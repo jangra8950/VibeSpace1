@@ -80,16 +80,19 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
             requireActivity().onBackPressed()
         }
         binding.btnMessage.setOnClickListener {
-            val intent = Intent(requireActivity(), ChatActivity::class.java)
-            intent.putExtra("data", args.data)
-            intent.putExtra("name",userName)
-            intent.putExtra("image",userImage)
-            startActivity(intent)
-            //requireActivity().finish()
+            startChatActivity(args.data,userImage,userName)
         }
 
         Log.i("SASASA",args.data)
 
+    }
+
+    private fun startChatActivity(userId: String, image: String, name: String) {
+        val intent = Intent(requireActivity(), ChatActivity::class.java)
+        intent.putExtra("data", userId)
+        intent.putExtra("name", name)
+        intent.putExtra("image", image)
+        startActivity(intent)
     }
 
     private fun follow(view: View, id: String) {
@@ -132,7 +135,9 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
                     }
 
-                    ApiStatus.LOADING -> {}
+                    ApiStatus.LOADING -> {
+
+                    }
 
                 }
             }
@@ -229,5 +234,9 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
 
     override fun block(userId: String, position: Int) {
         showDialogBlock(position,userId)
+    }
+
+    override fun chat(userId: String, image: String, name: String) {
+        startChatActivity(userId,image,name)
     }
 }

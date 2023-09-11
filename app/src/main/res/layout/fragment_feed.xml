@@ -65,6 +65,7 @@
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerLayout"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:itemCount="4"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:layout_marginTop="@dimen/_12sdp"
                 tools:listitem="@layout/layout_post_recycler_item" />
 
