@@ -26,14 +26,14 @@ class PostAllAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
                     private val post: Post,var context: Context
 ): RecyclerView.Adapter<PostAllAdapter.ViewHolder>() {
     inner class ViewHolder(var binding: LayoutPostRecyclerItemBinding): RecyclerView.ViewHolder(binding.root){
-        init {
-            itemView.setOnClickListener {
-               binding.tvTypeComment.clearFocus()
-                val imm =
-                    context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow( binding.tvTypeComment.windowToken, 0)
-            }
-        }
+//        init {
+//            itemView.setOnClickListener {
+//               binding.tvTypeComment.clearFocus()
+//                val imm =
+//                    context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+//                imm.hideSoftInputFromWindow( binding.tvTypeComment.windowToken, 0)
+//            }
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,8 +47,7 @@ class PostAllAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position>=0)
-            holder.binding.data=mList[position]
+
         val item=mList[position]
         if (item.isLiked)
             ImageViewCompat.setImageTintList(holder.binding.ivLike, ColorStateList.valueOf(context.getColor(R.color.colorRed)))
@@ -59,23 +58,23 @@ class PostAllAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
             showMenu(holder.binding.ivMore,context,position,item.userId,item.postId)
         }
 
-        holder.binding.tvTypeComment.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.toString().trim()!="")
-                    holder.binding.ivSend.visibility=View.VISIBLE
-                else
-                    holder.binding.ivSend.visibility=View.GONE
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
+//        holder.binding.tvTypeComment.addTextChangedListener(object : TextWatcher{
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                if (p0.toString().trim()!="")
+//                    holder.binding.ivSend.visibility=View.VISIBLE
+//                else
+//                    holder.binding.ivSend.visibility=View.GONE
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//
+//            }
+//
+//        })
 
         holder.binding.ivLike.setOnClickListener {
 
@@ -85,14 +84,14 @@ class PostAllAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
                 post.like(item.postId,position)
         }
 
-        holder.binding.ivSend.setOnClickListener {
-            holder.binding.tvTypeComment.clearFocus()
-            val imm =
-                context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(holder.binding.tvTypeComment.windowToken, 0)
-              post.comment(item.postId,position,holder.binding.tvTypeComment.text.toString())
-           // holder.binding.tvTypeComment.setText("")
-        }
+//        holder.binding.ivSend.setOnClickListener {
+//            holder.binding.tvTypeComment.clearFocus()
+//            val imm =
+//                context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+//            imm.hideSoftInputFromWindow(holder.binding.tvTypeComment.windowToken, 0)
+//              post.comment(item.postId,position,holder.binding.tvTypeComment.text.toString())
+//           // holder.binding.tvTypeComment.setText("")
+//        }
 
         holder.binding.ivComment.setOnClickListener {
             post.commentList(item.postId,position)

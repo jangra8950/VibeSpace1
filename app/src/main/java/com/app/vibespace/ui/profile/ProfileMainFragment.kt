@@ -32,6 +32,7 @@ import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.adapter.PostAdapter
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.registration.SignInActivity
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ProfileViewModel
 import com.google.gson.Gson
@@ -65,13 +66,17 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.lifecycleOwner=this
 
         binding.recyclerview.layoutManager=LinearLayoutManager(activity)
-        adapter =  PostAdapter(postList,this)
+        adapter =  PostAdapter(postList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
             getProfile(view,"")
             getPostList(view,"")
 
         navigation()
+
+        binding.ivSearchBar.setOnClickListener {
+            (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+        }
 
     }
 
@@ -208,6 +213,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.tvProfileName.text=data.firstName +" "+data.lastName
         binding.tvFollowersCount.text=data.totalFollower.toString()
         binding.tvFollowingCount.text= data.totalFollowing.toString()
+        loadImage(requireActivity(),data.profilePic,binding.ivAvatar)
 
     }
 

@@ -1,5 +1,6 @@
 package com.app.vibespace.viewModel.profile
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.app.vibespace.models.profile.DeleteAccountModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class ChatListViewModel @Inject constructor(
     private val repo: MyRepo,
     private val resources: android.content.res.Resources
+
 ):ViewModel() {
 
     fun getSummary()= liveData(Dispatchers.IO) {

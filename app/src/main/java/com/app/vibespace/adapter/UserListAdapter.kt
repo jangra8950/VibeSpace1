@@ -35,7 +35,8 @@ class UserListAdapter(private val mList:ArrayList<UserListModel.Data.User>,var a
         holder.name.text= item.firstName
 
         holder.itemView.setOnClickListener {
-            activity.startActivity(Intent(activity,ChatActivity::class.java).putExtra("data",mList[position].userId))
+
+           // activity.startActivity(Intent(activity,ChatActivity::class.java).putExtra("data",mList[position].userId))
         }
 
     }

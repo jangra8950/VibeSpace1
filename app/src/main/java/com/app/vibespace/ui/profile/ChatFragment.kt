@@ -70,9 +70,9 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
     }
 
     private fun refreshFunctionailty() {
-       binding.refreshLayout.setOnRefreshListener {
-             getSummary()
-       }
+//       binding.refreshLayout.setOnRefreshListener {
+//             getSummary()
+//       }
     }
 
     private fun showDialogDelete(context: Context,viewHolder: RecyclerView.ViewHolder){
@@ -157,6 +157,7 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
         getSummary()
     }
     private fun getSummary() {
+
        activity?.let {
            model.getSummary().observe(it){response->
                when(response.status){
@@ -170,14 +171,14 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
                        adapter.notifyDataSetChanged()
                        binding.shimmerLayout.visibility=View.GONE
                        binding.recyclerview.visibility=View.VISIBLE
-                       binding.refreshLayout.isRefreshing=false
+//                       binding.refreshLayout.isRefreshing=false
                    }
                    ApiStatus.ERROR -> {
                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                       binding.refreshLayout.isRefreshing=false
+//                       binding.refreshLayout.isRefreshing=false
                    }
                    ApiStatus.LOADING -> {
-                       binding.refreshLayout.isRefreshing=false
+//                       binding.refreshLayout.isRefreshing=false
                    }
                }
            }
