@@ -26,7 +26,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         val likeCount: TextView = itemView.findViewById(R.id.tvLikeCount)
         val commentCount: TextView = itemView.findViewById(R.id.tvCommentCount)
         val pic: AppCompatImageView = itemView.findViewById(R.id.ivMap)
-        val mascot: AppCompatImageView = itemView.findViewById(R.id.ivAvatar)
+       // val mascot: AppCompatImageView = itemView.findViewById(R.id.ivAvatar)
         val menu: ImageView = itemView.findViewById(R.id.ivMore)
 //        val typeText: AppCompatEditText =itemView.findViewById(R.id.tvTypeComment)
         val chatAct: AppCompatImageView = itemView.findViewById(R.id.ivChatAct)
@@ -53,7 +53,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
        // holder.typeText.visibility=View.GONE
         Log.i("CXCXCCX",item.userDetails.profilePic+",   ,"+"$position")
 
-        loadImage(context,item.userDetails.mascotIcon,holder.mascot)
+       // loadImage(context,item.userDetails.mascotIcon,holder.mascot)
         loadImage(context,item.userDetails.profilePic,holder.pic)
 
         holder.menu.setOnClickListener {
@@ -61,7 +61,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         }
 
         holder.chatAct.setOnClickListener {
-            change.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName )
+            change.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName, item.caption)
         }
 
 
@@ -100,7 +100,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
 
     interface Changes{
         fun block(userId: String,position: Int)
-        fun chat(userId:String,image:String,name:String)
+        fun chat(userId:String,image:String,name:String, mess:String)
     }
 
 }

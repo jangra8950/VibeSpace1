@@ -18,7 +18,7 @@ import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 
 
-class PostListPagingAdapter(var context:Context,private val post: Post):PagingDataAdapter<PostListModel.Data.Post,PostListPagingAdapter.PostViewHolder>(PostListDiffCallback()) {
+class PostListPagingAdapter(var context:Context,private val post: Post):PagingDataAdapter<PostListModel.Data.Post,PostListPagingAdapter.PostViewHolder>(PostListDiffCallback) {
     override fun onBindViewHolder(holder: PostListPagingAdapter.PostViewHolder, position: Int) {
         val item: PostListModel.Data.Post? = getItem(position)
 
@@ -53,7 +53,7 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
             holder.binding.tvCommentCount.text=item.commentCount
             holder.binding.tvCaption.text=item.caption
             loadImage(context,item.userDetails.profilePic,holder.binding.ivMap)
-            loadImage(context,item.userDetails.mascotIcon,holder.binding.ivAvatar)
+            //loadImage(context,item.userDetails.mascotIcon,holder.binding.ivAvatar)
 
 
         }
@@ -75,9 +75,9 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
 
     }
 
-    class PostListDiffCallback : DiffUtil.ItemCallback<PostListModel.Data.Post>() {
+    object PostListDiffCallback : DiffUtil.ItemCallback<PostListModel.Data.Post>() {
         override fun areItemsTheSame(oldItem: PostListModel.Data.Post, newItem: PostListModel.Data.Post) =
-            oldItem.userId == newItem.userId
+            oldItem.postId == newItem.postId
 
         override fun areContentsTheSame(
             oldItem: PostListModel.Data.Post,

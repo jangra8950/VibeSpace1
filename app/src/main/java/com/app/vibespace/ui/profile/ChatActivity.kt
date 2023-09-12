@@ -43,6 +43,7 @@ class ChatActivity : AppCompatActivity() {
     private var topic: String = "vibespace/dev/connection/chat/"
     private lateinit var client: MqttAndroidClient
     private lateinit var adap: ChatAdapter
+    private var mess:String?=""
 
     // private lateinit var adapter: ChatItemAdapter
     private val model: ChatItemViewModel by viewModels()
@@ -59,6 +60,10 @@ class ChatActivity : AppCompatActivity() {
         val otherUserId = intent.getStringExtra("data").toString()
         val name = intent.getStringExtra("name").toString()
         val image = intent.getStringExtra("image").toString()
+         mess = intent.getStringExtra("mess")
+        Log.i("WQWQWQWQW","level1 , $mess")
+
+
 
         loadImage(this,image,binding.ivAvatar)
 
@@ -146,6 +151,15 @@ class ChatActivity : AppCompatActivity() {
 
                     Log.d("Connect", "Connect Successfully")
 
+                    Log.i("WQWQWQWQW","level2 , $mess")
+                    if( !mess.isNullOrEmpty())
+
+                        publishAndAddToChatList(
+                            mess!!,
+                            channel,
+                            otherUserId,
+                            cId
+                        )
 
                     binding.ivSend.setOnClickListener {
 
@@ -160,7 +174,6 @@ class ChatActivity : AppCompatActivity() {
                             hideKeyboard(it)
                         }
                     }
-                    subscribe(channel,otherUserId)
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken, exception: Throwable) {
@@ -223,9 +236,9 @@ class ChatActivity : AppCompatActivity() {
                 status = ""
             )
 
-            val message = MqttMessage(Gson().toJson(sentChat).toByteArray())
+            val data = MqttMessage(Gson().toJson(sentChat).toByteArray())
 
-            client.publish(channel, message, null, object : IMqttActionListener {
+            client.publish(channel, data, null, object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
                     Log.d("Connect", "Message Sent Successfully")
                     binding.tvText.setText("")

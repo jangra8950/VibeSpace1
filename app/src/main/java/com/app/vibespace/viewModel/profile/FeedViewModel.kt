@@ -1,8 +1,10 @@
 package com.app.vibespace.viewModel.profile
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LoadState
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -26,6 +28,8 @@ class FeedViewModel @Inject constructor(
     private val repo: MyRepo,
     private val resources: android.content.res.Resources
 ):ViewModel() {
+
+
 
     fun getPostList(isSelf:Boolean?,post:String?)= liveData(Dispatchers.IO) {
         emit(Resources.loading(null))
@@ -137,15 +141,15 @@ class FeedViewModel @Inject constructor(
     }
 
 
-    fun getPostList() : Flow<PagingData<PostListModel.Data.Post>> {
+    fun getPostList(value:String) : Flow<PagingData<PostListModel.Data.Post>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
-                enablePlaceholders = false
+                enablePlaceholders = true
             ),
             pagingSourceFactory =
             {
-                FeedPagingSource(repo)
+                FeedPagingSource(repo,value)
             }
         ).flow.cachedIn(viewModelScope)
 

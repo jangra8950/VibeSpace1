@@ -14,8 +14,10 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +40,8 @@ import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.FeedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -52,8 +56,8 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     lateinit var adapter: PostAllAdapter
     lateinit var adap: PostListPagingAdapter
     private var myMap = hashMapOf<String, String>()
+    private var selectedOption: String = "all"
 
-    var check:Boolean?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,25 +80,47 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
         adap=PostListPagingAdapter(requireActivity(),this)
         binding.recyclerview.adapter=adap
-        getPostListPaging()
+        setData(selectedOption)
 
 
 //        getPostList()
 
         binding.ivSetting.setOnClickListener {
             startActivity(Intent(requireContext(),SettingActivity::class.java))
-           // requireActivity().finish()
         }
 
       binding.ivSearchBar.setOnClickListener {
-
-//          childFragmentManager.beginTransaction().replace(R.id.userListFragment, UserListProfileFragment())
-//              .commit()
-
           (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
       }
 
+      binding.tvAll.setOnClickListener {
+          binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
+          binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+          selectedOption="all"
+          setData(selectedOption)
+      }
+      binding.tvFollowing.setOnClickListener {
+          binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+          binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
+          selectedOption="following"
+          setData(selectedOption)
+      }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+
+            if(selectedOption=="following")
+               setData(selectedOption)
+            else
+                setData(selectedOption)
+            binding.swipeRefreshLayout.isRefreshing=false
+        }
+
+    }
+
+    private fun setData(data:String){
+        adap=PostListPagingAdapter(requireActivity(),this)
+        binding.recyclerview.adapter=adap
+        getPostListPaging(data)
     }
 
     override fun onDestroy() {
@@ -353,15 +379,22 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
          }
     }
 
-    private fun getPostListPaging() {
+    private fun getPostListPaging(value:String) {
+
         binding.shimmerLayout.startShimmer()
-        binding.shimmerLayout.visibility=View.GONE
-        binding.recyclerview.visibility=View.VISIBLE
+        binding.shimmerLayout.visibility=View.VISIBLE
+        binding.recyclerview.visibility=View.GONE
         lifecycleScope.launch {
 
-            model.getPostList().collectLatest { data ->
+            model.getPostList(value).collectLatest { data ->
 
-                adap.submitData(data)
+                if (adap.itemCount==0){
+                        delay(1000)
+                        binding.shimmerLayout.stopShimmer()
+                        binding.shimmerLayout.visibility=View.GONE
+                        binding.recyclerview.visibility=View.VISIBLE
+                }
+                    adap.submitData(data)
             }
 
         }

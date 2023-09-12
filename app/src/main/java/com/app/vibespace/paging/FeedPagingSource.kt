@@ -8,7 +8,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class FeedPagingSource(
-    private val repo: MyRepo
+    private val repo: MyRepo, val value:String
 ): PagingSource<Int, PostListModel.Data.Post>() {
 
 
@@ -18,7 +18,7 @@ class FeedPagingSource(
         return try {
             val query: HashMap<String, Any> = hashMapOf()
             query["isSelf"] = false
-            query["post"] = "all"
+            query["post"] = value
             query["limit"]=20
             query["offset"]=pageIndex
 

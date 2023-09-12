@@ -47,8 +47,7 @@ class PostAllAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position>=0)
-            holder.binding.data=mList[position]
+
         val item=mList[position]
         if (item.isLiked)
             ImageViewCompat.setImageTintList(holder.binding.ivLike, ColorStateList.valueOf(context.getColor(R.color.colorRed)))
