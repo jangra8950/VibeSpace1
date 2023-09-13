@@ -32,6 +32,7 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
 
     private lateinit var binding:FragmentOtherUserProfileBinding
     private val args:OtherUserProfileFragmentArgs by navArgs()
+    var userId=""
     private val model:OtherUserProfileViewModel by viewModels()
     private lateinit var adapter:OtherUserPostAdapter
     private var postList=ArrayList<PostListModel.Data.Post>()
@@ -58,12 +59,18 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
         binding.fragment=this
         binding.lifecycleOwner=this
 
+
+           if(arguments?.containsKey("user")==true)
+               userId=arguments?.getString("user")?:""
+           else
+               userId=args.data
+
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
         adapter =  OtherUserPostAdapter(postList,requireActivity(),this)
         binding.recyclerview.adapter =  adapter
 
-        getProfile(view,args.data)
-        getPostList(args.data)
+        getProfile(view,userId)
+        getPostList(userId)
 
         binding.btnFollow.text=textFollow
 
@@ -71,7 +78,7 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
             if(isFollow)
                 unfollow(view,connectId)
             else
-                follow(view, args.data)
+                follow(view, userId)
 
         }
 
@@ -80,10 +87,10 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
             requireActivity().onBackPressed()
         }
         binding.btnMessage.setOnClickListener {
-            startChatActivity(args.data,userImage,userName,"")
+            startChatActivity(userId,userImage,userName,"")
         }
 
-        Log.i("SASASA",args.data)
+        Log.i("SASASA",userId)
 
     }
 
@@ -217,8 +224,9 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
             model.blockUser(myMap).observe(it){response->
                 when(response.status){
                     ApiStatus.SUCCESS -> {
+
                         response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-                        getPostList(args.data)
+                        getPostList(userId)
                         //  postList.removeAt(position)
                         adapter.notifyItemRemoved(position)
                     }
@@ -233,11 +241,34 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
         }
     }
 
+    private fun mirrorPost(caption: String, postVisibility: String){
+      activity?.let {
+          model.mirrorPost(caption,postVisibility).observe(it){response->
+              when(response.status){
+                  ApiStatus.SUCCESS -> {
+                      Log.i("hdoasn",response.data?.data?.message!!)
+                      response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
+                  }
+                  ApiStatus.ERROR -> {
+                      response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                  }
+                  ApiStatus.LOADING -> {
+
+                  }
+              }
+          }
+      }
+    }
+
     override fun block(userId: String, position: Int) {
         showDialogBlock(position,userId)
     }
 
     override fun chat(userId: String, image: String, name: String,mess:String) {
         startChatActivity(userId,image,name,mess)
+    }
+
+    override fun vibe(caption: String, postVisibility: String) {
+        mirrorPost(caption,postVisibility)
     }
 }

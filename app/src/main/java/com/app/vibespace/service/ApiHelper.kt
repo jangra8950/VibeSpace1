@@ -6,6 +6,7 @@ import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
+import com.app.vibespace.models.profile.MirrorPostModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -27,6 +28,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 
 
@@ -89,4 +91,7 @@ interface ApiHelper {
    suspend fun deleteChat(param:HashMap<String,Any>):DeleteAccountModel
 
    suspend fun deleteUnfollow(id:String):FollowModel
+   suspend fun mirrorPost(param:HashMap<String,String>):MirrorPostModel
+
+   suspend fun getFollowers(params:HashMap<String,Any>):FollowersModel
 }

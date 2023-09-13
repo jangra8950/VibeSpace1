@@ -6,6 +6,7 @@ import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
+import com.app.vibespace.models.profile.MirrorPostModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -27,6 +28,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 import com.app.vibespace.util.ApiConstants
 import retrofit2.http.Body
@@ -128,5 +130,10 @@ interface ApiRequest {
 
    @DELETE(ApiConstants.API_DELETE_CONNECT)
    suspend fun deleteUnfollow(@Path("id")id:String):FollowModel
+   @POST(ApiConstants.API_POST_MIRROR)
+   suspend fun mirrorPost(@Body query: HashMap<String,String>):MirrorPostModel
+
+   @GET(ApiConstants.API_GET_CONNECT_FOLLOWERS)
+   suspend fun getFollowers(@QueryMap query: HashMap<String,Any>): FollowersModel
 
 }

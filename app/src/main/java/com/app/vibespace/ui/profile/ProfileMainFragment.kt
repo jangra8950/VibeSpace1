@@ -32,6 +32,7 @@ import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.adapter.PostAdapter
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.registration.SignInActivity
+import com.app.vibespace.ui.settings.SettingActivity
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ProfileViewModel
@@ -76,6 +77,10 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
 
         binding.ivSearchBar.setOnClickListener {
             (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+        }
+
+        binding.ivSetting.setOnClickListener {
+            startActivity(Intent(requireContext(), SettingActivity::class.java))
         }
 
     }
@@ -210,7 +215,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
 
     private fun setValues(data: UserUpdateModel.Data) {
 
-        binding.tvProfileName.text=data.firstName +" "+data.lastName
+        binding.tvProfileName.text=data.firstName
         binding.tvFollowersCount.text=data.totalFollower.toString()
         binding.tvFollowingCount.text= data.totalFollowing.toString()
         loadImage(requireActivity(),data.profilePic,binding.ivAvatar)
