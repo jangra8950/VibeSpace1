@@ -1,6 +1,7 @@
 package com.app.vibespace.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ class FollowersFragment : Fragment() {
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
         adapter= FollowersAdapter()
         binding.recyclerview.adapter=adapter
+
+        Log.i("jnw","clnanc")
 
     }
 
