@@ -61,7 +61,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         if(!::binding.isInitialized)
             binding=DataBindingUtil.inflate(inflater,R.layout.fragment_feed,container,false)
 
@@ -86,7 +86,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 //        getPostList()
 
         binding.ivSetting.setOnClickListener {
-            startActivity(Intent(requireContext(),SettingActivity::class.java))
+          //  startActivity(Intent(requireContext(),SettingActivity::class.java))
         }
 
       binding.ivSearchBar.setOnClickListener {
@@ -241,6 +241,40 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
     override fun commentList(postId: String, position: Int) {
           getCommentList(postId,position)
+    }
+
+    override fun vibe(caption: String, postVisibility: String) {
+        mirrorPost(caption,postVisibility)
+    }
+
+    override fun chat(userId: String, image: String, name: String, mess: String) {
+        startChatActivity(userId,image,name,mess)
+    }
+    private fun startChatActivity(userId: String, image: String, name: String,mess:String) {
+        val intent = Intent(requireActivity(), ChatActivity::class.java)
+        intent.putExtra("data", userId)
+        intent.putExtra("name", name)
+        intent.putExtra("image", image)
+        intent.putExtra("mess", mess)
+        startActivity(intent)
+    }
+
+    private fun mirrorPost(caption: String, postVisibility: String){
+        activity?.let {
+            model.mirrorPost(caption,postVisibility).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.ERROR -> {
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+
+                    }
+                }
+            }
+        }
     }
 
     private fun getCommentList(postId: String, position: Int) {

@@ -1,11 +1,17 @@
 package com.app.vibespace.paging
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.ImageViewCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -55,7 +61,13 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
             loadImage(context,item.userDetails.profilePic,holder.binding.ivMap)
             //loadImage(context,item.userDetails.mascotIcon,holder.binding.ivAvatar)
 
+           holder.binding.ivChatNew.setOnClickListener {
+               showDialogLogOut(context,item.caption,item.postVisibility)
+           }
 
+            holder.binding.ivChatAct.setOnClickListener {
+                post.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName, item.caption)
+            }
         }
 
     }
@@ -91,6 +103,24 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
 
             return super.getChangePayload(oldItem, newItem)
         }
+    }
+
+    private fun showDialogLogOut(context: Context, caption: String, postVisibility: String){
+        CommonFuctions.dialog = Dialog(context)
+        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        CommonFuctions.dialog?.setContentView(R.layout.layout_logout_confirm)
+        CommonFuctions.dialog?.setCancelable(false)
+        CommonFuctions.dialog!!.findViewById<AppCompatTextView>(R.id.tvConfirmation).text="Are you sure to want to add this vibe to your Profile?"
+        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnYes).setOnClickListener {
+            post.vibe(caption,postVisibility)
+            CommonFuctions.dialog!!.dismiss()
+        }
+        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnNo).setOnClickListener {
+            CommonFuctions.dialog!!.dismiss()
+        }
+        CommonFuctions.dialog?.show()
     }
 
     private fun showMenu(
@@ -138,5 +168,9 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
         fun unlike(postId:String,position: Int)
         fun comment(postId:String,position: Int,text:String)
         fun commentList(postId:String,position: Int)
+
+        fun vibe(caption:String, postVisibility:String)
+
+        fun chat(userId:String,image:String,name:String, mess:String)
     }
 }

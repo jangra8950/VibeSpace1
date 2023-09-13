@@ -40,6 +40,9 @@ class SettingsFragment : Fragment() {
         binding.back.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        binding.tvFollowings.setOnClickListener {
+            findNavController().navigate(R.id.followersFragment)
+        }
 
         binding.tvPassword.setOnClickListener {
             val intent = Intent(requireContext(), SignInActivity::class.java)

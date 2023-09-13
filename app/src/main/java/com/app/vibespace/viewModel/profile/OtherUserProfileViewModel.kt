@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import com.app.vibespace.models.profile.BlockUserModel
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
+import com.app.vibespace.models.profile.MirrorPostModel
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.service.MyRepo
@@ -100,5 +101,22 @@ class OtherUserProfileViewModel @Inject constructor(
             handleApiError(exe,resources)
         }
 
+    }
+
+    fun mirrorPost(caption: String, postVisibility: String)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+
+        try{
+            val query: HashMap<String, String> = hashMapOf()
+            query["caption"]=caption
+            query["postVisibility"]=postVisibility
+            val mirrorResponse:MirrorPostModel=repo.mirrorPost(query)
+            if(mirrorResponse.statusCode==200)
+                emit(Resources.success(mirrorResponse))
+            else
+                emit(Resources.error(mirrorResponse.message,null))
+        }catch(exe:Exception){
+            handleApiError(exe,resources)
+        }
     }
 }

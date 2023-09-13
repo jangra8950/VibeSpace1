@@ -148,6 +148,7 @@ class ChatActivity : AppCompatActivity() {
             val token = client.connect(options)
             token.actionCallback = object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken) {
+                    subscribe(channel,otherUserId)
 
                     Log.d("Connect", "Connect Successfully")
 

@@ -91,7 +91,7 @@
                             android:id="@+id/tvProfileName"
                             style="@style/text"
                             android:fontFamily="@font/poppins_medium"
-                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginStart="@dimen/_36sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             app:layout_constraintTop_toBottomOf="@id/ivAvatar"
                             app:layout_constraintStart_toStartOf="parent"
@@ -100,12 +100,14 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvFollowersCount"
                             android:textColor="@color/colorBlack"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_16ssp"
-                            android:layout_marginStart="@dimen/_56sdp"
+                            android:gravity="center"
+
                             android:layout_marginTop="@dimen/_16sdp"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvFollowingCount"
                             app:layout_constraintStart_toEndOf="@id/ivAvatar"
                             app:layout_constraintBottom_toTopOf="@id/tvFollower"
                             />
@@ -124,14 +126,16 @@
                             />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvFollowingCount"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
 
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_16ssp"
-                            android:layout_marginStart="@dimen/_58sdp"
+                            android:layout_marginEnd="@dimen/_6sdp"
                             android:layout_marginTop="@dimen/_16sdp"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tvFollowersCount"
                             />
                         <androidx.appcompat.widget.AppCompatTextView
@@ -195,6 +199,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:orientation="vertical">
 
                         <!--add  several shimmer placeholder layout -->
@@ -212,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="4"
-                    android:visibility="gone"
+
                     android:layout_marginTop="@dimen/_12sdp"
                     tools:listitem="@layout/layout_post_recycler_item" />
 

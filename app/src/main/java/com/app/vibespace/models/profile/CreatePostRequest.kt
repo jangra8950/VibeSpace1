@@ -6,7 +6,7 @@ data class CreatePostRequest(
     var postVisibility: String?=null
 ){
     data class Location(
-        var lat: Double,
-        var lng: Double
+        var lat: Int,
+        var lng:Int
     )
 }
