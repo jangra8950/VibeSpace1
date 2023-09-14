@@ -1,8 +1,10 @@
 package com.app.vibespace.ui.profile
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,12 +68,13 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.viewModel=model
         binding.fragment=this
         binding.lifecycleOwner=this
-
+        LocalBroadcastManager.getInstance(requireActivity())
+            .registerReceiver(broadCastReceiver, IntentFilter("com.app.vibespace"))
         binding.recyclerview.layoutManager=LinearLayoutManager(activity)
         adapter =  PostAdapter(postList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
-            getProfile(view,"")
+            getProfile("")
             getPostList(view,"")
 
         navigation()
@@ -153,7 +157,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
     }
 
 
-    private fun getProfile(view:View,id:String) {
+    private fun getProfile(id:String) {
         activity?.let {
             model.getProfile(id).observe(it){response->
                 when(response.status){
@@ -208,9 +212,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
            // findNavController().navigate(R.id.userProfileFragment)
             (requireActivity() as HomeActivity).updateFragment(UserProfileFragment())
         }
-//        binding.btnMonetize.setOnClickListener {
-//            findNavController().navigate(R.id.priceProfileFragment)
-//        }
+
     }
 
     private fun setValues(data: UserUpdateModel.Data) {
@@ -232,5 +234,19 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         showDialogDelete(position,postId)
     }
 
+
+
+    val broadCastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+            if (intent?.hasExtra("setting")==true)
+                getProfile("")
+        }
+    }
+
+    override fun onDestroyView() {
+        LocalBroadcastManager.getInstance(requireActivity())
+            .unregisterReceiver(broadCastReceiver)
+        super.onDestroyView()
+    }
 
 }

@@ -8,19 +8,22 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vibespace.R
 
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 
 
 class BlockedUserAdapter(private val mList:ArrayList<BlockedUserListModel.Data.BlockUser>,
-                         private val post: Unblock
+                         private val post: Unblock, private val context: Context
 ): RecyclerView.Adapter<BlockedUserAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         val name: TextView = itemView.findViewById(R.id.tvName)
         val menu: Button = itemView.findViewById(R.id.btnBlock)
+        val pic: AppCompatImageView = itemView.findViewById(R.id.ivAvatar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +38,7 @@ class BlockedUserAdapter(private val mList:ArrayList<BlockedUserListModel.Data.B
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item=mList[position]
         holder.name.text= item.blockedUserDetails.firstName
-
+        loadImage(context,item.blockedUserDetails.profilePic,holder.pic)
 
         holder.menu.setOnClickListener {
             post.unblock(position,item.otherUserId)
