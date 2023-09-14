@@ -62,7 +62,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         loadImage(context,item.userDetails.profilePic,holder.pic)
 
         holder.menu.setOnClickListener {
-            showMenu(holder.menu,context,position,item.userId,item.postId)
+            showMenu(holder.menu,context,position,item.userId)
         }
 
         holder.chatAct.setOnClickListener {
@@ -79,8 +79,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         deletePost: ImageView,
         context: Context,
         position: Int,
-        userId: String,
-        postId: String
+        userId: String
     ) {
         val popupMenu = PopupMenu(context, deletePost)
 

@@ -102,6 +102,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view7"
             />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollowCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_button_logout"
+            android:text="5"
+            android:textSize="@dimen/_13ssp"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/view7"
+            app:layout_constraintBottom_toTopOf="@id/view8"
+            app:layout_constraintStart_toEndOf="@id/tvFollow"
+            />
 
         <View
             android:id="@+id/view8"
@@ -111,6 +126,8 @@
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvFollow"
             />
+
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFollowings"
@@ -124,6 +141,21 @@
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view8"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollowinCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_button_logout"
+            android:text="5"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/view8"
+            app:layout_constraintBottom_toTopOf="@id/view9"
+            app:layout_constraintStart_toEndOf="@id/tvFollowings"
             />
         <View
             android:id="@+id/view9"

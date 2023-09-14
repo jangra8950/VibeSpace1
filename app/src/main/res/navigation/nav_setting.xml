@@ -85,5 +85,9 @@
         <action
             android:id="@+id/action_followersFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <argument
+            android:name="value"
+            app:argType="string"
+            />
     </fragment>
 </navigation>
