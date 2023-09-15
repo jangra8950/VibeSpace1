@@ -26,7 +26,7 @@ import com.app.vibespace.R
 import com.app.vibespace.adapter.CommentListAdapter
 import com.app.vibespace.databinding.FragmentFeedBinding
 import com.app.vibespace.models.profile.PostListModel
-import com.app.vibespace.adapter.PostAllAdapter
+
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.paging.PostListPagingAdapter
@@ -53,7 +53,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     private val model:FeedViewModel by viewModels()
     private var postList=ArrayList<PostListModel.Data.Post>()
     private var commentList=ArrayList<PostCommentListModel.Data.Comment>()
-    lateinit var adapter: PostAllAdapter
     lateinit var adap: PostListPagingAdapter
     private var myMap = hashMapOf<String, String>()
     private var selectedOption: String = "all"
@@ -75,15 +74,12 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         binding.lifecycleOwner=this
 
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
-//        adapter =  PostAllAdapter(postList,this,requireActivity())
-//        binding.recyclerview.adapter =  adapter
+
 
         adap=PostListPagingAdapter(requireActivity(),this)
         binding.recyclerview.adapter=adap
         setData(selectedOption)
 
-
-//        getPostList()
 
         binding.ivSetting.setOnClickListener {
           //  startActivity(Intent(requireContext(),SettingActivity::class.java))
@@ -128,49 +124,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         Log.i("SAHILDATA","Feed")
     }
 
-    private fun getPostList() {
-        activity?.let {
-            model.getPostList(null,"all").observe(it){response->
-                when(response.status){
-                    ApiStatus.SUCCESS -> {
 
-                        binding.shimmerLayout.startShimmer()
-                        binding.shimmerLayout.visibility=View.GONE
-                        binding.recyclerview.visibility=View.VISIBLE
-                        postList.clear()
-                        postList.addAll(response?.data?.data!!.posts)
-
-                        adapter.notifyDataSetChanged()
-                    }
-                    ApiStatus.ERROR -> {
-
-                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                    }
-                    ApiStatus.LOADING -> {
-
-                    }
-                }
-            }
-        }
-
-    }
-
-    private fun showDialogBlock(position:Int, userId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            blockUser(position,userId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
 
     private fun blockUser(position: Int, userId: String) {
         activity?.let {
@@ -179,9 +133,8 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                 when(response.status){
                     ApiStatus.SUCCESS -> {
                         response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-//                        getPostList()
-                      //  postList.removeAt(position)
-                        adapter.notifyItemRemoved(position)
+                        adap.notifyItemRemoved(position)
+                        //adapter.notifyItemRemoved(position)
                     }
                     ApiStatus.ERROR -> {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
@@ -197,12 +150,13 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
 
     override fun block(position: Int, userId: String) {
-        showDialogBlock(position,userId)
+        blockUser(position,userId)
     }
 
     override fun like(postId: String,position: Int) {
         likePost(postId,position)
     }
+
 
     override fun report(postId: String, position: Int) {
        reportPost(postId,position)
@@ -216,7 +170,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
               when(response.status){
                   ApiStatus.SUCCESS -> {
                       dismissDialog()
-                      adapter.notifyItemChanged(position)
+                     // adapter.notifyItemChanged(position)
                       response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
                   }
                   ApiStatus.ERROR -> {
@@ -352,7 +306,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
                       response?.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
                       postList[position].commentCount=(postList[position].commentCount.toInt()+1).toString()
-                      adapter.notifyItemChanged(position)
 
                   }
                   ApiStatus.ERROR -> {
@@ -373,9 +326,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                   when(response.status){
                       ApiStatus.SUCCESS -> {
                           dismissDialog()
-                          postList[position].isLiked=false
-                          postList[position].likeCount=(postList[position].likeCount.toInt()-1).toString()
-                          adapter.notifyItemChanged(position)
+                          adap.likedClicked(position,false)
                       }
                       ApiStatus.ERROR -> {
                           dismissDialog()
@@ -397,9 +348,8 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                  when(response.status){
                      ApiStatus.SUCCESS ->{
                          dismissDialog()
-                         postList[position].isLiked=true
-                         postList[position].likeCount=(postList[position].likeCount.toInt()+1).toString()
-                         adapter.notifyItemChanged(position)
+//                         var likeCount=(postList[position].likeCount.toInt()+1).toString()
+                         adap.likedClicked(position,true)
                      }
                      ApiStatus.ERROR -> {
                          dismissDialog()

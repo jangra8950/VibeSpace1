@@ -18,6 +18,8 @@ import com.app.vibespace.databinding.LayoutFollowersListBinding
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
+import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
+import com.app.vibespace.util.CommonFuctions.Companion.showMenuItems
 import java.util.ArrayList
 
 class FollowersAdapter(private val context: Context, private val change:Follow
@@ -46,60 +48,16 @@ class FollowersAdapter(private val context: Context, private val change:Follow
         loadImage(context,item.userDetails.profilePic,holder.binding.ivAvatar)
 
         holder.binding.btnRemove.setOnClickListener {
-            showDialogLogOut(context,item.connectId,position)
+            showDialogLogOutt(context,"Are you sure to want to unfollow this User?"){
+                change.unfollow(item.userDetails.userId,position)
+            }
         }
 
        holder.binding.ivMenu.setOnClickListener {
-           showMenu(holder.binding.ivMenu,context,position,item.userDetails.userId)
+           showMenuItems(holder.binding.ivMenu,context,"Are you sure to want to Block this User?",R.menu.menu_items){
+               change.block(item.userDetails.userId,position)
+           }
        }
-    }
-
-    private fun showMenu(
-        deletePost: ImageView,
-        context: Context,
-        position: Int,
-        userId: String
-    ) {
-        val popupMenu = PopupMenu(context, deletePost)
-
-        popupMenu.menuInflater.inflate(R.menu.menu_items, popupMenu.menu)
-        popupMenu.menu.findItem(R.id.reportPost).isVisible=false
-
-        popupMenu.setOnMenuItemClickListener {
-            change.block(userId,position)
-            true
-        }
-
-        try {
-            val popup = PopupMenu::class.java.getDeclaredField("mPopup")
-            popup.isAccessible = true
-            val menuPopupHelper = popup.get(popupMenu)
-            val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
-            val setForceIcons = classPopupHelper.getMethod("setForceShowIcon", Boolean::class.java)
-            setForceIcons.invoke(menuPopupHelper, true)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        // Showing the popup menu
-        popupMenu.show()
-    }
-
-    private fun showDialogLogOut(context: Context, userId: String, position: Int){
-        CommonFuctions.dialog = Dialog(context)
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_logout_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog!!.findViewById<AppCompatTextView>(R.id.tvConfirmation).text="Are you sure to want to unfollow this User?"
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnYes).setOnClickListener {
-            change.unfollow(userId,position)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
     }
 
     fun updateData(list:ArrayList<FollowersModel.Data.Follower>,follow:String){

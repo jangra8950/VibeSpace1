@@ -46,9 +46,7 @@ class UserListAdapter(private val mList:ArrayList<UserListModel.Data.User>,
         holder.name.text= item.firstName
         loadImage(context,item.profilePic,holder.pic)
         holder.itemView.setOnClickListener {
-
            shift.user(item.userId)
-           // activity.startActivity(Intent(activity,ChatActivity::class.java).putExtra("data",mList[position].userId))
         }
 
     }

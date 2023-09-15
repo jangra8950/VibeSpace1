@@ -23,6 +23,7 @@ import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.registration.SignInActivity
 import com.app.vibespace.util.CommonFuctions
+import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
 import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.util.showToast
@@ -57,12 +58,20 @@ class UserProfileFragment : Fragment() {
         setValues()
 
          binding.btnLogOut.setOnClickListener {
-             showDialogLogOut(it.context)
-          //   logout()
+             showDialogLogOutt(requireActivity(),
+                 "Are you sure you want to Logout from your Account?") {
+                 logout()
+             }
+             //showDialogLogOut(it.context)
+
          }
         binding.btnDeleteAccount.setOnClickListener {
-            showDialogDelete(it.context)
-          //  deleteAccount()
+            showDialogLogOutt(requireActivity(),
+                "Are you sure you want to Delete your Account?") {
+                deleteAccount()
+            }
+          //  showDialogDelete(it.context)
+
         }
 
         binding.back.setOnClickListener {

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.adapter.BlockedUserAdapter
-import com.app.vibespace.adapter.PostAllAdapter
+
 import com.app.vibespace.databinding.FragmentBlockedUserBinding
 import com.app.vibespace.models.setting.BlockedUserListModel
 import com.app.vibespace.util.CommonFuctions
@@ -81,23 +81,6 @@ class BlockedUserFragment : Fragment(),BlockedUserAdapter.Unblock {
        }
     }
 
-    private fun showDialogBlock(position:Int, userId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            unblockUser(position,userId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
-
     private fun unblockUser(position: Int, userId: String) {
         activity?.let{
             model.unblockUser(userId).observe(it){response->
@@ -119,7 +102,7 @@ class BlockedUserFragment : Fragment(),BlockedUserAdapter.Unblock {
     }
 
     override fun unblock(position: Int, userId: String) {
-        showDialogBlock(position,userId)
+        unblockUser(position,userId)
     }
 
 }

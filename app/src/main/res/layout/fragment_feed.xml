@@ -111,8 +111,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--add  several shimmer placeholder layout -->
-
+                    <include layout="@layout/layout_shimmer" />
+                    <include layout="@layout/layout_shimmer" />
                     <include layout="@layout/layout_shimmer" />
                     <include layout="@layout/layout_shimmer" />
                     <include layout="@layout/layout_shimmer" />
