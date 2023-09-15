@@ -45,17 +45,17 @@ class BlockedUserFragment : Fragment(),BlockedUserAdapter.Unblock {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
-        adapter =  BlockedUserAdapter(blockedList,this)
+        adapter =  BlockedUserAdapter(blockedList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
-       getBlockedUser(view)
+       getBlockedUser()
 
         binding.back.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
-    private fun getBlockedUser(view: View) {
+    private fun getBlockedUser() {
        activity?.let{
            model.getBlockedUserList().observe(it){response->
                when(response.status){

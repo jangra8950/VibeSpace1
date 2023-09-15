@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vibespace.R
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.ui.profile.ProfileMainFragment
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 
 class PostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
-                  private val callBack:PostCallbacks
+                  private val callBack:PostCallbacks, val context: Context
                   ): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val caption: TextView = itemView.findViewById(R.id.tvCaption)
@@ -21,6 +22,7 @@ class PostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         val likeCount: TextView = itemView.findViewById(R.id.tvLikeCount)
         val commentCount: TextView = itemView.findViewById(R.id.tvCommentCount)
         val deletePost: ImageView = itemView.findViewById(R.id.ivMore)
+        val pic: ImageView = itemView.findViewById(R.id.ivMap)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,10 +41,10 @@ class PostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         holder.likeCount.text= item.likeCount.toString()
         holder.commentCount.text=item.commentCount.toString()
         holder.deletePost.setOnClickListener {
-
             showMenu(holder.deletePost,it.context,position,item.postId)
-
         }
+
+        loadImage(context,item.userDetails.profilePic,holder.pic)
     }
 
     private fun showMenu(deletePost: ImageView, context: Context, position: Int, postId: String) {

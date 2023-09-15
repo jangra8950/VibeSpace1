@@ -23,12 +23,12 @@ class HomeViewModel @Inject constructor(
 
 ):ViewModel() {
 
-    fun getPeople()= liveData(Dispatchers.IO) {
+    fun getPeople(type:String)= liveData(Dispatchers.IO) {
         emit(Resources.loading(null))
         try {
 
             val query= hashMapOf<String,Any>()
-            query["users"]="all"
+            query["users"]=type
             query["lat"]=30.714
             query["lng"]=76.691
 

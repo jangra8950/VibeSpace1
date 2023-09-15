@@ -41,8 +41,8 @@ class CreatePostViewModel @Inject constructor(
       val obj=CreatePostRequest()
         obj.postVisibility="day"
         obj.caption=caption.value.toString()
-        obj.location?.lat="31.0880".toDouble()
-        obj.location?.lng="70.8751".toDouble()
+        obj.location?.lat="31".toDouble()
+        obj.location?.lng="70".toDouble()
         return obj
     }
 

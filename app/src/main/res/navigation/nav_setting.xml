@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_blockedUserFragment"
             app:destination="@id/blockedUserFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewBankDetailsFragment"
@@ -73,5 +76,18 @@
         <action
             android:id="@+id/action_paymentMethodFragment_to_addNewCardFragment"
             app:destination="@id/addNewCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.app.vibespace.ui.settings.FollowersFragment"
+        android:label="fragment_followers"
+        tools:layout="@layout/fragment_followers" >
+        <action
+            android:id="@+id/action_followersFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <argument
+            android:name="value"
+            app:argType="string"
+            />
     </fragment>
 </navigation>

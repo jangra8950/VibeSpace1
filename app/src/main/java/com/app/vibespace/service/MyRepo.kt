@@ -5,6 +5,7 @@ import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
+import com.app.vibespace.models.profile.MirrorPostModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostLikeCountModel
@@ -21,6 +22,7 @@ import com.app.vibespace.models.registration.SignUpRequest
 import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 
 import javax.inject.Inject
@@ -81,4 +83,12 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun getChatInd(userId:String):ChatItemModel=apiHelper.getChatInd(userId)
 
     suspend fun postFollow(params:HashMap<String,Any>):FollowModel=apiHelper.postFollow(params)
+
+    suspend fun deleteChat(params:HashMap<String,Any>):DeleteAccountModel=apiHelper.deleteChat(params)
+
+    suspend fun deleteUnfollow(id:String):FollowModel=apiHelper.deleteUnfollow(id)
+
+    suspend fun mirrorPost(params:HashMap<String,String>):MirrorPostModel=apiHelper.mirrorPost(params)
+
+    suspend fun getFollowers(params:HashMap<String,Any>):FollowersModel=apiHelper.getFollowers(params)
 }

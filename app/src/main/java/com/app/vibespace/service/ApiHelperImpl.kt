@@ -6,6 +6,7 @@ import com.app.vibespace.models.profile.CreatePostModel
 import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
+import com.app.vibespace.models.profile.MirrorPostModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -27,6 +28,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -114,5 +116,17 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
 
     override suspend fun postFollow(params: HashMap<String, Any>): FollowModel =
        apiService.postFollow(params)
+
+    override suspend fun deleteChat(param: HashMap<String, Any>): DeleteAccountModel =
+     apiService.deleteChat(param)
+
+    override suspend fun deleteUnfollow(id: String): FollowModel =
+      apiService.deleteUnfollow(id)
+
+    override suspend fun mirrorPost(param: HashMap<String, String>): MirrorPostModel =
+      apiService.mirrorPost(param)
+
+    override suspend fun getFollowers(params: HashMap<String, Any>): FollowersModel =
+      apiService.getFollowers(params)
 
 }

@@ -2,12 +2,23 @@ package com.app.vibespace.util
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.format.DateFormat
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import com.app.vibespace.R
 import com.app.vibespace.ui.profile.UserProfileFragment
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.net.URL
+import java.text.ParseException
+import java.util.Calendar
+import java.util.TimeZone
 
 class CommonFuctions {
     companion object {
@@ -61,6 +72,34 @@ class CommonFuctions {
                 dialog!!.dismiss()
             }
             dialog?.show()
+        }
+
+        fun convertTimestampToRealTime(timestamp: Long): String {
+
+            val smsTime: Calendar = Calendar.getInstance(TimeZone.getDefault())
+            smsTime.timeInMillis = timestamp
+            return try {
+                DateFormat.format("hh:mm a", smsTime).toString()
+            } catch (e: ParseException) {
+                throw RuntimeException(e)
+            }
+        }
+
+        fun loadImage(context:Context,url:String,imageView: ImageView){
+            if(url!="")
+                Picasso.with(context).load(url).transform(PicassoCircleTransformation()).into(imageView)
+            else
+                Picasso.with(context).load(R.drawable.ic_avatar).transform(PicassoCircleTransformation()).into(imageView)
+        }
+
+        suspend fun loadImageFromUrl(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
+            return@withContext try {
+                val `in` = URL(imageUrl).openStream()
+                BitmapFactory.decodeStream(`in`)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 }

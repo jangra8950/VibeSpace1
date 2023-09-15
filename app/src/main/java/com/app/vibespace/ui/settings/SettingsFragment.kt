@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.app.vibespace.R
 import com.app.vibespace.databinding.FragmentSettingsBinding
 import com.app.vibespace.ui.registration.SignInActivity
+import com.app.vibespace.util.MyApp
+import com.app.vibespace.util.MyApp.Companion.profileData
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,12 +42,27 @@ class SettingsFragment : Fragment() {
         binding.back.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        binding.tvFollowings.setOnClickListener {
+            val action= SettingsFragmentDirections.actionSettingsFragmentToFollowersFragment(
+                value = "following"
+            )
+            findNavController().navigate(action)
+        }
+        binding.tvFollow.setOnClickListener {
+            val action= SettingsFragmentDirections.actionSettingsFragmentToFollowersFragment(
+                value = "follower"
+            )
+            findNavController().navigate(action)
+        }
 
         binding.tvPassword.setOnClickListener {
             val intent = Intent(requireContext(), SignInActivity::class.java)
             intent.putExtra("key", "fromSettingActivity")
             startActivity(intent)
         }
+
+        binding.tvFollowCount.text= profileData?.totalFollower.toString()
+        binding.tvFollowinCount.text= profileData?.totalFollowing.toString()
 
     }
 

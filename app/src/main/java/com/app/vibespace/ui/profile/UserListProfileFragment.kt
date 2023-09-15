@@ -1,28 +1,31 @@
 package com.app.vibespace.ui.profile
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.adapter.UserListAdapter
-import com.app.vibespace.databinding.ActivityHomeBinding
 import com.app.vibespace.databinding.FragmentUserListProfileBinding
 import com.app.vibespace.models.profile.UserListModel
+import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.UserListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class UserListProfileFragment : Fragment() {
+class UserListProfileFragment : Fragment(),UserListAdapter.UserProfile {
 
     private lateinit var binding:FragmentUserListProfileBinding
     private val model: UserListViewModel by viewModels()
@@ -43,7 +46,7 @@ class UserListProfileFragment : Fragment() {
         binding.lifecycleOwner=this
 
         binding.recyclerview.layoutManager=LinearLayoutManager(activity)
-        adapter= UserListAdapter(userList,requireActivity())
+        adapter= UserListAdapter(userList,this,requireContext())
         binding.recyclerview.adapter=adapter
 
         view.setOnClickListener { v ->
@@ -99,7 +102,7 @@ class UserListProfileFragment : Fragment() {
                       userList.clear()
                       allUserList.clear()
                       userList.addAll(response?.data?.data!!.users)
-                      allUserList.addAll(response?.data?.data!!.users)
+                      allUserList.addAll(response.data.data.users)
                       adapter.notifyDataSetChanged()
                   }
                   ApiStatus.ERROR -> {
@@ -111,6 +114,24 @@ class UserListProfileFragment : Fragment() {
               }
           }
       }
+    }
+
+    override fun onDestroy() {
+        val intent = Intent("com.app.vibespace")
+        intent.putExtra("setting", "yes")
+        LocalBroadcastManager.getInstance(requireActivity()).sendBroadcast(intent)
+        super.onDestroy()
+    }
+
+    override fun user(id: String) {
+
+        val frag=OtherUserProfileFragment()
+        val bundle=Bundle()
+        bundle.putString("user",id)
+        frag.arguments=bundle
+        (requireActivity() as HomeActivity).changeFragment(frag)
+//       val action=UserListProfileFragmentDirections.actionUserListProfileFragmentToOtherUserProfileFragment(data=id)
+//        findNavController().navigate(action)
     }
 
 }

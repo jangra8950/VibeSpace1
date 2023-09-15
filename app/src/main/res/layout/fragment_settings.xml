@@ -62,8 +62,108 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvAccount"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProfile"
+            style="@style/text"
+            android:text="@string/manage_profile"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            />
+
+        <View
+            android:id="@+id/view7"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvProfile"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollow"
+            style="@style/text"
+            android:text="@string/followers"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view7"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollowCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_button_logout"
+            android:text="5"
+            android:textSize="@dimen/_13ssp"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/view7"
+            app:layout_constraintBottom_toTopOf="@id/view8"
+            app:layout_constraintStart_toEndOf="@id/tvFollow"
+            />
+
+        <View
+            android:id="@+id/view8"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvFollow"
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollowings"
+            style="@style/text"
+            android:text="@string/following"
+            android:drawableTint="@color/colorBlack"
+            android:fontFamily="@font/poppins_medium"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view8"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFollowinCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_button_logout"
+            android:text="5"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/view8"
+            app:layout_constraintBottom_toTopOf="@id/view9"
+            app:layout_constraintStart_toEndOf="@id/tvFollowings"
+            />
+        <View
+            android:id="@+id/view9"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvFollowings"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -74,10 +174,10 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_change_password"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/view"
+           app:layout_constraintTop_toBottomOf="@id/view9"
             />
 
         <View
@@ -85,7 +185,7 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvPassword"
             />
 
@@ -97,7 +197,7 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_block"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view1"
@@ -108,7 +208,7 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvBlocked"
             />
 
@@ -120,7 +220,7 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_add_bank"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view2"
@@ -131,7 +231,7 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvBankAccount"
             />
 
@@ -143,7 +243,7 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_add_payment_method"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view3"
@@ -154,7 +254,7 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvPayment"
             />
 
@@ -166,7 +266,7 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_privacy_policy"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view4"
@@ -177,7 +277,7 @@
             android:background="@color/colorBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvPolicy"
             />
 
@@ -189,7 +289,7 @@
             android:fontFamily="@font/poppins_medium"
             android:drawableStart="@drawable/ic_terms_and_conditions"
             android:drawablePadding="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view5"

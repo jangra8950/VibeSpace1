@@ -1,8 +1,10 @@
 package com.app.vibespace.ui.profile
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +35,8 @@ import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.adapter.PostAdapter
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.registration.SignInActivity
+import com.app.vibespace.ui.settings.SettingActivity
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ProfileViewModel
 import com.google.gson.Gson
@@ -63,27 +68,24 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         binding.viewModel=model
         binding.fragment=this
         binding.lifecycleOwner=this
-
+        LocalBroadcastManager.getInstance(requireActivity())
+            .registerReceiver(broadCastReceiver, IntentFilter("com.app.vibespace"))
         binding.recyclerview.layoutManager=LinearLayoutManager(activity)
-        adapter =  PostAdapter(postList,this)
+        adapter =  PostAdapter(postList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
-
-//        val bundle = arguments
-//        val message = bundle!!.getString("mText")
-//
-//        if(message!="") {
-//            getProfile(view, message!!)
-//            getPostList(view, message)
-//        }
-//        else{
-//            getProfile(view,"")
-//            getPostList(view,"")
-//        }
-            getProfile(view,"")
+            getProfile("")
             getPostList(view,"")
 
         navigation()
+
+        binding.ivSearchBar.setOnClickListener {
+            (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+        }
+
+        binding.ivSetting.setOnClickListener {
+            startActivity(Intent(requireContext(), SettingActivity::class.java))
+        }
 
     }
 
@@ -155,7 +157,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
     }
 
 
-    private fun getProfile(view:View,id:String) {
+    private fun getProfile(id:String) {
         activity?.let {
             model.getProfile(id).observe(it){response->
                 when(response.status){
@@ -210,16 +212,16 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
            // findNavController().navigate(R.id.userProfileFragment)
             (requireActivity() as HomeActivity).updateFragment(UserProfileFragment())
         }
-//        binding.btnMonetize.setOnClickListener {
-//            findNavController().navigate(R.id.priceProfileFragment)
-//        }
+
     }
 
     private fun setValues(data: UserUpdateModel.Data) {
 
-        binding.tvProfileName.text=data.firstName +" "+data.lastName
+        binding.tvProfileName.text=data.firstName
         binding.tvFollowersCount.text=data.totalFollower.toString()
         binding.tvFollowingCount.text= data.totalFollowing.toString()
+        loadImage(requireActivity(),data.profilePic,binding.ivAvatar)
+
     }
 
 
@@ -232,5 +234,19 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         showDialogDelete(position,postId)
     }
 
+
+
+    val broadCastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+            if (intent?.hasExtra("setting")==true)
+                getProfile("")
+        }
+    }
+
+    override fun onDestroyView() {
+        LocalBroadcastManager.getInstance(requireActivity())
+            .unregisterReceiver(broadCastReceiver)
+        super.onDestroyView()
+    }
 
 }

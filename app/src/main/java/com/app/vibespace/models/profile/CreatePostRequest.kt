@@ -7,6 +7,6 @@ data class CreatePostRequest(
 ){
     data class Location(
         var lat: Double,
-        var lng: Double
+        var lng:Double
     )
 }

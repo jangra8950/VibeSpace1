@@ -15,7 +15,7 @@ import com.app.vibespace.adapter.ChatAdapter
 import com.app.vibespace.databinding.ActivityChatBinding
 import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.ChatRequest
-import com.app.vibespace.models.profile.UserUpdateModel
+import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.hideKeyboard
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.ChatItemViewModel
@@ -25,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import info.mqtt.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener
 import org.eclipse.paho.client.mqttv3.IMqttToken
 import org.eclipse.paho.client.mqttv3.MqttCallback
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -34,20 +33,21 @@ import org.eclipse.paho.client.mqttv3.MqttException
 import org.eclipse.paho.client.mqttv3.MqttMessage
 import java.io.UnsupportedEncodingException
 import java.util.Date
-import java.util.Random
 
 
 @AndroidEntryPoint
 class ChatActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityChatBinding
-    private  var selfId:String=""
-    private var topic:String="vibespace/dev/connection/chat/"
-    private lateinit var client:MqttAndroidClient
-    private lateinit var adap:ChatAdapter
-   // private lateinit var adapter: ChatItemAdapter
-    private val model:ChatItemViewModel by viewModels()
-    private var chatList=ArrayList<ChatItemModel.Data.Chat>()
+    private lateinit var binding: ActivityChatBinding
+    private var selfId: String = ""
+    private var topic: String = "vibespace/dev/connection/chat/"
+    private lateinit var client: MqttAndroidClient
+    private lateinit var adap: ChatAdapter
+    private var mess:String?=""
+
+    // private lateinit var adapter: ChatItemAdapter
+    private val model: ChatItemViewModel by viewModels()
+    private var chatList = ArrayList<ChatItemModel.Data.Chat>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,15 @@ class ChatActivity : AppCompatActivity() {
         binding=DataBindingUtil.setContentView(this,R.layout.activity_chat)
         val otherUserId = intent.getStringExtra("data").toString()
         val name = intent.getStringExtra("name").toString()
-        binding.tvBlocked.text=name
+        val image = intent.getStringExtra("image").toString()
+         mess = intent.getStringExtra("mess")
+        Log.i("WQWQWQWQW","level1 , $mess")
+
+
+
+        loadImage(this,image,binding.ivAvatar)
+
+        binding.tvBlocked.text = name
         getChat(otherUserId)
 
 //        val layoutManager=LinearLayoutManager(this)
@@ -67,7 +75,6 @@ class ChatActivity : AppCompatActivity() {
 //        binding.recyclerview.layoutManager= layoutManager
 //        adapter= ChatItemAdapter(chatList,this,otherUserId)
 //        binding.recyclerview.adapter=adapter
-
 
 
         val layoutManager = LinearLayoutManager(this)
@@ -141,9 +148,19 @@ class ChatActivity : AppCompatActivity() {
             val token = client.connect(options)
             token.actionCallback = object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken) {
+                    subscribe(channel,otherUserId)
 
                     Log.d("Connect", "Connect Successfully")
 
+                    Log.i("WQWQWQWQW","level2 , $mess")
+                    if( !mess.isNullOrEmpty())
+
+                        publishAndAddToChatList(
+                            mess!!,
+                            channel,
+                            otherUserId,
+                            cId
+                        )
 
                     binding.ivSend.setOnClickListener {
 
@@ -158,7 +175,6 @@ class ChatActivity : AppCompatActivity() {
                             hideKeyboard(it)
                         }
                     }
-                    subscribe(channel,otherUserId)
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken, exception: Throwable) {
@@ -186,10 +202,11 @@ class ChatActivity : AppCompatActivity() {
                 override fun messageArrived(topic: String?, message: MqttMessage?) {
                     Log.d("Connect", "Subscribe topic: ${message.toString()}")
                     val data = Gson().fromJson(message.toString(), ChatItemModel.Data.Chat::class.java)
-                    if (data.status=="")
-                      chatList.add(0,data)
-                    adap.notifyItemInserted(0)
-                    binding.recyclerview.smoothScrollToPosition(0)
+                    if (data.status=="") {
+                        chatList.add(0, data)
+                        adap.notifyItemInserted(0)
+                        binding.recyclerview.smoothScrollToPosition(0)
+                    }
                 }
 
                 override fun deliveryComplete(token: IMqttDeliveryToken?) {
@@ -220,9 +237,9 @@ class ChatActivity : AppCompatActivity() {
                 status = ""
             )
 
-            val message = MqttMessage(Gson().toJson(sentChat).toByteArray())
+            val data = MqttMessage(Gson().toJson(sentChat).toByteArray())
 
-            client.publish(channel, message, null, object : IMqttActionListener {
+            client.publish(channel, data, null, object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
                     Log.d("Connect", "Message Sent Successfully")
                     binding.tvText.setText("")
