@@ -75,19 +75,9 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
                 chat.chat(position,item.senderId,item.senderFirstName+" "+item.senderLastName,item.senderMascotIcon)
         }
 
-
-
-
-
-
     }
-
-
-
     interface Summary{
         fun chat(position: Int,userId: String,name:String,image:String)
     }
-
-
 
 }

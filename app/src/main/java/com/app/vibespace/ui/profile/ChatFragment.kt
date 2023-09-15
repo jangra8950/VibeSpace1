@@ -90,7 +90,7 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
     }
 
     private fun dragFunctionality() {
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -102,11 +102,6 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                 showDialogDelete(requireActivity(),viewHolder)
-
-//                val deletedCourse: SummaryModel.Data.ChatSummary =
-//                    chatList[viewHolder.bindingAdapterPosition]
-//
-//                deleteChat(deletedCourse.conversationId,viewHolder.bindingAdapterPosition)
 
             }
         }).attachToRecyclerView(binding.recyclerview)

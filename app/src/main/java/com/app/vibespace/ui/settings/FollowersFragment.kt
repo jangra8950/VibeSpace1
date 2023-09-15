@@ -195,28 +195,12 @@ class FollowersFragment : Fragment(),FollowersAdapter.Follow {
         }
     }
 
-    private fun showDialogBlock(position:Int, userId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            blockUser(position,userId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
     override fun unfollow(id: String, position: Int) {
         unFollowUser(id,position)
     }
 
     override fun block(userId: String, position: Int) {
-        showDialogBlock(position,userId)
+        blockUser(position,userId)
     }
 
 }

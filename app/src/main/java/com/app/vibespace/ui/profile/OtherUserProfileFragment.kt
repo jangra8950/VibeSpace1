@@ -28,7 +28,7 @@ import com.app.vibespace.viewModel.profile.OtherUserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
+class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack {
 
     private lateinit var binding:FragmentOtherUserProfileBinding
     private val args:OtherUserProfileFragmentArgs by navArgs()
@@ -201,23 +201,6 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
         }
     }
 
-    private fun showDialogBlock(position:Int, userId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            blockUser(position,userId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
-
     private fun blockUser(position: Int, userId: String) {
         activity?.let {
             myMap["userId"] = userId
@@ -260,8 +243,54 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
       }
     }
 
+    private fun unlikePost(postId: String, position: Int) {
+        activity?.let{
+            model.postDislike(postId).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        CommonFuctions.dismissDialog()
+                        postList[position].isLiked=false
+                        postList[position].likeCount=(postList[position].likeCount.toInt()-1).toString()
+                        adapter.notifyItemChanged(position)
+                    }
+                    ApiStatus.ERROR -> {
+                        CommonFuctions.dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        CommonFuctions.showDialog(requireActivity())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun likePost(postId: String,position: Int) {
+        activity?.let {
+            val query: HashMap<String, String> = hashMapOf()
+            query["postId"] =postId
+            model.postLike(query).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS ->{
+                        CommonFuctions.dismissDialog()
+                        postList[position].isLiked=true
+                        postList[position].likeCount=(postList[position].likeCount.toInt()+1).toString()
+                        adapter.notifyItemChanged(position)
+                    }
+                    ApiStatus.ERROR -> {
+                        CommonFuctions.dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        CommonFuctions.showDialog(requireActivity())
+                    }
+                }
+            }
+        }
+    }
+
     override fun block(userId: String, position: Int) {
-        showDialogBlock(position,userId)
+        blockUser(position,userId)
     }
 
     override fun chat(userId: String, image: String, name: String,mess:String) {
@@ -270,5 +299,13 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.Changes {
 
     override fun vibe(caption: String, postVisibility: String) {
         mirrorPost(caption,postVisibility)
+    }
+
+    override fun like(postId: String, position: Int) {
+        likePost(postId,position)
+    }
+
+    override fun unlike(postId: String, position: Int) {
+        unlikePost(postId,position)
     }
 }
