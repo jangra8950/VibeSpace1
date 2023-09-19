@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -33,7 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
+    lateinit var binding: ActivityHomeBinding
     var postData=""
     private val model:HomeViewModel by viewModels()
     lateinit var navHostFragment:NavHostFragment
@@ -101,8 +102,8 @@ class HomeActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount>0)
             supportFragmentManager.popBackStack()
         else if(navHostFragment!=null && navHostFragment!!.isAdded && navHostFragment!!.childFragmentManager.backStackEntryCount>0)
-            navHostFragment!!.childFragmentManager.popBackStack()
-        else {
+            navHostFragment!!.childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            else {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()
                 return

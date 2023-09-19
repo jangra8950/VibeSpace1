@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 
@@ -64,6 +65,11 @@ class HomeFragment : Fragment(){
         return mapView
     }
 
+    override fun onResume() {
+        super.onResume()
+        val item: MenuItem = (requireActivity() as HomeActivity).binding.navigation.menu.findItem(R.id.homeFragment)
+        item.isChecked = true
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

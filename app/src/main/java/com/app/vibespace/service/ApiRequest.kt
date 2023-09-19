@@ -30,13 +30,17 @@ import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
+import com.app.vibespace.models.setting.UploadImageModel
 import com.app.vibespace.util.ApiConstants
+import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -135,5 +139,9 @@ interface ApiRequest {
 
    @GET(ApiConstants.API_GET_CONNECT_FOLLOWERS)
    suspend fun getFollowers(@QueryMap query: HashMap<String,Any>): FollowersModel
+
+    @Multipart
+    @POST(ApiConstants.API_POST_UPLOAD_PHOTO)
+    suspend fun uploadImage(@Part file: MultipartBody.Part): UploadImageModel
 
 }

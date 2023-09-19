@@ -30,6 +30,8 @@ import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
+import com.app.vibespace.models.setting.UploadImageModel
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -128,5 +130,8 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
 
     override suspend fun getFollowers(params: HashMap<String, Any>): FollowersModel =
       apiService.getFollowers(params)
+
+    override suspend fun uploadImage(file: MultipartBody.Part): UploadImageModel =
+     apiService.uploadImage(file)
 
 }

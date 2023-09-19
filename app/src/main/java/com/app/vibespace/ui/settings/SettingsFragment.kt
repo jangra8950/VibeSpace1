@@ -42,6 +42,11 @@ class SettingsFragment : Fragment() {
         binding.back.setOnClickListener {
             requireActivity().onBackPressed()
         }
+
+
+        binding.tvProfile.setOnClickListener {
+          findNavController().navigate(R.id.manageProfileFragment)
+        }
         binding.tvFollowings.setOnClickListener {
             val action= SettingsFragmentDirections.actionSettingsFragmentToFollowersFragment(
                 value = "following"
