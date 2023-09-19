@@ -82,7 +82,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
 
         binding.ivSetting.setOnClickListener {
-          //  startActivity(Intent(requireContext(),SettingActivity::class.java))
+            (requireActivity() as HomeActivity).changeFragment(NotificationFragment())
         }
 
       binding.ivSearchBar.setOnClickListener {
