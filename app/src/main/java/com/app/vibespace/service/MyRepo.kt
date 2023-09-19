@@ -6,6 +6,7 @@ import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PendingRequestModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostLikeCountModel
@@ -97,4 +98,6 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun uploadImage(file: MultipartBody.Part) = apiHelper.uploadImage(file)
 
     suspend fun editProfile(params:HashMap<String,Any>):EditProfileModel=apiHelper.editProfile(params)
+
+    suspend fun getPendingRequest():PendingRequestModel=apiHelper.getPendingRequest()
 }

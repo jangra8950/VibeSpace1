@@ -7,6 +7,7 @@ import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PendingRequestModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -101,4 +102,6 @@ interface ApiHelper {
     suspend fun uploadImage(file: MultipartBody.Part): UploadImageModel
 
     suspend fun editProfile(params:HashMap<String,Any>):EditProfileModel
+
+   suspend fun getPendingRequest():PendingRequestModel
 }

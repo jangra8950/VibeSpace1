@@ -42,9 +42,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSetting"
-            app:srcCompat="@drawable/ic_setting"
+            app:srcCompat="@drawable/ic_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="@color/colorEditTxt"
             android:padding="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_6sdp"
