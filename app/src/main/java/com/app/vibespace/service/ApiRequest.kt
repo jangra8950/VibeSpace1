@@ -28,6 +28,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.EditProfileModel
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 import com.app.vibespace.models.setting.UploadImageModel
@@ -143,5 +144,8 @@ interface ApiRequest {
     @Multipart
     @POST(ApiConstants.API_POST_UPLOAD_PHOTO)
     suspend fun uploadImage(@Part file: MultipartBody.Part): UploadImageModel
+
+    @PUT(ApiConstants.API_UPDATE_USER)
+    suspend fun editProfile(@Body query:HashMap<String,Any>):EditProfileModel
 
 }

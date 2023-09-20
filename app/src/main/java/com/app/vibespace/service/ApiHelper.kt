@@ -28,6 +28,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.EditProfileModel
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
 import com.app.vibespace.models.setting.UploadImageModel
@@ -98,4 +99,6 @@ interface ApiHelper {
    suspend fun getFollowers(params:HashMap<String,Any>):FollowersModel
 
     suspend fun uploadImage(file: MultipartBody.Part): UploadImageModel
+
+    suspend fun editProfile(params:HashMap<String,Any>):EditProfileModel
 }

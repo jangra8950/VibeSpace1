@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBlack">#FFFFFF</color>
+    <color name="colorWhite">#000000</color>
+    <color name="colorPrimary">#00CC90</color>
+    <color name="colorEditTxt">#D8D8D8</color>
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="colorTxt">#979797</color>
+    <color name="colorRed">#E56666</color>
+    <color name="chat_bg">#000000</color>
+    <color name="transparent_white">#BE000000</color>
+</resources>

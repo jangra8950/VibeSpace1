@@ -30,6 +30,7 @@ data class UserUpdateModel(
         var userId: String,
         var gender: String?,
         var height: Double,
+        var uniShortName:String?=null
     ){
         data class Location(
             var lat: Double,

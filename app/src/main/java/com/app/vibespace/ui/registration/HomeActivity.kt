@@ -1,6 +1,7 @@
 package com.app.vibespace.ui.registration
 
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -126,4 +127,5 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.userListFragment, frag).addToBackStack(null)
             .commit()
     }
+
 }

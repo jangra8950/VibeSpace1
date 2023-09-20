@@ -91,6 +91,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:3.2.1"
 
     implementation "com.github.CanHub:Android-Image-Cropper:4.2.1"
+   // implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
 }
 kapt {

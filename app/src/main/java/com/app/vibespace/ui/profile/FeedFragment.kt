@@ -85,13 +85,13 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
 //        getPostList()
 
-        binding.ivSetting.setOnClickListener {
-          //  startActivity(Intent(requireContext(),SettingActivity::class.java))
-        }
-
-      binding.ivSearchBar.setOnClickListener {
-          (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
-      }
+//        binding.ivSetting.setOnClickListener {
+//          //  startActivity(Intent(requireContext(),SettingActivity::class.java))
+//        }
+//
+//      binding.ivSearchBar.setOnClickListener {
+//          (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+//      }
 
       binding.tvAll.setOnClickListener {
           binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))

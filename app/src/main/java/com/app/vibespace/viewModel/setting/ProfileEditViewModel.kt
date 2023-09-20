@@ -2,6 +2,7 @@ package com.app.vibespace.viewModel.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.app.vibespace.models.setting.EditProfileModel
 import com.app.vibespace.models.setting.UploadImageModel
 import com.app.vibespace.service.MyRepo
 import com.app.vibespace.service.Resources
@@ -32,6 +33,25 @@ class ProfileEditViewModel @Inject constructor(
             }
 
         } catch (exc: Exception) {
+            emit(handleApiError(exc, resources))
+        }
+    }
+
+    fun editProfile(pic:String,bio:String)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+        try {
+
+            val query:HashMap<String,Any> = hashMapOf()
+            query["profilePic"]=pic
+            query["bio"]=bio
+
+            val editResponse:EditProfileModel=repo.editProfile(query)
+            if(editResponse.statusCode==200)
+                emit(Resources.success(editResponse))
+            else
+                emit(Resources.error(editResponse.message,null))
+
+        }catch (exc: Exception) {
             emit(handleApiError(exc, resources))
         }
     }
