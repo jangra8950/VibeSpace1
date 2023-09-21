@@ -118,7 +118,7 @@ class ManageProfileFragment : Fragment() {
         binding.tvName.text= profileData?.firstName
         binding.tvFollowersCount.text= profileData?.totalFollower.toString()
         binding.tvFollowingCount.text= profileData?.totalFollowing.toString()
-        binding.tvCollegeName.text=profileData?.uniShortName?:"TUFTS"
+        binding.tvCollegeName.text=profileData?.uniShortName
         binding.tvProfileName.text= profileData?.bio.toString()
         profileData?.profilePic?.let { loadImage(requireActivity(), it,binding.ivAvatar) }
 

@@ -36,18 +36,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
-    var postData=""
-    private val model:HomeViewModel by viewModels()
     lateinit var navHostFragment:NavHostFragment
     lateinit var navController:NavController
     private var doubleBackToExitPressedOnce=false
-   // private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val decor = window.decorView
             decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
+
         binding=DataBindingUtil.setContentView(this,R.layout.activity_home)
         Log.i("SAHIL_DATA",Gson().toJson(profileData))
 

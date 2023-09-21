@@ -65,14 +65,6 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
 
         dragFunctionality()
 
-        refreshFunctionailty()
-
-    }
-
-    private fun refreshFunctionailty() {
-//       binding.refreshLayout.setOnRefreshListener {
-//             getSummary()
-//       }
     }
 
     private fun showDialogDelete(context: Context,viewHolder: RecyclerView.ViewHolder){
@@ -118,6 +110,7 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
 
             }
         }).attachToRecyclerView(binding.recyclerview)
+
 
     }
 

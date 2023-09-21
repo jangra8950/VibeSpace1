@@ -21,6 +21,7 @@ import com.app.vibespace.R
 import com.app.vibespace.databinding.LayoutPostRecyclerItemBinding
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.util.CommonFuctions
+import com.app.vibespace.util.CommonFuctions.Companion.convertPixelsToDp
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 
 
@@ -68,6 +69,15 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
             holder.binding.ivChatAct.setOnClickListener {
                 post.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName, item.caption)
             }
+
+            val param = (holder.binding.cardItem.layoutParams as ViewGroup.MarginLayoutParams).apply {
+                if (item.spacing>1)
+                    setMargins(10,8,10, item.spacing*50)
+                else
+                    setMargins(10,8,10, 8)
+            }
+            holder.binding.cardItem.layoutParams = param
+
         }
 
     }

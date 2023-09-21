@@ -7,12 +7,12 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.format.DateFormat
+import android.util.DisplayMetrics
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.app.vibespace.R
-import com.app.vibespace.ui.profile.UserProfileFragment
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,6 +20,7 @@ import java.net.URL
 import java.text.ParseException
 import java.util.Calendar
 import java.util.TimeZone
+
 
 class CommonFuctions {
     companion object {
@@ -101,6 +102,11 @@ class CommonFuctions {
                 e.printStackTrace()
                 null
             }
+        }
+
+
+        fun convertPixelsToDp( context: Context,px: Int): Float {
+            return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
         }
     }
 }

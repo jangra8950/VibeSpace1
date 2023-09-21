@@ -179,7 +179,7 @@ class ProfileEditFragment : Fragment() {
             model.uploadPicOnAws(file).observe(it){response->
                 when(response.status){
                     ApiStatus.SUCCESS -> {
-
+                        dismissDialog()
                         val editor = sharedpreferences.edit()
                         profileData?.profilePic=response.data?.data?.url.toString()
                         editor.putString(ApiConstants.PROFILE_DATA, Gson().toJson(profileData))
@@ -187,10 +187,11 @@ class ProfileEditFragment : Fragment() {
                         loadImage(requireActivity(),response.data?.data?.url.toString(),binding.ivProfileMain)
                     }
                     ApiStatus.ERROR -> {
+                        dismissDialog()
                         response.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
                     }
                     ApiStatus.LOADING -> {
-
+                        showDialog(requireActivity())
                     }
                 }
 
