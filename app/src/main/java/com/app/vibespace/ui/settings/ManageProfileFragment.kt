@@ -14,7 +14,7 @@ import com.app.vibespace.databinding.FragmentManageProfileBinding
 import com.app.vibespace.ui.registration.SignInActivity
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
-import com.app.vibespace.util.CommonFuctions.Companion.showDialogConfirmation
+import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
 import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.MyApp.Companion.profileData
 import com.app.vibespace.util.showToast
@@ -42,12 +42,12 @@ class ManageProfileFragment : Fragment() {
 
         setValues()
         binding.btnLogOut.setOnClickListener {
-            showDialogConfirmation(requireActivity(),"Are you sure you want to LogOut?") {
+            showDialogLogOutt(requireActivity(),"Are you sure you want to LogOut?") {
                 logout()
             }
         }
         binding.btnDeleteAccount.setOnClickListener {
-            showDialogConfirmation(requireActivity(),"Are you sure you want to Delete your Account?") {
+            showDialogLogOutt(requireActivity(),"Are you sure you want to Delete your Account?") {
                 deleteAccount()
             }
         }

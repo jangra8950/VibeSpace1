@@ -7,6 +7,7 @@ import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PendingRequestModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -131,6 +132,10 @@ class ApiHelperImpl @Inject constructor(private val apiService:ApiRequest):ApiHe
 
     override suspend fun getFollowers(params: HashMap<String, Any>): FollowersModel =
       apiService.getFollowers(params)
+
+    override suspend fun getPendingRequest(): PendingRequestModel =
+        apiService.getPendingRequest()
+
 
     override suspend fun uploadImage(file: MultipartBody.Part): UploadImageModel =
      apiService.uploadImage(file)

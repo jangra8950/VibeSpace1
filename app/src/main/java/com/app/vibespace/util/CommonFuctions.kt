@@ -7,12 +7,13 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.format.DateFormat
-import android.util.DisplayMetrics
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import androidx.appcompat.widget.AppCompatTextView
 import com.app.vibespace.R
+import com.app.vibespace.adapter.OtherUserPostAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,7 +21,6 @@ import java.net.URL
 import java.text.ParseException
 import java.util.Calendar
 import java.util.TimeZone
-
 
 class CommonFuctions {
     companion object {
@@ -57,23 +57,60 @@ class CommonFuctions {
             dialog?.show()
         }
 
-
-
-        fun showDialogConfirmation(context: Context,value:String,click:()->Unit){
+        fun showDialogLogOutt(
+            context: Context,
+            value: String,
+            click:(String)-> Unit
+        ){
             dialog = Dialog(context)
             dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog?.setContentView(R.layout.layout_logout_confirm)
             dialog?.setCancelable(false)
-            dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog!!.findViewById<AppCompatTextView>(R.id.tvConfirmation).text=value
+            dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
             dialog!!.findViewById<Button>(R.id.btnYes).setOnClickListener {
-                click()
-                dialog!!.dismiss()
+                click(value)
+               dialog!!.dismiss()
             }
             dialog!!.findViewById<Button>(R.id.btnNo).setOnClickListener {
                 dialog!!.dismiss()
             }
             dialog?.show()
+        }
+
+         fun showMenuItems(
+            deletePost: ImageView,
+            context: Context,
+            value: String,menu:Int,
+            click:(String)-> Unit
+        ) {
+            val popupMenu = PopupMenu(context, deletePost)
+
+//            popupMenu.menuInflater.inflate(R.menu.menu_items, popupMenu.menu)
+            popupMenu.menuInflater.inflate(menu, popupMenu.menu)
+             if(menu!=R.menu.menu_delete_post)
+            popupMenu.menu.findItem(R.id.reportPost).isVisible=false
+
+            popupMenu.setOnMenuItemClickListener {
+                showDialogLogOutt(context,value){
+                    click(value)
+                }
+                true
+            }
+
+            try {
+                val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+                popup.isAccessible = true
+                val menuPopupHelper = popup.get(popupMenu)
+                val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
+                val setForceIcons = classPopupHelper.getMethod("setForceShowIcon", Boolean::class.java)
+                setForceIcons.invoke(menuPopupHelper, true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            // Showing the popup menu
+            popupMenu.show()
         }
 
         fun convertTimestampToRealTime(timestamp: Long): String {
@@ -91,7 +128,7 @@ class CommonFuctions {
             if(url!="")
                 Picasso.with(context).load(url).transform(PicassoCircleTransformation()).into(imageView)
             else
-                Picasso.with(context).load(R.drawable.ic_profile_default).transform(PicassoCircleTransformation()).into(imageView)
+                Picasso.with(context).load(R.drawable.ic_avatar).transform(PicassoCircleTransformation()).into(imageView)
         }
 
         suspend fun loadImageFromUrl(imageUrl: String): Bitmap? = withContext(Dispatchers.IO) {
@@ -102,11 +139,6 @@ class CommonFuctions {
                 e.printStackTrace()
                 null
             }
-        }
-
-
-        fun convertPixelsToDp( context: Context,px: Int): Float {
-            return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
         }
     }
 }

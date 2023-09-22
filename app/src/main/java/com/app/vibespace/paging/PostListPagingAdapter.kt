@@ -21,8 +21,8 @@ import com.app.vibespace.R
 import com.app.vibespace.databinding.LayoutPostRecyclerItemBinding
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.util.CommonFuctions
-import com.app.vibespace.util.CommonFuctions.Companion.convertPixelsToDp
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
+import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
 
 
 class PostListPagingAdapter(var context:Context,private val post: Post):PagingDataAdapter<PostListModel.Data.Post,PostListPagingAdapter.PostViewHolder>(PostListDiffCallback) {
@@ -63,7 +63,9 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
             //loadImage(context,item.userDetails.mascotIcon,holder.binding.ivAvatar)
 
            holder.binding.ivChatNew.setOnClickListener {
-               showDialogLogOut(context,item.caption,item.postVisibility)
+               CommonFuctions.showDialogLogOutt(context,"Are you sure to want to add this vibe to your Profile?"){
+                   post.vibe(item.caption,item.postVisibility)
+               }
            }
 
             holder.binding.ivChatAct.setOnClickListener {
@@ -82,6 +84,16 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
 
     }
 
+    fun likedClicked(position:Int,liked:Boolean){
+        getItem(position).let {
+            it?.isLiked=liked
+            if (liked)
+                it?.likeCount="${it?.likeCount?.toInt()?.plus(1)}"
+            else
+                it?.likeCount="${it?.likeCount?.toInt()?.minus(1)}"
+        }
+        notifyItemChanged(position)
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -115,24 +127,6 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
         }
     }
 
-    private fun showDialogLogOut(context: Context, caption: String, postVisibility: String){
-        CommonFuctions.dialog = Dialog(context)
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_logout_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog!!.findViewById<AppCompatTextView>(R.id.tvConfirmation).text="Are you sure to want to add this vibe to your Profile?"
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnYes).setOnClickListener {
-            post.vibe(caption,postVisibility)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<Button>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
-
     private fun showMenu(
         deletePost: ImageView,
         context: Context,
@@ -146,11 +140,22 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.blockUser->{
-                    post.block(position,userId)
+
+                    showDialogLogOutt(
+                        context,
+                        "Are you sure you want to Block this User?",
+                        click = {
+                            post.block(position,userId)
+                        })
 
                 }
                 R.id.reportPost->{
-                    post.report(postId,position)
+                    showDialogLogOutt(
+                        context,
+                        "Are you sure you want to report this Post?",
+                        click = {
+                            post.report(postId,position)
+                        })
 
                 }
             }
@@ -178,9 +183,7 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
         fun unlike(postId:String,position: Int)
         fun comment(postId:String,position: Int,text:String)
         fun commentList(postId:String,position: Int)
-
         fun vibe(caption:String, postVisibility:String)
-
         fun chat(userId:String,image:String,name:String, mess:String)
     }
 }

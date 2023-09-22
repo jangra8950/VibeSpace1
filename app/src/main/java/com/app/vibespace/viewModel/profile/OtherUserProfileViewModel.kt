@@ -6,6 +6,7 @@ import com.app.vibespace.models.profile.BlockUserModel
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PostLikeCountModel
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.models.profile.UserUpdateModel
 import com.app.vibespace.service.MyRepo
@@ -115,6 +116,36 @@ class OtherUserProfileViewModel @Inject constructor(
                 emit(Resources.success(mirrorResponse))
             else
                 emit(Resources.error(mirrorResponse.message,null))
+        }catch(exe:Exception){
+            handleApiError(exe,resources)
+        }
+    }
+
+    fun postLike(user:HashMap<String,String>)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+
+        try{
+            val postResponse: PostLikeCountModel =repo.postLike(user)
+            if(postResponse.statusCode==200)
+                emit(Resources.success(postResponse))
+            else
+                emit(Resources.error(postResponse.message,null))
+
+        }catch(exe:Exception){
+            handleApiError(exe,resources)
+        }
+    }
+
+    fun postDislike(id:String)= liveData(Dispatchers.IO) {
+        emit(Resources.loading(null))
+
+        try{
+            val postResponse: PostLikeCountModel =repo.dislikePost(id)
+            if(postResponse.statusCode==200)
+                emit(Resources.success(postResponse))
+            else
+                emit(Resources.error(postResponse.message,null))
+
         }catch(exe:Exception){
             handleApiError(exe,resources)
         }

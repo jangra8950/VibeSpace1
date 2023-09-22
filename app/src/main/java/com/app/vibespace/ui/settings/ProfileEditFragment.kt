@@ -56,8 +56,8 @@ class ProfileEditFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-         if(!::binding.isInitialized)
-             binding=FragmentProfileEditBinding.inflate(layoutInflater)
+        if(!::binding.isInitialized)
+            binding=FragmentProfileEditBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -81,32 +81,33 @@ class ProfileEditFragment : Fragment() {
     }
 
     private fun editProfile() {
-       activity?.let{
-           model.editProfile(profileData?.profilePic.toString(),binding.etBio.text.toString()).observe(it){response->
-               when(response.status){
-                   ApiStatus.SUCCESS -> {
-                       dismissDialog()
-                       val editor = sharedpreferences.edit()
-                       profileData?.profilePic=response.data?.data?.profilePic.toString()
-                       profileData?.bio=response.data?.data?.bio.toString()
-                       profileData?.uniShortName=response.data?.data?.uniShortName.toString()
-                       editor.putString(ApiConstants.PROFILE_DATA, Gson().toJson(profileData))
-                       editor.apply()
+        activity?.let{
+            model.editProfile(profileData?.profilePic.toString(),binding.etBio.text.toString()).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        dismissDialog()
+                        val editor = sharedpreferences.edit()
+                        profileData?.profilePic=response.data?.data?.profilePic.toString()
+                        profileData?.bio=response.data?.data?.bio.toString()
+                        profileData?.uniShortName=response.data?.data?.uniShortName.toString()
+                        editor.putString(ApiConstants.PROFILE_DATA, Gson().toJson(profileData))
+                        editor.apply()
 
-                       showToast(requireActivity(),"Profile Updated Successfully")
-                       findNavController().navigate(R.id.manageProfileFragment)
-                   }
-                   ApiStatus.ERROR -> {
-                       dismissDialog()
-                       response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                   }
-                   ApiStatus.LOADING -> {
-                      showDialog(requireActivity())
-                   }
-               }
+                        showToast(requireActivity(),"Profile Updated Successfully")
+                        requireActivity().onBackPressed()
+//                        findNavController().navigate(R.id.manageProfileFragment)
+                    }
+                    ApiStatus.ERROR -> {
+                        dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        showDialog(requireActivity())
+                    }
+                }
 
-           }
-       }
+            }
+        }
     }
 
     private val pickMedia=registerForActivityResult(ActivityResultContracts.PickVisualMedia()){

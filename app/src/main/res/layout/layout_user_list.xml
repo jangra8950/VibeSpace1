@@ -15,7 +15,7 @@
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/_42sdp"
             android:layout_height="@dimen/_42sdp"
-            app:srcCompat="@drawable/ic_avatar"
+            app:srcCompat="@drawable/ic_profile_default"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintTop_toTopOf="parent"
