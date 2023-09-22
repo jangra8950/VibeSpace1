@@ -33,6 +33,7 @@ object ApiConstants {
     const val API_GET_SUMMARY="chats/summary"
     const val API_GET_CHAT_IND="chats/individual"
     const val API_GET_CONNECT_FOLLOWERS="connect/connections"
+    const val API_GET_PENDING_REQUEST="connect/pendingRequests"
 
     // Delete call
     const val API_DELETE_ACCOUNT="user/64a54428038d3bba08c818c2"

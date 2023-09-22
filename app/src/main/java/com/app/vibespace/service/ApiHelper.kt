@@ -7,6 +7,7 @@ import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PendingRequestModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -94,4 +95,6 @@ interface ApiHelper {
    suspend fun mirrorPost(param:HashMap<String,String>):MirrorPostModel
 
    suspend fun getFollowers(params:HashMap<String,Any>):FollowersModel
+
+   suspend fun getPendingRequest():PendingRequestModel
 }

@@ -105,4 +105,6 @@
 
     <string name="mapbox_access_token">sk.eyJ1IjoiemltYmxlY29kZSIsImEiOiJjbGttZmh1YmwwOWIwM2VtaWJmdzVldmM4In0.Yu5NQGscXHxZ7hj1skDSHQ</string>
     <string name="manage_profile">Manage Profile</string>
+    <string name="notification">Notification</string>
+    <string name="pending_requests">Pending Requests</string>
 </resources>

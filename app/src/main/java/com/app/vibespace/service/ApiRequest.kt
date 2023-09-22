@@ -7,6 +7,7 @@ import com.app.vibespace.models.profile.CreatePostRequest
 import com.app.vibespace.models.profile.DeleteAccountModel
 import com.app.vibespace.models.profile.FollowModel
 import com.app.vibespace.models.profile.MirrorPostModel
+import com.app.vibespace.models.profile.PendingRequestModel
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.models.profile.PostCommentModel
 import com.app.vibespace.models.profile.PostDeleteModel
@@ -135,5 +136,8 @@ interface ApiRequest {
 
    @GET(ApiConstants.API_GET_CONNECT_FOLLOWERS)
    suspend fun getFollowers(@QueryMap query: HashMap<String,Any>): FollowersModel
+
+   @GET(ApiConstants.API_GET_PENDING_REQUEST)
+   suspend fun getPendingRequest():PendingRequestModel
 
 }

@@ -89,23 +89,6 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
 
     }
 
-     private fun showDialogDelete(position:Int, postId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            deletePost(position,postId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
-
     private fun deletePost(position: Int, postId: String) {
         activity?.let{
             model.deletePost(postId).observe(it){response->
@@ -180,7 +163,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
                     ApiStatus.ERROR -> {
 
                         loginDialog()
-                       //CommonFuctions.dismissDialog()
+                       // CommonFuctions.dismissDialog()
                       //  response.message?.let { it1 -> showToast(requireActivity(), it1) }
                     }
                     ApiStatus.LOADING -> {
@@ -231,7 +214,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
     }
 
     override fun deletePostCallback(position: Int, postId: String) {
-        showDialogDelete(position,postId)
+        deletePost(position,postId)
     }
 
 
