@@ -1,7 +1,5 @@
 package com.app.vibespace.ui.profile
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -9,29 +7,31 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.adapter.CommentListAdapter
 import com.app.vibespace.databinding.FragmentFeedBinding
+import com.app.vibespace.models.profile.PostListModel
+
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
-import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.paging.PostListPagingAdapter
+import com.app.vibespace.ui.registration.HomeActivity
+import com.app.vibespace.ui.settings.SettingActivity
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.dismissDialog
 import com.app.vibespace.util.CommonFuctions.Companion.showDialog
@@ -40,11 +40,11 @@ import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.FeedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Date
-
 
 @AndroidEntryPoint
 class FeedFragment : Fragment(),PostListPagingAdapter.Post {
@@ -56,9 +56,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     lateinit var adap: PostListPagingAdapter
     private var myMap = hashMapOf<String, String>()
     private var selectedOption: String = "all"
-    private var isViewVisible = true
-    lateinit var slide_down: Animation
-    lateinit var slide_up: Animation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,115 +72,45 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         binding.viewModel=model
         binding.fragment=this
         binding.lifecycleOwner=this
-        slide_down = AnimationUtils.loadAnimation(requireContext(),
-            R.anim.slide_down)
-        slide_up = AnimationUtils.loadAnimation(requireContext(),
-            R.anim.slide_up);
+
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
-//        adapter =  PostAllAdapter(postList,this,requireActivity())
-//        binding.recyclerview.adapter =  adapter
+
 
         adap=PostListPagingAdapter(requireActivity(),this)
         binding.recyclerview.adapter=adap
         setData(selectedOption)
 
-//        binding.recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if (dy > 0 && isViewVisible) {
-//                    hideViewWithAnimation()
-//                } else if (dy < 0 && !isViewVisible) {
-//                    showViewWithAnimation()
-//                }
-//            }
-//        })
 
+        binding.ivSetting.setOnClickListener {
+            (requireActivity() as HomeActivity).changeFragment(NotificationFragment())
+        }
 
+        binding.ivSearchBar.setOnClickListener {
+            (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+        }
 
-//        getPostList()
-
-//        binding.ivSetting.setOnClickListener {
-//          //  startActivity(Intent(requireContext(),SettingActivity::class.java))
-//        }
-//
-//      binding.ivSearchBar.setOnClickListener {
-//          (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
-//      }
-
-      binding.tvAll.setOnClickListener {
-          binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
-          binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
-          selectedOption="all"
-          setData(selectedOption)
-      }
-      binding.tvFollowing.setOnClickListener {
-          binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
-          binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
-          selectedOption="following"
-          setData(selectedOption)
-      }
+        binding.tvAll.setOnClickListener {
+            binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
+            binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+            selectedOption="all"
+            setData(selectedOption)
+        }
+        binding.tvFollowing.setOnClickListener {
+            binding.tvFollowing.setTextColor(ContextCompat.getColor(it.context, R.color.colorPrimary))
+            binding.tvAll.setTextColor(ContextCompat.getColor(it.context, R.color.colorEditTxt))
+            selectedOption="following"
+            setData(selectedOption)
+        }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 
             if(selectedOption=="following")
-               setData(selectedOption)
+                setData(selectedOption)
             else
                 setData(selectedOption)
             binding.swipeRefreshLayout.isRefreshing=false
         }
 
-    }
-
-    private fun showViewWithAnimation() {
-//        binding.llTab.visibility = View.VISIBLE
-//        binding.llTab.animate().translationY(0f).setDuration(1000)
-//            .withEndAction { isViewVisible = true }
-//        binding.llTab.translationY =  binding.llTab.height.toFloat()
-
-        isViewVisible = true
-        slide_down.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-                // This is where you can make your view visible
-//                yourView.visibility = View.VISIBLE
-            }
-
-            override fun onAnimationEnd(animation: Animation?) {
-//                binding.llTab.visibility = View.VISIBLE
-                // This is where you can hide your view
-            }
-
-            override fun onAnimationRepeat(animation: Animation?) {
-                // Not needed for your use case
-            }
-        })
-//        binding.llTab.startAnimation(slide_down)
-
-    }
-
-    private fun hideViewWithAnimation() {
-//        binding.llTab.animate().translationY(0f).setDuration(1000)
-//            .withEndAction {
-//                binding.llTab.visibility = View.GONE
-//                isViewVisible = false
-//            }
-
-        isViewVisible = false
-        slide_up.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {
-                // This is where you can make your view visible
-            }
-
-            override fun onAnimationEnd(animation: Animation?) {
-                // This is where you can hide your view
-//                yourView.visibility = View.GONE
-//                binding.llTab.visibility = View.GONE
-            }
-
-            override fun onAnimationRepeat(animation: Animation?) {
-                // Not needed for your use case
-            }
-        })
-//        binding.llTab.startAnimation(slide_up)
     }
 
     private fun setData(data:String){
@@ -197,48 +124,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         Log.i("SAHILDATA","Feed")
     }
 
-    private fun getPostList() {
-        activity?.let {
-            model.getPostList(null,"all").observe(it){response->
-                when(response.status){
-                    ApiStatus.SUCCESS -> {
 
-                        binding.shimmerLayout.startShimmer()
-                        binding.shimmerLayout.visibility=View.GONE
-                        binding.recyclerview.visibility=View.VISIBLE
-                        postList.clear()
-                        postList.addAll(response?.data?.data!!.posts)
-
-                    }
-                    ApiStatus.ERROR -> {
-
-                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                    }
-                    ApiStatus.LOADING -> {
-
-                    }
-                }
-            }
-        }
-
-    }
-
-    private fun showDialogBlock(position:Int, userId: String){
-        CommonFuctions.dialog = Dialog(requireContext())
-        CommonFuctions.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        CommonFuctions.dialog?.setContentView(R.layout.layout_delete_confirm)
-        CommonFuctions.dialog?.setCancelable(false)
-        CommonFuctions.dialog?.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnYes).setOnClickListener {
-            blockUser(position,userId)
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog!!.findViewById<TextView>(R.id.btnNo).setOnClickListener {
-            CommonFuctions.dialog!!.dismiss()
-        }
-        CommonFuctions.dialog?.show()
-    }
 
     private fun blockUser(position: Int, userId: String) {
         activity?.let {
@@ -247,8 +133,8 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                 when(response.status){
                     ApiStatus.SUCCESS -> {
                         response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-//                        getPostList()
-                      //  postList.removeAt(position)
+                        adap.notifyItemRemoved(position)
+                        //adapter.notifyItemRemoved(position)
                     }
                     ApiStatus.ERROR -> {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
@@ -264,41 +150,43 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
 
     override fun block(position: Int, userId: String) {
-        showDialogBlock(position,userId)
+        blockUser(position,userId)
     }
 
     override fun like(postId: String,position: Int) {
         likePost(postId,position)
     }
 
+
     override fun report(postId: String, position: Int) {
-       reportPost(postId,position)
+        reportPost(postId,position)
     }
 
     private fun reportPost(postId: String, position: Int) {
-      activity?.let{
-          val query: HashMap<String, String> = hashMapOf()
-          query["postId"] =postId
-          model.postReport(query).observe(it){response->
-              when(response.status){
-                  ApiStatus.SUCCESS -> {
-                      dismissDialog()
-                      response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-                  }
-                  ApiStatus.ERROR -> {
-                      dismissDialog()
-                      response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                  }
-                  ApiStatus.LOADING -> {
-                      showDialog(requireActivity())
-                  }
-              }
-          }
-      }
+        activity?.let{
+            val query: HashMap<String, String> = hashMapOf()
+            query["postId"] =postId
+            model.postReport(query).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        dismissDialog()
+                        // adapter.notifyItemChanged(position)
+                        response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.ERROR -> {
+                        dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        showDialog(requireActivity())
+                    }
+                }
+            }
+        }
     }
 
     override fun unlike(postId: String, position: Int) {
-       unlikePost(postId,position)
+        unlikePost(postId,position)
     }
 
     override fun comment(postId: String, position: Int, text: String) {
@@ -306,7 +194,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     }
 
     override fun commentList(postId: String, position: Int) {
-          getCommentList(postId,position)
+        getCommentList(postId,position)
     }
 
     override fun vibe(caption: String, postVisibility: String) {
@@ -344,31 +232,31 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     }
 
     private fun getCommentList(postId: String, position: Int) {
-      activity?.let{
-          model.postCommentList(postId).observe(it){response->
-              when(response.status){
-                  ApiStatus.SUCCESS -> {
-                      dismissDialog()
+        activity?.let{
+            model.postCommentList(postId).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        dismissDialog()
 
-                      commentList.clear()
-                      commentList.addAll(response?.data?.data!!.comments)
-                      showBottomSheet(postId,position,response?.data?.data!!.comments)
-                     // showBottomSheet(postId,position)
+                        commentList.clear()
+                        commentList.addAll(response?.data?.data!!.comments)
+                        showBottomSheet(postId,position,response?.data?.data!!.comments)
+                        // showBottomSheet(postId,position)
 
 //                      CommentAdapter.notifyItemChanged(position)
 
-                  }
-                  ApiStatus.ERROR -> {
-                      dismissDialog()
-                      response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.ERROR -> {
+                        dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
 
-                  }
-                  ApiStatus.LOADING -> {
-                      showDialog(requireActivity())
-                  }
-              }
-          }
-      }
+                    }
+                    ApiStatus.LOADING -> {
+                        showDialog(requireActivity())
+                    }
+                }
+            }
+        }
     }
 
     private fun showBottomSheet(
@@ -407,73 +295,72 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     }
 
     private fun commentPost(postId: String, position: Int, text: String) {
-      activity?.let {
-          val query: HashMap<String, String> = hashMapOf()
-          query["postId"] =postId
-          query["text"]=text
+        activity?.let {
+            val query: HashMap<String, String> = hashMapOf()
+            query["postId"] =postId
+            query["text"]=text
 
-          model.postComment(query).observe(it){response->
-              when(response.status){
-                  ApiStatus.SUCCESS -> {
+            model.postComment(query).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
 
-                      response?.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
-                      postList[position].commentCount=(postList[position].commentCount.toInt()+1).toString()
+                        response?.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
+                        postList[position].commentCount=(postList[position].commentCount.toInt()+1).toString()
 
-                  }
-                  ApiStatus.ERROR -> {
-                      response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                  }
-                  ApiStatus.LOADING -> {
+                    }
+                    ApiStatus.ERROR -> {
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
 
-                  }
-              }
-          }
-      }
+                    }
+                }
+            }
+        }
 
     }
 
     private fun unlikePost(postId: String, position: Int) {
-          activity?.let{
-              model.postDislike(postId).observe(it){response->
-                  when(response.status){
-                      ApiStatus.SUCCESS -> {
-                          dismissDialog()
-                          postList[position].isLiked=false
-                          postList[position].likeCount=(postList[position].likeCount.toInt()-1).toString()
-                      }
-                      ApiStatus.ERROR -> {
-                          dismissDialog()
-                          response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                      }
-                      ApiStatus.LOADING -> {
-                          showDialog(requireActivity())
-                      }
-                  }
-              }
-          }
+        activity?.let{
+            model.postDislike(postId).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS -> {
+                        dismissDialog()
+                        adap.likedClicked(position,false)
+                    }
+                    ApiStatus.ERROR -> {
+                        dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        showDialog(requireActivity())
+                    }
+                }
+            }
+        }
     }
 
     private fun likePost(postId: String,position: Int) {
-         activity?.let {
-             val query: HashMap<String, String> = hashMapOf()
-             query["postId"] =postId
-             model.postLike(query).observe(it){response->
-                 when(response.status){
-                     ApiStatus.SUCCESS ->{
-                         dismissDialog()
-                         postList[position].isLiked=true
-                         postList[position].likeCount=(postList[position].likeCount.toInt()+1).toString()
-                     }
-                     ApiStatus.ERROR -> {
-                         dismissDialog()
-                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                     }
-                     ApiStatus.LOADING -> {
-                         showDialog(requireActivity())
-                     }
-                 }
-             }
-         }
+        activity?.let {
+            val query: HashMap<String, String> = hashMapOf()
+            query["postId"] =postId
+            model.postLike(query).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS ->{
+                        dismissDialog()
+//                         var likeCount=(postList[position].likeCount.toInt()+1).toString()
+                        adap.likedClicked(position,true)
+                    }
+                    ApiStatus.ERROR -> {
+                        dismissDialog()
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
+                        showDialog(requireActivity())
+                    }
+                }
+            }
+        }
     }
 
     private fun getPostListPaging(value:String) {
@@ -484,13 +371,14 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         lifecycleScope.launch {
 
             model.getPostList(value).collectLatest { data ->
+
                 if (adap.itemCount==0){
-                        delay(1000)
-                        binding.shimmerLayout.stopShimmer()
-                        binding.shimmerLayout.visibility=View.GONE
-                        binding.recyclerview.visibility=View.VISIBLE
+                    delay(1000)
+                    binding.shimmerLayout.stopShimmer()
+                    binding.shimmerLayout.visibility=View.GONE
+                    binding.recyclerview.visibility=View.VISIBLE
                 }
-                    adap.submitData(data)
+                adap.submitData(data)
             }
 
         }

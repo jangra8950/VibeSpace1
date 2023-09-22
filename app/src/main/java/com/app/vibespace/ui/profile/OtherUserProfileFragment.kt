@@ -182,13 +182,15 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
             model.getProfile(id).observe(it){response->
                 when(response.status){
                     ApiStatus.SUCCESS -> {
+                        binding.tvProfileName.text= response?.data?.data?.firstName.toString()+" "+response?.data?.data?.lastName.toString()
+                        binding.tvStreakCount.text=response?.data?.data?.totalFollower.toString()
+                        binding.tvVibesCount.text= response?.data?.data?.totalFollowing.toString()
                         userName=response?.data?.data?.firstName.toString()+" "+response?.data?.data?.lastName.toString()
                         userImage=response?.data?.data?.profilePic!!
                         binding.tvProfileName.text= userName
                         binding.tvStreakCount.text= response.data.data.totalFollower.toString()
                         binding.tvVibesCount.text= response.data.data.totalFollowing.toString()
                         loadImage(requireActivity(),userImage,binding.ivAvatar)
-
                     }
                     ApiStatus.ERROR -> {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }

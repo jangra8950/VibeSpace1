@@ -83,23 +83,23 @@ class HomeFragment : Fragment(){
 
 
     private fun getPeopleList() {
-       activity?.let {
-           model.getPeople(type).observe(it){response->
-               when(response.status){
-                   ApiStatus.SUCCESS ->{
-                       peopleList.clear()
-                       peopleList.addAll(response.data?.data?.userList!!)
-                       addMap()
-                   }
-                   ApiStatus.ERROR ->{
-                       response.message?.let { it1 -> showToast(requireActivity(), it1) }
-                   }
-                   ApiStatus.LOADING -> {
+        activity?.let {
+            model.getPeople(type).observe(it){response->
+                when(response.status){
+                    ApiStatus.SUCCESS ->{
+                        peopleList.clear()
+                        peopleList.addAll(response.data?.data?.userList!!)
+                        addMap()
+                    }
+                    ApiStatus.ERROR ->{
+                        response.message?.let { it1 -> showToast(requireActivity(), it1) }
+                    }
+                    ApiStatus.LOADING -> {
 
-                   }
-               }
-           }
-       }
+                    }
+                }
+            }
+        }
     }
 
     private fun addMap() {

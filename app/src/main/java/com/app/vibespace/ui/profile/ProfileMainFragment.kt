@@ -74,8 +74,8 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         adapter =  PostAdapter(postList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
-            getProfile("")
-            getPostList(view,"")
+        getProfile("")
+        getPostList(view,"")
 
         navigation()
 
