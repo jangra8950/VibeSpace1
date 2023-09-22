@@ -21,7 +21,6 @@ import com.app.vibespace.R
 import com.app.vibespace.databinding.LayoutPostRecyclerItemBinding
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.util.CommonFuctions
-import com.app.vibespace.util.CommonFuctions.Companion.convertPixelsToDp
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
 

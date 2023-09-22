@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
 import com.app.vibespace.adapter.CommentListAdapter
-import com.app.vibespace.adapter.PostAllAdapter
 import com.app.vibespace.databinding.FragmentFeedBinding
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
@@ -54,7 +53,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     private val model:FeedViewModel by viewModels()
     private var postList=ArrayList<PostListModel.Data.Post>()
     private var commentList=ArrayList<PostCommentListModel.Data.Comment>()
-    lateinit var adapter: PostAllAdapter
     lateinit var adap: PostListPagingAdapter
     private var myMap = hashMapOf<String, String>()
     private var selectedOption: String = "all"
@@ -211,7 +209,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                         postList.clear()
                         postList.addAll(response?.data?.data!!.posts)
 
-                        adapter.notifyDataSetChanged()
                     }
                     ApiStatus.ERROR -> {
 
@@ -252,7 +249,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                         response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
 //                        getPostList()
                       //  postList.removeAt(position)
-                        adapter.notifyItemRemoved(position)
                     }
                     ApiStatus.ERROR -> {
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }
@@ -287,7 +283,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
               when(response.status){
                   ApiStatus.SUCCESS -> {
                       dismissDialog()
-                      adapter.notifyItemChanged(position)
                       response.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
                   }
                   ApiStatus.ERROR -> {
@@ -423,7 +418,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
                       response?.data?.data?.message?.let { it1 -> showToast(requireActivity(), it1) }
                       postList[position].commentCount=(postList[position].commentCount.toInt()+1).toString()
-                      adapter.notifyItemChanged(position)
 
                   }
                   ApiStatus.ERROR -> {
@@ -446,7 +440,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                           dismissDialog()
                           postList[position].isLiked=false
                           postList[position].likeCount=(postList[position].likeCount.toInt()-1).toString()
-                          adapter.notifyItemChanged(position)
                       }
                       ApiStatus.ERROR -> {
                           dismissDialog()
@@ -470,7 +463,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
                          dismissDialog()
                          postList[position].isLiked=true
                          postList[position].likeCount=(postList[position].likeCount.toInt()+1).toString()
-                         adapter.notifyItemChanged(position)
                      }
                      ApiStatus.ERROR -> {
                          dismissDialog()
