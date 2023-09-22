@@ -121,7 +121,8 @@ class HomeFragment : Fragment(){
                         pointAnnotationManager.create(pointAnnotationOptions)
 
                         pointAnnotationManager.addClickListener(OnPointAnnotationClickListener {
-                            val action=  MapLoadFragmentDirections.actionHomeFragmentToOtherUserProfileFragment(data = data.userId)
+
+                           val action=MapLoadFragmentDirections.actionHomeFragmentToOtherUserProfileFragment(value = data.userId)
                             findNavController().navigate(action)
                             true
                         })

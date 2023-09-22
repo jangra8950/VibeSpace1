@@ -46,7 +46,7 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         if(!::binding.isInitialized)
             binding=DataBindingUtil.inflate(inflater,R.layout.fragment_other_user_profile,container,false)
@@ -60,10 +60,10 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
         binding.lifecycleOwner=this
 
 
-           if(arguments?.containsKey("user")==true)
-               userId=arguments?.getString("user")?:""
-           else
-               userId=args.data
+//           if(arguments?.containsKey("user")==true)
+//               userId=arguments?.getString("user")?:""
+//           else
+               userId=args.value
 
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
         adapter =  OtherUserPostAdapter(postList,requireActivity(),this)

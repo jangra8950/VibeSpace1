@@ -80,13 +80,14 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         binding.recyclerview.adapter=adap
         setData(selectedOption)
 
-
         binding.ivSetting.setOnClickListener {
-            (requireActivity() as HomeActivity).changeFragment(NotificationFragment())
+            startActivity(Intent(requireContext(),NotificationActivity::class.java))
+            //(requireActivity() as HomeActivity).changeFragment(NotificationFragment())
         }
 
         binding.ivSearchBar.setOnClickListener {
-            (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+            startActivity(Intent(requireContext(),UserProfileActivity::class.java))
+            //(requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
         }
 
         binding.tvAll.setOnClickListener {
