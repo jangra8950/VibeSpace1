@@ -19,7 +19,7 @@ object ApiConstants {
     const val API_POST_CONNECT="connect"
     const val API_POST_CHAT_DELETE="chats/deleteBy"
     const val API_POST_MIRROR="post"
-
+    const val API_POST_UPLOAD_PHOTO = "s3uploads/image-upload"
 
 
     // Get call

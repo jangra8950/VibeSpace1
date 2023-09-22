@@ -23,8 +23,10 @@ import com.app.vibespace.models.registration.SignUpRequest
 import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.models.registration.VerifyOtpRequest
 import com.app.vibespace.models.setting.BlockedUserListModel
+import com.app.vibespace.models.setting.EditProfileModel
 import com.app.vibespace.models.setting.FollowersModel
 import com.app.vibespace.models.setting.UnblockUserModel
+import okhttp3.MultipartBody
 
 import javax.inject.Inject
 
@@ -92,6 +94,10 @@ class MyRepo @Inject constructor(private val apiHelper:ApiHelper) {
     suspend fun mirrorPost(params:HashMap<String,String>):MirrorPostModel=apiHelper.mirrorPost(params)
 
     suspend fun getFollowers(params:HashMap<String,Any>):FollowersModel=apiHelper.getFollowers(params)
+
+    suspend fun uploadImage(file: MultipartBody.Part) = apiHelper.uploadImage(file)
+
+    suspend fun editProfile(params:HashMap<String,Any>):EditProfileModel=apiHelper.editProfile(params)
 
     suspend fun getPendingRequest():PendingRequestModel=apiHelper.getPendingRequest()
 }

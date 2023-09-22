@@ -1,11 +1,13 @@
 package com.app.vibespace.ui.registration
 
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -34,19 +36,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
-    var postData=""
-    private val model:HomeViewModel by viewModels()
+    lateinit var binding: ActivityHomeBinding
     lateinit var navHostFragment:NavHostFragment
     lateinit var navController:NavController
     private var doubleBackToExitPressedOnce=false
-   // private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val decor = window.decorView
             decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
+
         binding=DataBindingUtil.setContentView(this,R.layout.activity_home)
         Log.i("SAHIL_DATA",Gson().toJson(profileData))
 
@@ -101,8 +101,8 @@ class HomeActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount>0)
             supportFragmentManager.popBackStack()
         else if(navHostFragment!=null && navHostFragment!!.isAdded && navHostFragment!!.childFragmentManager.backStackEntryCount>0)
-            navHostFragment!!.childFragmentManager.popBackStack()
-        else {
+            navHostFragment!!.childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            else {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()
                 return
@@ -125,4 +125,5 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.userListFragment, frag).addToBackStack(null)
             .commit()
     }
+
 }

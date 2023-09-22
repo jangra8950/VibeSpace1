@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_followersFragment"
             app:destination="@id/followersFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_manageProfileFragment"
+            app:destination="@id/manageProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewBankDetailsFragment"
@@ -90,4 +93,18 @@
             app:argType="string"
             />
     </fragment>
+    <fragment
+        android:id="@+id/manageProfileFragment"
+        android:name="com.app.vibespace.ui.settings.ManageProfileFragment"
+        android:label="fragment_manage_profile"
+        tools:layout="@layout/fragment_manage_profile" >
+        <action
+            android:id="@+id/action_manageProfileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.app.vibespace.ui.settings.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" />
 </navigation>

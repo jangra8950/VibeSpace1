@@ -74,8 +74,8 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         adapter =  PostAdapter(postList,this,requireActivity())
         binding.recyclerview.adapter =  adapter
 
-            getProfile("")
-            getPostList(view,"")
+        getProfile("")
+        getPostList(view,"")
 
         navigation()
 
@@ -149,12 +149,13 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
                         val editor = MyApp.sharedpreferences.edit()
                         profileData?.insertDate= response.data?.data?.insertDate!!.toInt()
                         profileData?.totalFollower=response.data?.data?.totalFollower!!.toInt()
-                        profileData?.totalFollowing= response.data.data.totalFollowing.toInt()
+                        profileData?.totalFollowing= response.data.data.totalFollowing
                         profileData?.gender=response.data.data.gender
                         profileData?.height=response.data.data.height
                         profileData?.occupation=response.data.data.occupation
                         profileData?.isPrivate=response.data.data.isPrivate
                         profileData?.universityName=response.data.data.universityName
+                        profileData?.uniShortName=response.data.data.uniShortName
 
                         editor.putString(ApiConstants.PROFILE_DATA, Gson().toJson(profileData))
                         editor.apply()

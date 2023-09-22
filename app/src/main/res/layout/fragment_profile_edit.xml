@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    tools:context=".ui.settings.ProfileEditFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDetails"
+        style="@style/txtHeading"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="Edit Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivProfileMain"
+        app:srcCompat="@drawable/ic_profile_default"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCamera"
+        app:srcCompat="@drawable/ic_camera"
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:padding="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="@id/ivProfileMain"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfileMain"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCollegeName"
+        style="@style/text"
+        android:text="College Name"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvCollege" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCollege"
+        style="@style/editText"
+        android:layout_marginTop="@dimen/_46sdp"
+        android:hint="Tufts University"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileMain"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBio"
+        style="@style/text"
+        android:text="@string/biotext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etBio" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etBio"
+        style="@style/editText"
+        android:layout_marginTop="@dimen/_42sdp"
+        android:hint="@string/bio"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:lines="3"
+        android:gravity="top|start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCollege" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDetails"
+        style="@style/button"
+        android:layout_marginTop="@dimen/_42sdp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etBio" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

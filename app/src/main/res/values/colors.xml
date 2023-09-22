@@ -2,7 +2,8 @@
 <resources>
     <color name="colorBlack">#FF000000</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorPrimary">#00CC90</color>
+<!--    <color name="colorPrimary">#00CC90</color>-->
+    <color name="colorPrimary">#87CEEB</color>
     <color name="colorEditTxt">#333333</color>
     <color name="colorBackground">#EEEEEE</color>
     <color name="colorTxt">#777777</color>

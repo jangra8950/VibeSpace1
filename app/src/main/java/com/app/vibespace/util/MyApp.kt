@@ -18,7 +18,6 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         sharedpreferences = getSharedPreferences(ApiConstants.SHARED_PREFS, Context.MODE_PRIVATE)
-
         if (sharedpreferences.getString(ApiConstants.PROFILE_DATA,"")!=null && sharedpreferences.getString(ApiConstants.PROFILE_DATA,"")!="")
             profileData=Gson().fromJson(sharedpreferences.getString(ApiConstants.PROFILE_DATA,""),UserUpdateModel.Data::class.java)
 

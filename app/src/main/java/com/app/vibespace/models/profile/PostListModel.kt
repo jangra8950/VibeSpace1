@@ -26,7 +26,9 @@ data class PostListModel(
             val postVisibility: String,
             val reportCount: Int,
             val userDetails: UserDetails,
-            val userId: String
+            val userId: String,
+            val shouldRemove:Boolean,
+            val spacing:Int
         ){
             data class UserDetails(
                 val email: String,

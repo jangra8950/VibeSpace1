@@ -106,6 +106,7 @@ class ChatFragment : Fragment(), ChatListAdapter.Summary {
             }
         }).attachToRecyclerView(binding.recyclerview)
 
+
     }
 
     private fun searchFunctionality() {

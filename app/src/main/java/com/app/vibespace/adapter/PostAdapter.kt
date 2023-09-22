@@ -12,6 +12,7 @@ import com.app.vibespace.R
 import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.ui.profile.ProfileMainFragment
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
+import com.app.vibespace.util.MyApp
 import com.app.vibespace.util.CommonFuctions.Companion.showDialogLogOutt
 import com.app.vibespace.util.CommonFuctions.Companion.showMenuItems
 
@@ -49,7 +50,7 @@ class PostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
             }
         }
 
-        loadImage(context,item.userDetails.profilePic,holder.pic)
+        loadImage(context, MyApp.profileData!!.profilePic,holder.pic)
     }
 
     interface PostCallbacks{
