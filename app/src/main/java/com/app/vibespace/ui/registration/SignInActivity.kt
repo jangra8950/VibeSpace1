@@ -21,10 +21,7 @@ class SignInActivity : AppCompatActivity() {
    // private var navController: NavController? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val decor = window.decorView
-            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
+
        if (!::binding.isInitialized)
            binding=ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)

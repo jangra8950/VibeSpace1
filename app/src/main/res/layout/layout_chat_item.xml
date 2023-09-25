@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginHorizontal="@dimen/_6sdp"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_14sdp"
         android:background="@drawable/round_edit_profile">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -30,7 +30,7 @@
             android:text="John Wick"
             android:textSize="@dimen/_14sdp"
             android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/colorEditTxt"
+            android:textColor="@color/colorTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -41,6 +41,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTxt"
             android:text="hello there we are here to help "
+            android:textColor="@color/colorBlack"
             android:fontFamily="@font/poppins_medium"
             android:layout_width="0dp"
             android:maxLines="2"
@@ -56,6 +57,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTime"
             android:text="Yesterday"
+            android:textColor="@color/colorBlack"
             android:fontFamily="@font/poppins_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

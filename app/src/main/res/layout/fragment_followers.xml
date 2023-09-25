@@ -14,6 +14,7 @@
 
        <androidx.appcompat.widget.AppCompatImageView
            android:id="@+id/back"
+           android:tint="@color/colorBlack"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:padding="@dimen/_10sdp"
@@ -37,7 +38,7 @@
            android:gravity="center"
            android:layout_height="wrap_content"
            android:text="@string/followers"
-
+           android:textColor="@color/colorTxt"
            android:textSize="@dimen/_14ssp"
            android:padding="@dimen/_4sdp"
            android:fontFamily="@font/poppins_medium"
@@ -72,7 +73,7 @@
            android:layout_height="wrap_content"
            android:gravity="center"
            android:text="Following"
-           android:textColor="@color/colorEditTxt"
+           android:textColor="@color/colorTxt"
            android:textSize="@dimen/_14ssp"
            android:padding="@dimen/_4sdp"
            android:fontFamily="@font/poppins_medium"
@@ -91,6 +92,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:background="@drawable/round_button_logout"
+           android:drawableTint="@color/colorBlack"
            android:drawableStart="@drawable/ic_search_bar"
            app:layout_constraintTop_toBottomOf="@id/view2"
            app:layout_constraintStart_toStartOf="parent"

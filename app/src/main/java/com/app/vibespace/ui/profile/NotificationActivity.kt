@@ -13,10 +13,7 @@ class NotificationActivity : AppCompatActivity() {
     private var navHostFragment: NavHostFragment?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val decor = window.decorView
-            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
+
         setContentView(R.layout.activity_notification)
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.navNotiFragment) as NavHostFragment?

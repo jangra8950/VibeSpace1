@@ -9,11 +9,11 @@
         android:id="@+id/cardItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorWhite"
         app:cardCornerRadius="10dp"
         android:elevation="0dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
+
         android:layout_marginHorizontal="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="@dimen/_12sdp"
-            android:background="@color/colorWhite">
+            android:background="@drawable/round_edit_profile">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivMap"

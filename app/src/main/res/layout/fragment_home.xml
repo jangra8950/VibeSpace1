@@ -35,7 +35,7 @@
            android:layout_height="wrap_content"
            android:text="Following"
            android:fontFamily="@font/poppins_medium"
-           android:textColor="@color/colorEditTxt"
+           android:textColor="@color/colorTxt"
            android:textSize="@dimen/_14ssp"
            android:gravity="center"
            android:padding="@dimen/_8sdp"

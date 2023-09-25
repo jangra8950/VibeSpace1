@@ -13,6 +13,7 @@
             type="com.app.vibespace.ui.profile.FeedFragment" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.appcompat.widget.AppCompatTextView
@@ -29,6 +30,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSearchBar"
+            android:tint="@color/colorBlack"
             app:srcCompat="@drawable/ic_search_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +47,7 @@
             app:srcCompat="@drawable/ic_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tint="@color/colorEditTxt"
+            android:tint="@color/colorBlack"
             android:padding="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_6sdp"
@@ -77,7 +79,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/white"
+                        android:background="@color/colorWhite"
                         android:orientation="horizontal"
                         app:layout_collapseMode="parallax">
                         <androidx.appcompat.widget.AppCompatTextView
@@ -99,7 +101,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="Following"
-                            android:textColor="@color/colorEditTxt"
+                            android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_14ssp"
                             android:padding="@dimen/_4sdp"
                             android:fontFamily="@font/poppins_medium"/>

@@ -14,11 +14,13 @@
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/colorWhite"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back"
+        android:tint="@color/colorBlack"
         android:onClick="@{(view)->fragment.onBack(view)}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

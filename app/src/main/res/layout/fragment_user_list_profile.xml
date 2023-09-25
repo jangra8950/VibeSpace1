@@ -14,6 +14,7 @@
 
      <androidx.appcompat.widget.AppCompatImageView
          android:id="@+id/back"
+         android:tint="@color/colorBlack"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:padding="@dimen/_10sdp"
@@ -43,6 +44,7 @@
          android:layout_height="wrap_content"
          android:background="@drawable/round_button_logout"
          android:drawableStart="@drawable/ic_search_bar"
+         android:drawableTint="@color/colorBlack"
          app:layout_constraintTop_toBottomOf="@id/back"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"

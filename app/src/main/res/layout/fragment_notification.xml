@@ -10,6 +10,7 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back"
+        android:tint="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
@@ -40,6 +41,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvRequest"
         android:text="@string/pending_requests"
+        android:textColor="@color/colorTxt"
         android:fontFamily="@font/poppins_medium"
         android:textSize="@dimen/_14ssp"
         android:layout_width="wrap_content"
@@ -54,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5"
+        android:textColor="@color/colorTxt"
         android:textSize="@dimen/_14ssp"
         android:fontFamily="@font/poppins_medium"
         android:layout_marginTop="@dimen/_32sdp"
@@ -63,6 +66,7 @@
         />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivForward"
+        android:tint="@color/colorTxt"
         app:srcCompat="@drawable/ic_baseline_arrow_forward"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"

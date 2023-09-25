@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBlack">#FF000000</color>
-    <color name="colorWhite">#FFFFFF</color>
-<!--    <color name="colorPrimary">#00CC90</color>-->
+    <color name="colorBlack">#FFFFFF</color>
+    <color name="colorWhite">#000000</color>
     <color name="colorPrimary">#87CEEB</color>
-    <color name="colorEditTxt">#333333</color>
-    <color name="colorBackground">#EEEEEE</color>
-    <color name="colorTxt">#777777</color>
+    <color name="colorEditTxt">#FFFFFF</color>
+    <color name="colorBackground">#646464</color>
+    <color name="colorTxt">#CCCCCC</color>
     <color name="colorRed">#E56666</color>
     <color name="chat_bg">#EFF3F7</color>
     <color name="transparent_white">#BEFFFFFF</color>
+    <color name="colorBlue">#4169E1</color>
+    <color name="colorChatBack">#494042</color>
+    <color name="colorChat">#976E77</color>
+    <color name="colorChatMess">#36454F</color>
+    <color name="colorChatTime">#595959</color>
+    <color name="colorChatTxtBack">#18191A</color>
 </resources>
 

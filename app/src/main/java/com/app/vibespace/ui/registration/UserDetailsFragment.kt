@@ -21,6 +21,7 @@ import com.app.vibespace.models.registration.UniversityListModel
 import com.app.vibespace.service.Resources
 import com.app.vibespace.util.ColorArrayAdapter
 import com.app.vibespace.util.CommonFuctions
+import com.app.vibespace.util.MyApp
 
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.registration.UserDetailsViewModel
@@ -79,12 +80,13 @@ private fun dropDown(autoCompleteTextView: AutoCompleteTextView) {
         data.add(it.universityName)
     }
     val adapter = ColorArrayAdapter(autoCompleteTextView.context, android.R.layout.simple_list_item_1, data)
-    autoCompleteTextView.setAdapter(adapter)
 
+    autoCompleteTextView.setAdapter(adapter)
     autoCompleteTextView.onItemClickListener =
         AdapterView.OnItemClickListener { _, _, position, _ ->
             adapter.setSelectedItem(position)
             universityId=universityList[position]._id
+
         }
 }
 
@@ -126,7 +128,6 @@ private fun dropDown(autoCompleteTextView: AutoCompleteTextView) {
                         //binding.progressBar.root.visibility=View.GONE
                         universityList.addAll(response.data?.data?.universities!!)
                         dropDown(binding.dropDown)
-
 
                     }
                     ApiStatus.LOADING->{

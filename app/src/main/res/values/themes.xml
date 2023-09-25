@@ -28,6 +28,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorEditTxt</item>
         <item name="android:layout_marginTop">@dimen/_52sdp</item>
+
     </style>
     <style name="text">
         <item name="android:layout_height">wrap_content</item>
@@ -36,6 +37,7 @@
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:layout_marginStart">@dimen/_14sdp</item>
         <item name="android:layout_marginBottom">@dimen/_4sdp</item>
+        <item name="android:textColor">@color/colorTxt</item>
     </style>
     <style name="editText">
         <item name="android:layout_height">wrap_content</item>
@@ -48,6 +50,8 @@
         <item name="android:imeOptions">actionNext</item>
         <item name="android:padding">@dimen/_10sdp</item>
         <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="hintTextColor">@color/colorTxt</item>
+        <item name="android:textColor">@color/colorBlack</item>
 
     </style>
     <style name="inputLayout">
@@ -71,25 +75,22 @@
         <item name="fontFamily">@font/poppins_medium</item>
         <item name="android:padding">@dimen/_10sdp</item>
         <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorBlack</item>
         <item name="android:layout_marginHorizontal">@dimen/_18sdp</item>
         <item name="android:layout_marginTop">@dimen/_82sdp</item>
+
     </style>
 
     <style name="otp">
         <item name="android:layout_height">@dimen/_36sdp</item>
         <item name="android:layout_width">@dimen/_36sdp</item>
         <item name="android:digits">0123456789</item>
-
-
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:imeOptions">actionNext</item>
         <item name="android:inputType">phone</item>
         <item name="android:importantForAutofill">no</item>
         <item name="android:layout_marginHorizontal">@dimen/_6sdp</item>
         <item name="android:maxLength">1</item>
-
-
         <item name="android:textColor">@color/colorBlack</item>
         <item name="hintTextColor">@color/colorTxt</item>
         <item name="android:textStyle">bold</item>
@@ -101,7 +102,6 @@
 
     <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="android:layout_width">match_parent</item>
-
-        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 </resources>

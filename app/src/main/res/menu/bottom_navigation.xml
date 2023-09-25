@@ -5,23 +5,22 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_map1"
-       android:title="Map"
-        />
+        tools:ignore="MenuTitle" />
     <item
         android:id="@+id/feedFragment"
         android:icon="@drawable/ic_feed1"
-        android:title="Feed" />
+        tools:ignore="MenuTitle"/>
     <item
         android:id="@+id/profileHostFragment"
         android:icon="@drawable/ic_profile1"
-        android:title="Profile"  />
+        tools:ignore="MenuTitle"/>
     <item
         android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat1"
-        android:title="Chat" />
+        tools:ignore="MenuTitle"/>
     <item
         android:id="@+id/createPostFragment"
         android:icon="@drawable/ic_post1"
-        android:title="Post"
+        tools:ignore="MenuTitle"
         />
 </menu>

@@ -14,11 +14,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back"
+            android:tint="@color/colorBlack"
             android:onClick="@{(view)->fragment.onBack(view)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +48,8 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etVerifyEmail"
             style="@style/editText"
+            android:textColorHint="@color/colorTxt"
+            android:textColor="@color/colorBlack"
             android:text="@={viewModel.email}"
             android:layout_marginTop="@dimen/_72sdp"
             android:hint="@string/edSignInEmail"
@@ -76,6 +80,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textSize="@dimen/_12ssp"
             android:text="@string/create"
+            android:textColor="@color/colorTxt"
             android:layout_marginStart="@dimen/_64sdp"
             android:layout_marginBottom="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"

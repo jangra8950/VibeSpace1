@@ -32,6 +32,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSearchBar"
+            android:tint="@color/colorBlack"
             app:srcCompat="@drawable/ic_search_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +46,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSetting"
+            android:tint="@color/colorBlack"
             app:srcCompat="@drawable/ic_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAppName">
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            android:background="@color/colorWhite">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -75,7 +78,8 @@
                     app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite">
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/ivAvatar"
 
@@ -90,6 +94,8 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvProfileName"
                             style="@style/text"
+                            android:textColorHint="@color/colorTxt"
+                            android:textColor="@color/colorBlack"
                             android:fontFamily="@font/poppins_medium"
                             android:layout_marginStart="@dimen/_36sdp"
                             android:layout_marginTop="@dimen/_8sdp"
@@ -99,12 +105,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvFollowersCount"
-                            android:textColor="@color/colorBlack"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_16ssp"
                             android:gravity="center"
-
+                            android:textColorHint="@color/colorTxt"
+                            android:textColor="@color/colorBlack"
                             android:layout_marginTop="@dimen/_16sdp"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/tvFollowingCount"
@@ -129,7 +135,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-
+                            android:textColorHint="@color/colorTxt"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_16ssp"
                             android:layout_marginEnd="@dimen/_6sdp"
@@ -195,8 +201,7 @@
                     android:id="@+id/shimmerLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    >
+                    android:layout_marginTop="@dimen/_12sdp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -218,7 +223,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="4"
-
                     android:layout_marginTop="@dimen/_12sdp"
                     tools:listitem="@layout/layout_post_recycler_item" />
 

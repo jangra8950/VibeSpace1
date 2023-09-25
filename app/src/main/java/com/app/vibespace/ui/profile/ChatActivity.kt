@@ -52,10 +52,6 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val decor = window.decorView
-            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
         binding=DataBindingUtil.setContentView(this,R.layout.activity_chat)
         val otherUserId = intent.getStringExtra("data").toString()
         val name = intent.getStringExtra("name").toString()

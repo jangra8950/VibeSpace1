@@ -20,6 +20,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back"
+            android:tint="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
@@ -58,7 +59,8 @@
                     app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite">
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/ivAvatar"
                             app:srcCompat="@drawable/ic_avatar"
@@ -73,6 +75,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvProfileName"
                             style="@style/text"
+                            android:textColor="@color/colorBlack"
                             android:fontFamily="@font/poppins_medium"
                             android:layout_marginStart="@dimen/_24sdp"
                             android:layout_marginTop="@dimen/_8sdp"

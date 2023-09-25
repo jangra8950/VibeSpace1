@@ -39,8 +39,6 @@ class ColorArrayAdapter(context: Context, resource: Int, objects: List<String>) 
         } else {
             view.setBackgroundColor(Color.TRANSPARENT)
         }
-
-
         // Set the text color of the dropdown item
         val textColor = if (position == selectedItem) {
             ContextCompat.getColor(context, R.color.colorPrimary)

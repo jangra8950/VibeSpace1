@@ -14,6 +14,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back"
+            android:tint="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
@@ -109,7 +110,7 @@
             android:background="@drawable/round_button_logout"
             android:text="5"
             android:textSize="@dimen/_13ssp"
-
+            android:textColor="@color/colorTxt"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:layout_marginStart="@dimen/_20sdp"
@@ -149,6 +150,7 @@
             android:layout_height="40dp"
             android:background="@drawable/round_button_logout"
             android:text="5"
+            android:textColor="@color/colorTxt"
             android:textSize="@dimen/_13ssp"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
