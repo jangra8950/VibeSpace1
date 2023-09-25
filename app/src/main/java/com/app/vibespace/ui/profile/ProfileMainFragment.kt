@@ -80,7 +80,8 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
         navigation()
 
         binding.ivSearchBar.setOnClickListener {
-            (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
+            startActivity(Intent(requireContext(),UserProfileActivity::class.java))
+           // (requireActivity() as HomeActivity).changeFragment(UserListProfileFragment())
         }
 
         binding.ivSetting.setOnClickListener {

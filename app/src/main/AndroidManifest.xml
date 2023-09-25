@@ -11,9 +11,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA"
+    <uses-permission
+        android:name="android.permission.CAMERA"
         android:required="true"
-        android:requiredFeature="true"/>
+        android:requiredFeature="true" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="MediaStore.createWriteRequest" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
@@ -21,6 +22,7 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
     <application
         android:name=".util.MyApp"
         android:allowBackup="true"
@@ -34,10 +36,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.profile.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.ChatActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.settings.SettingActivity"
             android:exported="false"
@@ -64,9 +72,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
+
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.app.vibespace.provider"
@@ -76,11 +85,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"
             android:screenOrientation="portrait"
-            />
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>

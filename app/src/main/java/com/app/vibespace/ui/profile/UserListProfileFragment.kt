@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
@@ -125,13 +126,15 @@ class UserListProfileFragment : Fragment(),UserListAdapter.UserProfile {
 
     override fun user(id: String) {
 
-        val frag=OtherUserProfileFragment()
-        val bundle=Bundle()
-        bundle.putString("user",id)
-        frag.arguments=bundle
-        (requireActivity() as HomeActivity).changeFragment(frag)
-//       val action=UserListProfileFragmentDirections.actionUserListProfileFragmentToOtherUserProfileFragment(data=id)
-//        findNavController().navigate(action)
+//        val frag=OtherUserProfileFragment()
+//        val bundle=Bundle()
+//        bundle.putString("user",id)
+//        frag.arguments=bundle
+//        (requireActivity() as HomeActivity).changeFragment(frag)
+
+      val action=UserListProfileFragmentDirections.actionUserListProfileFragment2ToOtherUserProfileFragment2(value = id)
+        findNavController().navigate(action)
+
     }
 
 }

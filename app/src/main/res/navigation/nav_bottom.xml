@@ -176,7 +176,7 @@
         android:label="OtherUserProfileFragment" >
 
         <argument
-            android:name="data"
+            android:name="value"
             app:argType="string" />
     </fragment>
 </navigation>
