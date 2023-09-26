@@ -8,15 +8,25 @@
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:drawableTint="@color/colorPrimary"
+        android:drawableTop="@drawable/custom_gallery_profile_item"
         android:text="Gallary"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/colorEditTxt"
+        android:textSize="@dimen/_14sdp"
         android:layout_weight="1"/>
     <TextView
         android:id="@+id/tvCamera"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="@dimen/_14sdp"
+        android:drawableTint="@color/colorPrimary"
+        android:drawableTop="@drawable/custom_camera_profile_item"
         android:text="Camera"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/colorEditTxt"
+        android:textSize="@dimen/_14sdp"
         android:layout_weight="1"/>
 </LinearLayout>
