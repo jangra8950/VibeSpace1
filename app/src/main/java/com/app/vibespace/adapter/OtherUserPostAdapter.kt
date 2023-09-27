@@ -33,6 +33,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
       // val typeText: AppCompatEditText =itemView.findViewById(R.id.tvTypeComment)
         val chatAct: AppCompatImageView = itemView.findViewById(R.id.ivChatAct)
         val chatNew: AppCompatImageView = itemView.findViewById(R.id.ivChatNew)
+        val chatNewAct: AppCompatImageView = itemView.findViewById(R.id.ivChatNewAct)
         val like:AppCompatImageView = itemView.findViewById(R.id.ivLike)
 
 
@@ -70,6 +71,10 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
             change.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName, item.caption)
         }
 
+        holder.chatNewAct.setOnClickListener {
+            change.newChat(item.userId,item.userDetails.profilePic,item.userDetails.firstName, item.caption)
+        }
+
         holder.chatNew.setOnClickListener {
             showDialogLogOutt(context,"Are you sure to want to add this vibe to your Profile?",click={
                 change.vibe(item.caption,item.postVisibility)
@@ -99,6 +104,7 @@ class OtherUserPostAdapter(private val mList:ArrayList<PostListModel.Data.Post>,
         fun vibe(caption:String, postVisibility:String)
         fun like(postId:String,position: Int)
         fun unlike(postId:String,position: Int)
+        fun newChat(userId:String,image:String,name:String, mess:String)
     }
 
 }

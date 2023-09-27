@@ -63,13 +63,17 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
             //loadImage(context,item.userDetails.mascotIcon,holder.binding.ivAvatar)
 
            holder.binding.ivChatNew.setOnClickListener {
-               CommonFuctions.showDialogLogOutt(context,"Are you sure to want to add this vibe to your Profile?"){
+               showDialogLogOutt(context,"Are you sure to want to add this vibe to your Profile?"){
                    post.vibe(item.caption,item.postVisibility)
                }
            }
 
             holder.binding.ivChatAct.setOnClickListener {
                 post.chat(item.userId,item.userDetails.profilePic,item.userDetails.firstName+" "+item.userDetails.lastName, item.caption)
+            }
+
+            holder.binding.ivChatNewAct.setOnClickListener {
+               post.newChat(item.userId,item.userDetails.profilePic,item.userDetails.firstName, item.caption)
             }
 
             val param = (holder.binding.cardItem.layoutParams as ViewGroup.MarginLayoutParams).apply {
@@ -185,5 +189,6 @@ class PostListPagingAdapter(var context:Context,private val post: Post):PagingDa
         fun commentList(postId:String,position: Int)
         fun vibe(caption:String, postVisibility:String)
         fun chat(userId:String,image:String,name:String, mess:String)
+        fun newChat(userId:String,image:String,name:String, mess:String)
     }
 }

@@ -67,6 +67,8 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
 
         holder.binding.tvTxt.text=item.message
         holder.binding.tvTime.text=convertTimestampToRealTime(item.sentAt)
+        if(item.unReadCount>0)
+         holder.binding.tvCount.text= item.unReadCount.toString()
 
         holder.itemView.setOnClickListener {
             if(item.isOwnMessage)
@@ -74,6 +76,14 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
             else
                 chat.chat(position,item.senderId,item.senderFirstName+" "+item.senderLastName,item.senderMascotIcon)
         }
+
+        val param = (holder.binding.root.layoutParams as ViewGroup.MarginLayoutParams).apply {
+            if (item.spacing>1)
+                setMargins(10,8,10, item.spacing*50)
+            else
+                setMargins(10,8,10, 8)
+        }
+        holder.binding.root.layoutParams = param
 
     }
     interface Summary{

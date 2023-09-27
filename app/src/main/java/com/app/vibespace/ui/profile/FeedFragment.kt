@@ -30,6 +30,7 @@ import com.app.vibespace.models.profile.PostListModel
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
 import com.app.vibespace.paging.PostListPagingAdapter
+import com.app.vibespace.ui.chat.NewChatActivity
 import com.app.vibespace.ui.registration.HomeActivity
 import com.app.vibespace.ui.settings.SettingActivity
 import com.app.vibespace.util.CommonFuctions
@@ -205,8 +206,22 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
     override fun chat(userId: String, image: String, name: String, mess: String) {
         startChatActivity(userId,image,name,mess)
     }
+
+    override fun newChat(userId: String, image: String, name: String, mess: String) {
+        startNewChatActivity(userId,image,name,mess)
+    }
+
     private fun startChatActivity(userId: String, image: String, name: String,mess:String) {
         val intent = Intent(requireActivity(), ChatActivity::class.java)
+        intent.putExtra("data", userId)
+        intent.putExtra("name", name)
+        intent.putExtra("image", image)
+        intent.putExtra("mess", mess)
+        startActivity(intent)
+    }
+
+    private fun startNewChatActivity(userId: String, image: String, name: String,mess:String) {
+        val intent = Intent(requireActivity(), NewChatActivity::class.java)
         intent.putExtra("data", userId)
         intent.putExtra("name", name)
         intent.putExtra("image", image)

@@ -149,7 +149,7 @@ class ProfileMainFragment : Fragment(), PostAdapter.PostCallbacks {
                     //    CommonFuctions.dismissDialog()
                         val editor = MyApp.sharedpreferences.edit()
                         profileData?.insertDate= response.data?.data?.insertDate!!.toInt()
-                        profileData?.totalFollower=response.data?.data?.totalFollower!!.toInt()
+                        profileData?.totalFollower= response.data.data.totalFollower.toInt()
                         profileData?.totalFollowing= response.data.data.totalFollowing
                         profileData?.gender=response.data.data.gender
                         profileData?.height=response.data.data.height

@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginHorizontal="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:background="@drawable/round_edit_profile">
@@ -59,11 +58,31 @@
             android:fontFamily="@font/poppins_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-           app:layout_constraintStart_toEndOf="@id/tvTxt"
-           app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/tvTxt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCount"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:text="5"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/round_button_logout"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTime"
+            app:layout_constraintStart_toEndOf="@id/tvTxt"
+            />
+
+
 <!--        <View-->
 <!--            android:id="@+id/view"-->
 <!--            android:layout_width="match_parent"-->

@@ -31,6 +31,10 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getPendingRequest()
+
+        binding.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun getPendingRequest() {

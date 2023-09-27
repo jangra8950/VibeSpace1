@@ -15,6 +15,7 @@ import com.app.vibespace.adapter.ChatAdapter
 import com.app.vibespace.databinding.ActivityChatBinding
 import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.ChatRequest
+import com.app.vibespace.models.profile.SummaryModel
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.hideKeyboard
 import com.app.vibespace.util.showToast
@@ -36,7 +37,7 @@ import java.util.Date
 
 
 @AndroidEntryPoint
-class ChatActivity : AppCompatActivity() {
+class ChatActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityChatBinding
     private var selfId: String = ""
@@ -114,6 +115,8 @@ class ChatActivity : AppCompatActivity() {
                     adap.notifyDataSetChanged()
                     binding.shimmerLayout.visibility=View.GONE
                     binding.recyclerview.visibility=View.VISIBLE
+
+                    //count.getCount("chat")
                 }
                 ApiStatus.ERROR -> {
                     response.message?.let { it1 -> showToast(this, it1) }
@@ -190,6 +193,8 @@ class ChatActivity : AppCompatActivity() {
 
     private fun subscribe(channel:String,otherUserId:String){
         Log.d("Subsscribe", "Message Arrived Successfully")
+
+
         try{
 
             client.subscribe(channel,1)
@@ -200,7 +205,7 @@ class ChatActivity : AppCompatActivity() {
                 }
 
                 override fun messageArrived(topic: String?, message: MqttMessage?) {
-                    Log.d("Connect", "Subscribe topic: ${message.toString()}")
+                    Log.d("Subsscribe", "Subscribe topic: ${message.toString()}")
                     val data = Gson().fromJson(message.toString(), ChatItemModel.Data.Chat::class.java)
                     if (data.status=="") {
                         chatList.add(0, data)
@@ -210,7 +215,7 @@ class ChatActivity : AppCompatActivity() {
                 }
 
                 override fun deliveryComplete(token: IMqttDeliveryToken?) {
-
+                    Log.d("Subsscribe", "Subscribe token: ${token.toString()}")
                 }
 
             })
@@ -232,8 +237,8 @@ class ChatActivity : AppCompatActivity() {
                 type = "text",
                 connectionsId = cId,
                 chatType = "text",
-                isRead = false,
-                isDelivered = false,
+                isRead = true,
+                isDelivered = true,
                 status = ""
             )
 
@@ -255,6 +260,10 @@ class ChatActivity : AppCompatActivity() {
         } catch (e: MqttException) {
             e.printStackTrace()
         }
+    }
+
+    interface Count{
+        fun getCount(value:String)
     }
 
 

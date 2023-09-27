@@ -138,7 +138,6 @@ class FollowersFragment : Fragment(),FollowersAdapter.Follow {
                         allfollowerList.addAll(response.data.data.followers)
                         adapter.updateData(followerList,value)
 
-
                     }
                     ApiStatus.ERROR ->{
                         response.message?.let { it1 -> showToast(requireActivity(), it1) }

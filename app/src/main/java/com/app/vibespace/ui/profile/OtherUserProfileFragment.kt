@@ -21,6 +21,7 @@ import com.app.vibespace.R
 import com.app.vibespace.adapter.OtherUserPostAdapter
 import com.app.vibespace.databinding.FragmentOtherUserProfileBinding
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.ui.chat.NewChatActivity
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.showToast
@@ -59,11 +60,7 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
         binding.fragment=this
         binding.lifecycleOwner=this
 
-
-//           if(arguments?.containsKey("user")==true)
-//               userId=arguments?.getString("user")?:""
-//           else
-               userId=args.value
+        userId=args.value
 
         binding.recyclerview.layoutManager= LinearLayoutManager(activity)
         adapter =  OtherUserPostAdapter(postList,requireActivity(),this)
@@ -190,6 +187,7 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
                         binding.tvProfileName.text= userName
                         binding.tvStreakCount.text= response.data.data.totalFollower.toString()
                         binding.tvVibesCount.text= response.data.data.totalFollowing.toString()
+                        binding.tvCollegeCount.text=response.data.data.uniShortName.toString()
                         loadImage(requireActivity(),userImage,binding.ivAvatar)
                     }
                     ApiStatus.ERROR -> {
@@ -291,6 +289,15 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
         }
     }
 
+    private fun startNewChatActivity(userId: String, image: String, name: String,mess:String) {
+        val intent = Intent(requireActivity(), NewChatActivity::class.java)
+        intent.putExtra("data", userId)
+        intent.putExtra("name", name)
+        intent.putExtra("image", image)
+        intent.putExtra("mess", mess)
+        startActivity(intent)
+    }
+
     override fun block(userId: String, position: Int) {
         blockUser(position,userId)
     }
@@ -309,5 +316,9 @@ class OtherUserProfileFragment : Fragment(),OtherUserPostAdapter.ChangesCallBack
 
     override fun unlike(postId: String, position: Int) {
         unlikePost(postId,position)
+    }
+
+    override fun newChat(userId: String, image: String, name: String, mess: String) {
+        startNewChatActivity(userId,image,name,mess)
     }
 }

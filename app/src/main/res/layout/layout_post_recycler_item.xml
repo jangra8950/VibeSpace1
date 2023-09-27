@@ -112,28 +112,26 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivComment"
+                android:visibility="gone"
                 android:tint="@color/colorEditTxt"
                 app:srcCompat="@drawable/ic_message"
                 android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_8sdp"
-
                 app:layout_constraintTop_toBottomOf="@id/tvCaption"
                 app:layout_constraintStart_toEndOf="@id/tvLikeCount"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCommentCount"
-
+                android:visibility="gone"
                 android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_16sdp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/colorEditTxt"
-
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_6sdp"
-
                 app:layout_constraintTop_toBottomOf="@+id/tvCaption"
                 app:layout_constraintStart_toEndOf="@id/ivComment"
                 />
@@ -141,7 +139,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivChatAct"
                 android:tint="@color/colorEditTxt"
-                app:srcCompat="@drawable/ic_chat_act"
+                app:srcCompat="@drawable/ic_new_chat_act"
                 android:layout_width="@dimen/_18sdp"
                 android:layout_height="@dimen/_18sdp"
                 android:layout_marginTop="@dimen/_6sdp"
@@ -151,18 +149,29 @@
                 app:layout_constraintTop_toBottomOf="@id/tvCaption"
                 app:layout_constraintStart_toEndOf="@id/tvCommentCount"
                 />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivChatNewAct"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:srcCompat="@drawable/ic_chat_act"
+                android:tint="@color/colorEditTxt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvCaption"
+                app:layout_constraintStart_toEndOf="@id/ivChatAct"
+                />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivChatNew"
-
                 app:srcCompat="@drawable/ic_chat_new"
                 android:layout_width="@dimen/_18sdp"
                 android:layout_height="@dimen/_18sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_8sdp"
-
                 app:layout_constraintTop_toBottomOf="@id/tvCaption"
-                app:layout_constraintStart_toEndOf="@id/ivChatAct"
+                app:layout_constraintStart_toEndOf="@id/ivChatNewAct"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="@dimen/_8sdp"
                 />

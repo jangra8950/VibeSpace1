@@ -33,7 +33,8 @@ data class SummaryModel(
             val senderProfilePic: String,
             val sentAt: Long,
             val type: String,
-            val unReadCount: Int
+            val unReadCount: Int,
+            val spacing:Int
         )
     }
 }
