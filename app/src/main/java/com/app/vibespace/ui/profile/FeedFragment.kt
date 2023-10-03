@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
@@ -33,8 +34,11 @@ import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.FeedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Date
 
 @AndroidEntryPoint
@@ -374,17 +378,27 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
         binding.shimmerLayout.startShimmer()
         binding.shimmerLayout.visibility=View.VISIBLE
         binding.recyclerview.visibility=View.GONE
+
+
+
+
         lifecycleScope.launch {
 
-            model.getPostList(value).collectLatest { data ->
 
-                if (adap.itemCount==0){
-                    binding.shimmerLayout.stopShimmer()
-                    binding.shimmerLayout.visibility=View.GONE
-                    binding.recyclerview.visibility=View.VISIBLE
+            model.getPostList(value).collectLatest{
+                    launch(Dispatchers.Main){
+                        adap.loadStateFlow.collectLatest { loadStates ->
+                            if (loadStates.refresh is LoadState.NotLoading){
+                                binding.shimmerLayout.stopShimmer()
+                                binding.shimmerLayout.visibility=View.GONE
+                                binding.recyclerview.visibility=View.VISIBLE
+                            }
+                        }
+                    }
+                adap.submitData(it)
                 }
-                adap.submitData(data)
-            }
+
+
 
         }
     }
