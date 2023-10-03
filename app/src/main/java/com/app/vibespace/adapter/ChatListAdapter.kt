@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.text.format.DateFormat
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -67,8 +68,9 @@ class ChatListAdapter(private val mList:ArrayList<SummaryModel.Data.ChatSummary>
 
         holder.binding.tvTxt.text=item.message
         holder.binding.tvTime.text=convertTimestampToRealTime(item.sentAt)
-        if(item.unReadCount>0)
-         holder.binding.tvCount.text= item.unReadCount.toString()
+//        if(item.unReadCount>0)
+//         holder.binding.tvCount.text= item.unReadCount.toString()
+        holder.binding.tvCount.visibility= View.GONE
 
         holder.itemView.setOnClickListener {
             if(item.isOwnMessage)

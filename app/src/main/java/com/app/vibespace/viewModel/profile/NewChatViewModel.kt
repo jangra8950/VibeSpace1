@@ -21,7 +21,7 @@ class NewChatViewModel @Inject constructor(
         try {
 
             val query:HashMap<String,Any> = hashMapOf()
-            query["follower"]=true
+            query["following"]=true
 
             val followerResponse: FollowersModel =repo.getFollowers(query)
             if(followerResponse.statusCode==200)

@@ -21,7 +21,5 @@ class MyApp : Application() {
         if (sharedpreferences.getString(ApiConstants.PROFILE_DATA,"")!=null && sharedpreferences.getString(ApiConstants.PROFILE_DATA,"")!="")
             profileData=Gson().fromJson(sharedpreferences.getString(ApiConstants.PROFILE_DATA,""),UserUpdateModel.Data::class.java)
 
-
-
     }
 }

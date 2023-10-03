@@ -1,4 +1,4 @@
-package com.app.vibespace.ui.profile
+package com.app.vibespace.ui.chat
 
 
 import android.os.Build
@@ -15,7 +15,6 @@ import com.app.vibespace.adapter.ChatAdapter
 import com.app.vibespace.databinding.ActivityChatBinding
 import com.app.vibespace.models.profile.ChatItemModel
 import com.app.vibespace.models.profile.ChatRequest
-import com.app.vibespace.models.profile.SummaryModel
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage
 import com.app.vibespace.util.hideKeyboard
 import com.app.vibespace.util.showToast
@@ -116,7 +115,6 @@ class ChatActivity() : AppCompatActivity() {
                     binding.shimmerLayout.visibility=View.GONE
                     binding.recyclerview.visibility=View.VISIBLE
 
-                    //count.getCount("chat")
                 }
                 ApiStatus.ERROR -> {
                     response.message?.let { it1 -> showToast(this, it1) }
@@ -262,9 +260,7 @@ class ChatActivity() : AppCompatActivity() {
         }
     }
 
-    interface Count{
-        fun getCount(value:String)
-    }
+
 
 
 }

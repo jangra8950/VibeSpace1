@@ -1,17 +1,12 @@
 package com.app.vibespace.ui.profile
 
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -21,6 +16,7 @@ import com.app.vibespace.R
 import com.app.vibespace.adapter.OtherUserPostAdapter
 import com.app.vibespace.databinding.FragmentOtherUserProfileBinding
 import com.app.vibespace.models.profile.PostListModel
+import com.app.vibespace.ui.chat.ChatActivity
 import com.app.vibespace.ui.chat.NewChatActivity
 import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.loadImage

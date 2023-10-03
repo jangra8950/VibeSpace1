@@ -45,7 +45,7 @@
             android:name=".ui.profile.UserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ChatActivity"
+            android:name=".ui.chat.ChatActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />

@@ -2,6 +2,7 @@ package com.app.vibespace.ui.chat
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,13 +11,9 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
-import com.app.vibespace.R
 import com.app.vibespace.adapter.NewChatUserListAdapter
-import com.app.vibespace.adapter.UserListAdapter
 import com.app.vibespace.databinding.ActivityNewChatBinding
-import com.app.vibespace.models.profile.UserListModel
 import com.app.vibespace.models.setting.FollowersModel
-import com.app.vibespace.ui.profile.ChatActivity
 import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.NewChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +33,10 @@ class NewChatActivity : AppCompatActivity(),NewChatUserListAdapter.NewChat {
         binding=ActivityNewChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val decor = window.decorView
+            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
         mess = intent.getStringExtra("mess")
 
         binding.recyclerview.layoutManager= LinearLayoutManager(this)

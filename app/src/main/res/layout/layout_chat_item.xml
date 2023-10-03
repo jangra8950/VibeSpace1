@@ -68,7 +68,6 @@
             android:id="@+id/tvCount"
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
-            android:text="5"
             android:textSize="@dimen/_10ssp"
             android:textColor="@color/colorWhite"
             android:gravity="center"

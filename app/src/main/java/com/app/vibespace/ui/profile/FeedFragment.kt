@@ -1,25 +1,18 @@
 package com.app.vibespace.ui.profile
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vibespace.Enums.ApiStatus
 import com.app.vibespace.R
@@ -29,11 +22,10 @@ import com.app.vibespace.models.profile.PostListModel
 
 import com.app.vibespace.databinding.LayoutCommentListBinding
 import com.app.vibespace.models.profile.PostCommentListModel
+import com.app.vibespace.paging.LoadAdapter
 import com.app.vibespace.paging.PostListPagingAdapter
+import com.app.vibespace.ui.chat.ChatActivity
 import com.app.vibespace.ui.chat.NewChatActivity
-import com.app.vibespace.ui.registration.HomeActivity
-import com.app.vibespace.ui.settings.SettingActivity
-import com.app.vibespace.util.CommonFuctions
 import com.app.vibespace.util.CommonFuctions.Companion.dismissDialog
 import com.app.vibespace.util.CommonFuctions.Companion.showDialog
 import com.app.vibespace.util.MyApp.Companion.profileData
@@ -41,8 +33,6 @@ import com.app.vibespace.util.showToast
 import com.app.vibespace.viewModel.profile.FeedViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -117,7 +107,7 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
 
     private fun setData(data:String){
         adap=PostListPagingAdapter(requireActivity(),this)
-        binding.recyclerview.adapter=adap
+        binding.recyclerview.adapter=adap.withLoadStateFooter(footer = LoadAdapter())
         getPostListPaging(data)
     }
 
@@ -389,7 +379,6 @@ class FeedFragment : Fragment(),PostListPagingAdapter.Post {
             model.getPostList(value).collectLatest { data ->
 
                 if (adap.itemCount==0){
-                    delay(1000)
                     binding.shimmerLayout.stopShimmer()
                     binding.shimmerLayout.visibility=View.GONE
                     binding.recyclerview.visibility=View.VISIBLE
